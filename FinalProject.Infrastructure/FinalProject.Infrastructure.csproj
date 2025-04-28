@@ -20,9 +20,4 @@
     <ProjectReference Include="..\FinalProject.Data\FinalProject.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="IRepositry\" />
-    <Folder Include="Repositry\" />
-  </ItemGroup>
-
 </Project>
