@@ -1,0 +1,17 @@
+D:\.net\projects\FinalProject\FinalProject.Services\bin\Debug\net8.0\FinalProject.Services.deps.json
+D:\.net\projects\FinalProject\FinalProject.Services\bin\Debug\net8.0\FinalProject.Services.dll
+D:\.net\projects\FinalProject\FinalProject.Services\bin\Debug\net8.0\FinalProject.Services.pdb
+D:\.net\projects\FinalProject\FinalProject.Services\bin\Debug\net8.0\FinalProject.Data.dll
+D:\.net\projects\FinalProject\FinalProject.Services\bin\Debug\net8.0\FinalProject.Infrastructure.dll
+D:\.net\projects\FinalProject\FinalProject.Services\bin\Debug\net8.0\FinalProject.Data.pdb
+D:\.net\projects\FinalProject\FinalProject.Services\bin\Debug\net8.0\FinalProject.Infrastructure.pdb
+D:\.net\projects\FinalProject\FinalProject.Services\obj\Debug\net8.0\FinalProject.Services.csproj.AssemblyReference.cache
+D:\.net\projects\FinalProject\FinalProject.Services\obj\Debug\net8.0\FinalProject.Services.GeneratedMSBuildEditorConfig.editorconfig
+D:\.net\projects\FinalProject\FinalProject.Services\obj\Debug\net8.0\FinalProject.Services.AssemblyInfoInputs.cache
+D:\.net\projects\FinalProject\FinalProject.Services\obj\Debug\net8.0\FinalProject.Services.AssemblyInfo.cs
+D:\.net\projects\FinalProject\FinalProject.Services\obj\Debug\net8.0\FinalProject.Services.csproj.CoreCompileInputs.cache
+D:\.net\projects\FinalProject\FinalProject.Services\obj\Debug\net8.0\FinalPro.C7476B36.Up2Date
+D:\.net\projects\FinalProject\FinalProject.Services\obj\Debug\net8.0\FinalProject.Services.dll
+D:\.net\projects\FinalProject\FinalProject.Services\obj\Debug\net8.0\refint\FinalProject.Services.dll
+D:\.net\projects\FinalProject\FinalProject.Services\obj\Debug\net8.0\FinalProject.Services.pdb
+D:\.net\projects\FinalProject\FinalProject.Services\obj\Debug\net8.0\ref\FinalProject.Services.dll
