@@ -14,7 +14,7 @@ namespace FinalProject.Services.Implemetations
         }
         public IQueryable<Doctor> GetAll()
         {
-            var result = _unitOfWork.Repositry<Doctor>().Get(includes: [c => c.Department]);
+            var result = _unitOfWork.Repositry<Doctor>().Get(includes: [d => d.Department,a=>a.DoctorSchedules]);
             return result;
         }
     }

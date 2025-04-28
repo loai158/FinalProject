@@ -6,7 +6,7 @@
 
 <h1 class="text-center mb-4">قائمة الأطباء</h1>
 
-<table class="table table-bordered table-striped text-center">
+<table class="table table-bordered table-striped text-center align-middle">
     <thead class="table-dark">
         <tr>
             <th>#</th>
@@ -16,6 +16,7 @@
             <th>رقم الهاتف</th>
             <th>البريد الإلكتروني</th>
             <th>الجنس</th>
+            <th>مواعيد الدكتور</th>
         </tr>
     </thead>
     <tbody>
@@ -40,13 +41,52 @@
                     <td>@doctor.Phone</td>
                     <td>@doctor.Email</td>
                     <td>@(doctor.Gender == FinalProject.Data.Models.AppModels.Gender.Male ? "ذكر" : "أنثى")</td>
+                    <td>
+                        @if (doctor.DoctorSchedules != null && doctor.DoctorSchedules.Any())
+                        {
+                            <table class="table table-sm table-bordered text-center mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>التاريخ</th>
+                                        <th>من</th>
+                                        <th>إلى</th>
+                                        <th>الحالة</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var schedule in doctor.DoctorSchedules)
+                                    {
+                                        <tr>
+                                            <td>@schedule.Date.ToString("yyyy/MM/dd")</td>
+                                            <td>@schedule.StartTime.ToString("HH:mm")</td>
+                                            <td>@schedule.EndTime.ToString("HH:mm")</td>
+                                            <td>
+                                                @if (schedule.IsAvailable)
+                                                {
+                                                    <span class="badge bg-success">متاح</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-danger">محجوز</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                        else
+                        {
+                            <span>لا يوجد مواعيد مسجلة</span>
+                        }
+                    </td>
                 </tr>
             }
         }
         else
         {
             <tr>
-                <td colspan="7" class="text-center">لا يوجد أطباء مسجلين حالياً.</td>
+                <td colspan="8" class="text-center">لا يوجد أطباء مسجلين حالياً.</td>
             </tr>
         }
     </tbody>
