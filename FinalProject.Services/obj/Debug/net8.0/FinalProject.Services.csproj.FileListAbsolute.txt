@@ -15,3 +15,4 @@ D:\.net\projects\FinalProject\FinalProject.Services\obj\Debug\net8.0\FinalProjec
 D:\.net\projects\FinalProject\FinalProject.Services\obj\Debug\net8.0\refint\FinalProject.Services.dll
 D:\.net\projects\FinalProject\FinalProject.Services\obj\Debug\net8.0\FinalProject.Services.pdb
 D:\.net\projects\FinalProject\FinalProject.Services\obj\Debug\net8.0\ref\FinalProject.Services.dll
+D:\.net\projects\FinalProject\FinalProject.Services\obj\Debug\net8.0\FinalProject.Services.sourcelink.json

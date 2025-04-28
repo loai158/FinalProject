@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FinalProject.Services.Abstracts;
+using FinalProject.Services.Implemetations;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FinalProject.Services
 {
@@ -6,7 +8,7 @@ namespace FinalProject.Services
     {
         public static IServiceCollection AddServicesDependences(this IServiceCollection services)
         {
-             
+            services.AddScoped<IDoctorServices, DoctorServices>();
             return services;
         }
     }

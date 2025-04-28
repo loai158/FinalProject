@@ -17,3 +17,4 @@ D:\.net\projects\FinalProject\FinalProject.Core\obj\Debug\net8.0\FinalProject.Co
 D:\.net\projects\FinalProject\FinalProject.Core\obj\Debug\net8.0\refint\FinalProject.Core.dll
 D:\.net\projects\FinalProject\FinalProject.Core\obj\Debug\net8.0\FinalProject.Core.pdb
 D:\.net\projects\FinalProject\FinalProject.Core\obj\Debug\net8.0\ref\FinalProject.Core.dll
+D:\.net\projects\FinalProject\FinalProject.Core\obj\Debug\net8.0\FinalProject.Core.sourcelink.json

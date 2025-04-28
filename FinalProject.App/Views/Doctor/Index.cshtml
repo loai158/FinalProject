@@ -1,0 +1,53 @@
+﻿@model IEnumerable<FinalProject.Core.Feature.Doctor.Query.Response.GetAllDoctorsResponse>
+
+@{
+    ViewData["Title"] = "قائمة الأطباء";
+}
+
+<h1 class="text-center mb-4">قائمة الأطباء</h1>
+
+<table class="table table-bordered table-striped text-center">
+    <thead class="table-dark">
+        <tr>
+            <th>#</th>
+            <th>الصورة</th>
+            <th>الاسم</th>
+            <th>التخصص</th>
+            <th>رقم الهاتف</th>
+            <th>البريد الإلكتروني</th>
+            <th>الجنس</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var doctor in Model)
+            {
+                <tr>
+                    <td>@doctor.Id</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(doctor.Image))
+                        {
+                            <img src="@doctor.Image" alt="Doctor Image" width="70" height="70" class="rounded-circle" />
+                        }
+                        else
+                        {
+                            <span>لا يوجد صورة</span>
+                        }
+                    </td>
+                    <td>@doctor.Name</td>
+                    <td>@doctor.Department</td>
+                    <td>@doctor.Phone</td>
+                    <td>@doctor.Email</td>
+                    <td>@(doctor.Gender == FinalProject.Data.Models.AppModels.Gender.Male ? "ذكر" : "أنثى")</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7" class="text-center">لا يوجد أطباء مسجلين حالياً.</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -19,4 +19,8 @@
     <ProjectReference Include="..\FinalProject.Services\FinalProject.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Feature\Doctor\Command\" />
+  </ItemGroup>
+
 </Project>
