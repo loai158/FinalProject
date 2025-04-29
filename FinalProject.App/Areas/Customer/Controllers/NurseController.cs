@@ -3,15 +3,16 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace FinalProject.App.Controllers
+namespace FinalProject.App.Areas.Customer.Controllers
 {
+    [Area("Customer")]
     public class NurseController : Controller
     {
         private readonly IMediator _mediator;
 
         public NurseController( IMediator mediator  ) 
         {
-            this._mediator = mediator;
+            _mediator = mediator;
         }
 
         public async Task<IActionResult> GetById([FromQuery] GetNurseByIdQuery query)
