@@ -12,6 +12,8 @@ namespace FinalProject.Infrastructure.Bases
 
         public void Delete(T entity);
 
+        public Task<bool> Exist(Expression<Func<T, bool>> predicate);
+
         public void Delete(List<T> entities);
 
         public void Commit();

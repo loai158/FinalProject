@@ -15,10 +15,8 @@ namespace FinalProject.Services.Implemetations
         public async Task<Nurse> GetById(int id)
         {
             var nurse = await _unitOfWork.Repositry<Nurse>().GetOne(n=>n.Id == id, includes: [d=>d.Department]);
-             
                 return nurse  ;
-            
-           
         }
+
     }
 }
