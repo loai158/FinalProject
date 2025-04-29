@@ -1,4 +1,5 @@
 ﻿using FinalProject.Core.Behavior;
+using FinalProject.Core.Feature.Doctor.Command.Validators;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using MediatR;
@@ -13,6 +14,8 @@ namespace FinalProject.Core
         {
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddFluentValidationAutoValidation();
+            services.AddFluentValidationClientsideAdapters();
+            services.AddValidatorsFromAssemblyContaining<AddDoctorCommandValidator>();
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             services.AddMediatR(cfg =>

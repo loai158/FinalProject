@@ -4,6 +4,7 @@
     ViewData["Title"] = "قائمة الأطباء";
 }
 
+
 <h1 class="text-center mb-4">قائمة الأطباء</h1>
 
 <table class="table table-bordered table-striped text-center align-middle">
@@ -91,3 +92,18 @@
         }
     </tbody>
 </table>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var successMessage = '@TempData["SuccessMessage"]';
+            if (successMessage) {
+                toastr.success(successMessage, 'تم بنجاح', { timeOut: 4000 });
+            }
+
+            var errorMessage = '@TempData["ErrorMessage"]';
+            if (errorMessage) {
+                toastr.error(errorMessage, 'حدث خطأ', { timeOut: 4000 });
+            }
+        });
+    </script>
+}

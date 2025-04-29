@@ -1,0 +1,73 @@
+﻿@using FinalProject.Data.Models.AppModels
+@model FinalProject.Core.Feature.Doctor.Command.Models.AddDoctorCommand
+
+@{
+    ViewData["Title"] = "إضافة طبيب جديد";
+}
+
+<h2>إضافة طبيب جديد</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Phone"></label>
+        <input asp-for="Phone" class="form-control" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Image"></label>
+        <input asp-for="Image" class="form-control" />
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Details"></label>
+        <textarea asp-for="Details" class="form-control"></textarea>
+        <span asp-validation-for="Details" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Gender"></label>
+        <select asp-for="Gender" class="form-control" asp-items="Html.GetEnumSelectList<Gender>()">
+            <option value="">اختر الجنس</option>
+        </select>
+        <span asp-validation-for="Gender" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DepatrmentId">القسم</label>
+        <input asp-for="DepatrmentId" class="form-control" />
+        <span asp-validation-for="DepatrmentId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">إضافة</button>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");} 
+    <script>
+        $(document).ready(function () {
+            var successMessage = '@TempData["SuccessMessage"]';
+            if (successMessage) {
+                toastr.success(successMessage, 'تم بنجاح', { timeOut: 4000 });
+            }
+
+            var errorMessage = '@TempData["ErrorMessage"]';
+            if (errorMessage) {
+                toastr.error(errorMessage, 'حدث خطأ', { timeOut: 4000 });
+            }
+        });
+    </script>
+}
