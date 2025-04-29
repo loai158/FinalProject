@@ -2,16 +2,16 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FinalProject.App.Controllers
+namespace FinalProject.App.Areas.Customer.Controllers
 {
- 
+    [Area("Customer")]
     public class DoctorController : Controller
     {
         private readonly IMediator _mediator;
 
         public DoctorController( IMediator mediator )
         {
-            this._mediator = mediator;
+            _mediator = mediator;
         }
         [HttpGet]
         public async Task<IActionResult> Index()

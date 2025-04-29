@@ -1,4 +1,5 @@
-﻿@model NurseResponse
+﻿@using FinalProject.Core.Feature.Nurse.Query.Response
+@model NurseResponse
 
 @{
     ViewBag.Title = "Nurse Details";
@@ -27,4 +28,4 @@
    
 </table>
 
-<a href="@Url.Action("Index", "Nurse")" class="btn btn-secondary">Back to List</a>
+<a href="@Url.Action("Index", "Nurse") class="btn btn-secondary">Back to List</a>
