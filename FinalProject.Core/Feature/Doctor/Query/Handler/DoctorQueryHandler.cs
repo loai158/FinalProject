@@ -17,6 +17,9 @@ namespace FinalProject.Core.Feature.Doctor.Query.Handler
         public async Task<IEnumerable<GetAllDoctorsResponse>> Handle(GetAllDoctorsQuery request, CancellationToken cancellationToken)
         {
             var doctors = _doctorServices.GetAll();
+
+
+
             var response = doctors.MapDoctorsResponseDTOs();
             return response;
         }

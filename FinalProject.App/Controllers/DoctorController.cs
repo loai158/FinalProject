@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProject.App.Controllers
 {
+ 
     public class DoctorController : Controller
     {
         private readonly IMediator _mediator;

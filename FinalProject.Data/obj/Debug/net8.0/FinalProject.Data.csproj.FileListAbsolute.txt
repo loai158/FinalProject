@@ -6,8 +6,8 @@ D:\.net\projects\FinalProject\FinalProject.Data\obj\Debug\net8.0\FinalProject.Da
 D:\.net\projects\FinalProject\FinalProject.Data\obj\Debug\net8.0\FinalProject.Data.AssemblyInfoInputs.cache
 D:\.net\projects\FinalProject\FinalProject.Data\obj\Debug\net8.0\FinalProject.Data.AssemblyInfo.cs
 D:\.net\projects\FinalProject\FinalProject.Data\obj\Debug\net8.0\FinalProject.Data.csproj.CoreCompileInputs.cache
+D:\.net\projects\FinalProject\FinalProject.Data\obj\Debug\net8.0\FinalProject.Data.sourcelink.json
 D:\.net\projects\FinalProject\FinalProject.Data\obj\Debug\net8.0\FinalProject.Data.dll
 D:\.net\projects\FinalProject\FinalProject.Data\obj\Debug\net8.0\refint\FinalProject.Data.dll
 D:\.net\projects\FinalProject\FinalProject.Data\obj\Debug\net8.0\FinalProject.Data.pdb
 D:\.net\projects\FinalProject\FinalProject.Data\obj\Debug\net8.0\ref\FinalProject.Data.dll
-D:\.net\projects\FinalProject\FinalProject.Data\obj\Debug\net8.0\FinalProject.Data.sourcelink.json

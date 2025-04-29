@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="Feature\Doctor\Command\" />
+    <Folder Include="Feature\Nurse\Command\" />
   </ItemGroup>
 
 </Project>

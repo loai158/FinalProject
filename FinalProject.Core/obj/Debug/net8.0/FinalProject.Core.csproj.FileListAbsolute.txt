@@ -12,9 +12,9 @@ D:\.net\projects\FinalProject\FinalProject.Core\obj\Debug\net8.0\FinalProject.Co
 D:\.net\projects\FinalProject\FinalProject.Core\obj\Debug\net8.0\FinalProject.Core.AssemblyInfoInputs.cache
 D:\.net\projects\FinalProject\FinalProject.Core\obj\Debug\net8.0\FinalProject.Core.AssemblyInfo.cs
 D:\.net\projects\FinalProject\FinalProject.Core\obj\Debug\net8.0\FinalProject.Core.csproj.CoreCompileInputs.cache
+D:\.net\projects\FinalProject\FinalProject.Core\obj\Debug\net8.0\FinalProject.Core.sourcelink.json
 D:\.net\projects\FinalProject\FinalProject.Core\obj\Debug\net8.0\FinalPro.9D5ABB86.Up2Date
 D:\.net\projects\FinalProject\FinalProject.Core\obj\Debug\net8.0\FinalProject.Core.dll
 D:\.net\projects\FinalProject\FinalProject.Core\obj\Debug\net8.0\refint\FinalProject.Core.dll
 D:\.net\projects\FinalProject\FinalProject.Core\obj\Debug\net8.0\FinalProject.Core.pdb
 D:\.net\projects\FinalProject\FinalProject.Core\obj\Debug\net8.0\ref\FinalProject.Core.dll
-D:\.net\projects\FinalProject\FinalProject.Core\obj\Debug\net8.0\FinalProject.Core.sourcelink.json

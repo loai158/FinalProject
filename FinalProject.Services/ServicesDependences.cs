@@ -9,6 +9,7 @@ namespace FinalProject.Services
         public static IServiceCollection AddServicesDependences(this IServiceCollection services)
         {
             services.AddScoped<IDoctorServices, DoctorServices>();
+            services.AddScoped<INurseServices, NurseServices>();
             return services;
         }
     }
