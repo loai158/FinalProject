@@ -1098,5 +1098,23 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\lib\jquery\LICENSE.txt'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfImg\73332e0f-c9a9-4dad-ac6a-d2cf988a36c3.png'))">
+      <SourceType>Package</SourceType>
+      <SourceId>FinalProject.App</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/FinalProject.App</BasePath>
+      <RelativePath>ProfImg/73332e0f-c9a9-4dad-ac6a-d2cf988a36c3.png</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>p5hz5t8tp8</Fingerprint>
+      <Integrity>Y0UjfI3uJv7HMBP6ERODmb1zxFbbfo8o4dHlojGtzSA=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfImg\73332e0f-c9a9-4dad-ac6a-d2cf988a36c3.png'))</OriginalItemSpec>
+    </StaticWebAsset>
   </ItemGroup>
 </Project>

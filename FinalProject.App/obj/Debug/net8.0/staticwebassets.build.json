@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "0ae54KoKb8NjaNmK7uZOkwaN160w/qy0OI5OBNOD4po=",
+  "Hash": "z1NbDC9g9xGlo097Zv8RRwkbNPHChTcxp0kXA4/Lp8g=",
   "Source": "FinalProject.App",
   "BasePath": "_content/FinalProject.App",
   "Mode": "Default",
@@ -1317,6 +1317,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Desktop\\GraduateProject\\FinalProject\\FinalProject.App\\wwwroot\\ProfImg\\73332e0f-c9a9-4dad-ac6a-d2cf988a36c3.png",
+      "SourceId": "FinalProject.App",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Desktop\\GraduateProject\\FinalProject\\FinalProject.App\\wwwroot\\",
+      "BasePath": "_content/FinalProject.App",
+      "RelativePath": "ProfImg/73332e0f-c9a9-4dad-ac6a-d2cf988a36c3#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "p5hz5t8tp8",
+      "Integrity": "Y0UjfI3uJv7HMBP6ERODmb1zxFbbfo8o4dHlojGtzSA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\ProfImg\\73332e0f-c9a9-4dad-ac6a-d2cf988a36c3.png"
     }
   ],
   "Endpoints": [
@@ -6401,6 +6422,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s="
+        }
+      ]
+    },
+    {
+      "Route": "ProfImg/73332e0f-c9a9-4dad-ac6a-d2cf988a36c3.p5hz5t8tp8.png",
+      "AssetFile": "C:\\Users\\user\\Desktop\\GraduateProject\\FinalProject\\FinalProject.App\\wwwroot\\ProfImg\\73332e0f-c9a9-4dad-ac6a-d2cf988a36c3.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2919"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Y0UjfI3uJv7HMBP6ERODmb1zxFbbfo8o4dHlojGtzSA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 29 Apr 2025 17:42:49 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "p5hz5t8tp8"
+        },
+        {
+          "Name": "label",
+          "Value": "ProfImg/73332e0f-c9a9-4dad-ac6a-d2cf988a36c3.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Y0UjfI3uJv7HMBP6ERODmb1zxFbbfo8o4dHlojGtzSA="
+        }
+      ]
+    },
+    {
+      "Route": "ProfImg/73332e0f-c9a9-4dad-ac6a-d2cf988a36c3.png",
+      "AssetFile": "C:\\Users\\user\\Desktop\\GraduateProject\\FinalProject\\FinalProject.App\\wwwroot\\ProfImg\\73332e0f-c9a9-4dad-ac6a-d2cf988a36c3.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2919"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Y0UjfI3uJv7HMBP6ERODmb1zxFbbfo8o4dHlojGtzSA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 29 Apr 2025 17:42:49 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Y0UjfI3uJv7HMBP6ERODmb1zxFbbfo8o4dHlojGtzSA="
         }
       ]
     }
