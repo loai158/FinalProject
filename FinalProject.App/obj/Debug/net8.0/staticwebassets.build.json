@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "z1NbDC9g9xGlo097Zv8RRwkbNPHChTcxp0kXA4/Lp8g=",
+  "Hash": "1H6e4+TSk/TRWbIF6dkqSkpuRLqNRCzK6D/hH+xBymk=",
   "Source": "FinalProject.App",
   "BasePath": "_content/FinalProject.App",
   "Mode": "Default",
@@ -1319,12 +1319,12 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Identity": "C:\\Users\\user\\Desktop\\GraduateProject\\FinalProject\\FinalProject.App\\wwwroot\\ProfImg\\73332e0f-c9a9-4dad-ac6a-d2cf988a36c3.png",
+      "Identity": "C:\\Users\\user\\Desktop\\GraduateProject\\FinalProject\\FinalProject.App\\wwwroot\\ProfImg\\b8734041-79a3-4dde-9cc2-ffb8feef1a98.png",
       "SourceId": "FinalProject.App",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\user\\Desktop\\GraduateProject\\FinalProject\\FinalProject.App\\wwwroot\\",
       "BasePath": "_content/FinalProject.App",
-      "RelativePath": "ProfImg/73332e0f-c9a9-4dad-ac6a-d2cf988a36c3#[.{fingerprint}]?.png",
+      "RelativePath": "ProfImg/b8734041-79a3-4dde-9cc2-ffb8feef1a98#[.{fingerprint}]?.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1333,11 +1333,11 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "p5hz5t8tp8",
-      "Integrity": "Y0UjfI3uJv7HMBP6ERODmb1zxFbbfo8o4dHlojGtzSA=",
+      "Fingerprint": "q5m6mlqu36",
+      "Integrity": "rh9Gc+c+rPo9OeLT7DBU5Aa5r7gM+9dqWYv4TCe0sEg=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\ProfImg\\73332e0f-c9a9-4dad-ac6a-d2cf988a36c3.png"
+      "OriginalItemSpec": "wwwroot\\ProfImg\\b8734041-79a3-4dde-9cc2-ffb8feef1a98.png"
     }
   ],
   "Endpoints": [
@@ -6426,8 +6426,8 @@
       ]
     },
     {
-      "Route": "ProfImg/73332e0f-c9a9-4dad-ac6a-d2cf988a36c3.p5hz5t8tp8.png",
-      "AssetFile": "C:\\Users\\user\\Desktop\\GraduateProject\\FinalProject\\FinalProject.App\\wwwroot\\ProfImg\\73332e0f-c9a9-4dad-ac6a-d2cf988a36c3.png",
+      "Route": "ProfImg/b8734041-79a3-4dde-9cc2-ffb8feef1a98.png",
+      "AssetFile": "C:\\Users\\user\\Desktop\\GraduateProject\\FinalProject\\FinalProject.App\\wwwroot\\ProfImg\\b8734041-79a3-4dde-9cc2-ffb8feef1a98.png",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -6436,7 +6436,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2919"
+          "Value": "2463"
         },
         {
           "Name": "Content-Type",
@@ -6444,56 +6444,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Y0UjfI3uJv7HMBP6ERODmb1zxFbbfo8o4dHlojGtzSA=\""
+          "Value": "\"rh9Gc+c+rPo9OeLT7DBU5Aa5r7gM+9dqWYv4TCe0sEg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 29 Apr 2025 17:42:49 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "p5hz5t8tp8"
-        },
-        {
-          "Name": "label",
-          "Value": "ProfImg/73332e0f-c9a9-4dad-ac6a-d2cf988a36c3.png"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-Y0UjfI3uJv7HMBP6ERODmb1zxFbbfo8o4dHlojGtzSA="
-        }
-      ]
-    },
-    {
-      "Route": "ProfImg/73332e0f-c9a9-4dad-ac6a-d2cf988a36c3.png",
-      "AssetFile": "C:\\Users\\user\\Desktop\\GraduateProject\\FinalProject\\FinalProject.App\\wwwroot\\ProfImg\\73332e0f-c9a9-4dad-ac6a-d2cf988a36c3.png",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2919"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/png"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"Y0UjfI3uJv7HMBP6ERODmb1zxFbbfo8o4dHlojGtzSA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 29 Apr 2025 17:42:49 GMT"
+          "Value": "Wed, 30 Apr 2025 11:55:22 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6503,7 +6458,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Y0UjfI3uJv7HMBP6ERODmb1zxFbbfo8o4dHlojGtzSA="
+          "Value": "sha256-rh9Gc+c+rPo9OeLT7DBU5Aa5r7gM+9dqWYv4TCe0sEg="
+        }
+      ]
+    },
+    {
+      "Route": "ProfImg/b8734041-79a3-4dde-9cc2-ffb8feef1a98.q5m6mlqu36.png",
+      "AssetFile": "C:\\Users\\user\\Desktop\\GraduateProject\\FinalProject\\FinalProject.App\\wwwroot\\ProfImg\\b8734041-79a3-4dde-9cc2-ffb8feef1a98.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2463"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"rh9Gc+c+rPo9OeLT7DBU5Aa5r7gM+9dqWYv4TCe0sEg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 30 Apr 2025 11:55:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "q5m6mlqu36"
+        },
+        {
+          "Name": "label",
+          "Value": "ProfImg/b8734041-79a3-4dde-9cc2-ffb8feef1a98.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-rh9Gc+c+rPo9OeLT7DBU5Aa5r7gM+9dqWYv4TCe0sEg="
         }
       ]
     }

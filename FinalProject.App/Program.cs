@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Services;
 using FinalProject.Infrastructure;
+using FinalProject.Infrastructure.IRepositry;
+using FinalProject.Infrastructure.Repositry;
 namespace FinalProject.App
 {
     public class Program
@@ -42,7 +44,7 @@ namespace FinalProject.App
 
 
 
-
+            builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
 
 
             var app = builder.Build();
