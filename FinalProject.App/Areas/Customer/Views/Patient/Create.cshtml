@@ -1,0 +1,209 @@
+﻿@model FinalProject.Core.Feature.Patient.Command.Models.AddNewPatient
+
+@{
+    ViewData["Title"] = "إضافة مريض جديد";
+}
+
+<h2>إضافة مريض جديد</h2>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Phone"></label>
+        <input asp-for="Phone" class="form-control" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Address"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Image"></label>
+        <input asp-for="Image" class="form-control" type="file" />
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Gender"></label>
+        <select asp-for="Gender" class="form-control"
+                asp-items="Html.GetEnumSelectList<FinalProject.Data.Models.AppModels.Gender>()">
+            <option value="">-- اختر الجنس --</option>
+        </select>
+        <span asp-validation-for="Gender" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DateOfBirth"></label>
+        <input asp-for="DateOfBirth" class="form-control" type="date" />
+        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+    </div>
+
+    <!-- قسم إضافة الأدوية السابقة -->
+    <h3>إضافة الأدوية السابقة</h3>
+    <div id="medicines-container">
+        <div class="medicine-entry mb-3">
+            <div class="row">
+                <div class="col-md-3">
+                    <label>اسم الدواء</label>
+                    <input type="text" name="PreviousMedicines[0].Name" class="form-control medicine-name" placeholder="اكتب اسم الدواء" required />
+                </div>
+                <div class="col-md-2">
+                    <label>تاريخ البداية</label>
+                    <input type="date" name="PreviousMedicines[0].StartDate" class="form-control" required />
+                </div>
+                <div class="col-md-2">
+                    <label>تاريخ النهاية</label>
+                    <input type="date" name="PreviousMedicines[0].EndDate" class="form-control" required />
+                </div>
+                <div class="col-md-2">
+                    <label>الجرعة</label>
+                    <input type="text" name="PreviousMedicines[0].Dose" class="form-control" placeholder="مثال: 500 ملغ" required />
+                </div>
+                <div class="col-md-2 align-self-end">
+                    <button type="button" class="btn btn-danger remove-medicine">حذف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-secondary mt-2" id="add-medicine">إضافة دواء آخر</button>
+
+    <!-- قسم إضافة الحالات السابقة -->
+    <h3>إضافة الحالات السابقة</h3>
+    <div id="conditions-container">
+        <div class="condition-entry mb-3">
+            <div class="row">
+                <div class="col-md-8">
+                    <label>الحالة</label>
+                    <select name="PreviousConditions[0].Name" class="form-control"
+                            asp-items="Html.GetEnumSelectList<FinalProject.Data.Models.AppModels.Name>()">
+                        <option value="">-- اختر الحالة --</option>
+                    </select>
+                </div>
+                <div class="col-md-4 align-self-end">
+                    <button type="button" class="btn btn-danger remove-condition">حذف</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-secondary mt-2" id="add-condition">إضافة حالة أخرى</button>
+
+    <button type="submit" class="btn btn-primary mt-3">حفظ</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            let medicineIndex = 1;
+            let conditionIndex = 1;
+
+            // Autocomplete للأدوية
+            function initializeAutocomplete(element) {
+                element.autocomplete({
+                    source: function (request, response) {
+                        $.ajax({
+                            url: '@Url.Action("SearchMedicines", "Interaction", new { area = "Customer" })',
+                            dataType: "json",
+                            data: {
+                                term: request.term
+                            },
+                            success: function (data) {
+                                response(data);
+                            }
+                        });
+                    },
+                    minLength: 2
+                });
+            }
+
+            // تهيئة Autocomplete للحقل الأول
+            initializeAutocomplete($(".medicine-name"));
+
+            // إضافة دواء جديد
+            $("#add-medicine").click(function () {
+                let newMedicine = `
+                    <div class="medicine-entry mb-3">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>اسم الدواء</label>
+                                <input type="text" name="PreviousMedicines[${medicineIndex}].Name" class="form-control medicine-name" placeholder="اكتب اسم الدواء" required />
+                            </div>
+                            <div class="col-md-2">
+                                <label>تاريخ البداية</label>
+                                <input type="date" name="PreviousMedicines[${medicineIndex}].StartDate" class="form-control" required />
+                            </div>
+                            <div class="col-md-2">
+                                <label>تاريخ النهاية</label>
+                                <input type="date" name="PreviousMedicines[${medicineIndex}].EndDate" class="form-control" required />
+                            </div>
+                            <div class="col-md-2">
+                                <label>الجرعة</label>
+                                <input type="text" name="PreviousMedicines[${medicineIndex}].Dose" class="form-control" placeholder="مثال: 500 ملغ" required />
+                            </div>
+                            <div class="col-md-2 align-self-end">
+                                <button type="button" class="btn btn-danger remove-medicine">حذف</button>
+                            </div>
+                        </div>
+                    </div>`;
+                $("#medicines-container").append(newMedicine);
+                initializeAutocomplete($(`input[name='PreviousMedicines[${medicineIndex}].Name']`));
+                medicineIndex++;
+            });
+
+            // إضافة حالة سابقة جديدة
+            $("#add-condition").click(function () {
+                let newCondition = `
+                    <div class="condition-entry mb-3">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <label>الحالة</label>
+                                <select name="PreviousConditions[${conditionIndex}].Name" class="form-control">
+                                    <option value="">-- اختر الحالة --</option>
+                                    @foreach (var condition in Enum.GetValues(typeof(FinalProject.Data.Models.AppModels.Name)))
+                                    {
+                                        <option value="@condition">@condition</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-4 align-self-end">
+                                <button type="button" class="btn btn-danger remove-condition">حذف</button>
+                            </div>
+                        </div>
+                    </div>`;
+                $("#conditions-container").append(newCondition);
+                conditionIndex++;
+            });
+
+            // حذف دواء
+            $(document).on("click", ".remove-medicine", function () {
+                $(this).closest(".medicine-entry").remove();
+            });
+
+            // حذف حالة
+            $(document).on("click", ".remove-condition", function () {
+                $(this).closest(".condition-entry").remove();
+            });
+        });
+    </script>
+}
