@@ -1,0 +1,36 @@
+﻿ 
+<h2>إضافة علاج</h2>
+
+<form asp-action="SaveTreatment" asp-controller="Interaction" asp-area="Customer" method="post">
+    <div class="form-group">
+        <label for="medicineName">اسم الدواء</label>
+        <input type="text" id="medicineName" name="MedicineName" class="form-control" placeholder="اكتب اسم الدواء" required />
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">حفظ</button>
+</form>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#medicineName").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '@Url.Action("SearchMedicines", "Interaction", new { area = "Customer" })',
+                        dataType: "json",
+                        data: {
+                            term: request.term
+                        },
+                        success: function (data) {
+                            response(data);
+                        }
+                    });
+                },
+                minLength: 2 // الحد الأدنى لعدد الأحرف قبل البحث
+            });
+        });
+    </script>
+}

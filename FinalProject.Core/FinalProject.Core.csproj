@@ -20,7 +20,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Feature\PreviousConditions\Command\Handler\" />
+    <Folder Include="Feature\PreviousConditions\Command\Models\" />
+    <Folder Include="Feature\PreviousConditions\Query\" />
     <Folder Include="Feature\Nurse\Command\" />
+    <Folder Include="Feature\PreviousMedicines\Command\Handler\" />
+    <Folder Include="Feature\PreviousMedicines\Query\" />
   </ItemGroup>
 
 </Project>

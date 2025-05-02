@@ -34,8 +34,7 @@ namespace FinalProject.App.Areas.Customer.Controllers
                 TempData["ErrorMessage"] = " الاسم موجود  بالفعل";
                 return View();
             }
-             
-
+              
                 TempData["SuccessMessage"] = "تم إضافة الطبيب بنجاح";
                 return RedirectToAction("Index");
              

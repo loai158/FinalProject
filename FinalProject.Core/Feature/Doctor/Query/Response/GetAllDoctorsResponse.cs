@@ -1,4 +1,5 @@
 ﻿using FinalProject.Data.Models.AppModels;
+using MediatR;
 
 namespace FinalProject.Core.Feature.Doctor.Query.Response
 {
