@@ -1,7 +1,6 @@
 ﻿using FinalProject.Data.Models.AppModels;
 using FinalProject.Infrastructure.UnitOfWorks;
 using FinalProject.Services.Abstracts;
-using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Services.Implemetations
 {
@@ -26,8 +25,13 @@ namespace FinalProject.Services.Implemetations
             }
             else
                 return 0;
+        }
 
-
+        public string Edit(Doctor doctor)
+        {
+            _unitOfWork.Repositry<Doctor>().Edit(doctor);
+            _unitOfWork.Repositry<Doctor>().Commit();
+            return "success";
         }
 
         public IQueryable<Doctor> GetAll()
@@ -35,6 +39,13 @@ namespace FinalProject.Services.Implemetations
             var result = _unitOfWork.Repositry<Doctor>().Get(includes: [d => d.Department, a => a.DoctorSchedules]);
             return result;
         }
+
+        public async Task<Doctor> GetById(int id)
+        {
+            var doctor = await _unitOfWork.Repositry<Doctor>().GetOne(c => c.Id == id, includes: [a => a.Appointments, ds => ds.DoctorSchedules, dd => dd.Department], tracked: false);
+            return doctor;
+        }
+
         public async Task<bool> IsDoctorNameExists(string name)
         {
             return await _unitOfWork.Repositry<Doctor>().Exist(d => d.Name == name);

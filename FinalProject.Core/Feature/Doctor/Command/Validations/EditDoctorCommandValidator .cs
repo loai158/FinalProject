@@ -1,0 +1,48 @@
+﻿using FinalProject.Core.Feature.Doctor.Command.Models;
+using FluentValidation;
+
+namespace FinalProject.Core.Feature.Doctor.Command.Validations
+{
+    public class EditDoctorCommandValidator : AbstractValidator<EditDoctorCommand>
+    {
+        public EditDoctorCommandValidator()
+        {
+            RuleFor(x => x.Id)
+                .GreaterThan(0).WithMessage("معرف الدكتور غير صالح");
+
+            RuleFor(x => x.Name)
+                .NotEmpty().WithMessage("الاسم مطلوب")
+                .MaximumLength(100).WithMessage("الاسم لا يمكن أن يتجاوز 100 حرف");
+
+            RuleFor(x => x.Details)
+                .NotEmpty().WithMessage("التفاصيل مطلوبة")
+                .MaximumLength(500).WithMessage("التفاصيل لا يمكن أن تتجاوز 500 حرف");
+
+            RuleFor(x => x.Phone)
+                .NotEmpty().WithMessage("رقم الهاتف مطلوب")
+                .Matches(@"^\+?\d{10,15}$").WithMessage("رقم الهاتف غير صالح");
+
+            RuleFor(x => x.Email)
+                .NotEmpty().WithMessage("البريد الإلكتروني مطلوب")
+                .EmailAddress().WithMessage("البريد الإلكتروني غير صالح");
+
+            RuleFor(x => x.Gender)
+                .NotNull().WithMessage("الجنس مطلوب");
+
+            RuleFor(x => x.DepatrmentId)
+                .GreaterThan(0).WithMessage("معرف القسم غير صالح");
+
+            RuleFor(x => x.Image)
+                .Must(BeAValidImage).WithMessage("الصورة يجب أن تكون من نوع صالح (jpg, png)");
+        }
+        private bool BeAValidImage(string file)
+        {
+            if (file == null)
+                return true; // الصورة اختيارية
+
+            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+            var extension = Path.GetExtension(file).ToLower();
+            return allowedExtensions.Contains(extension);
+        }
+    }
+}
