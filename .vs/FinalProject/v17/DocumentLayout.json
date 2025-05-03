@@ -1,0 +1,74 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\user\\Desktop\\GraduateProject\\FinalProject\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|c:\\users\\user\\desktop\\graduateproject\\finalproject\\finalproject.app\\areas\\identity\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|solutionrelative:finalproject.app\\areas\\identity\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5A572F3C-EC98-417D-B063-1B1AD9FB96B2}|FinalProject.Core\\FinalProject.Core.csproj|c:\\users\\user\\desktop\\graduateproject\\finalproject\\finalproject.core\\feature\\nurse\\query\\handler\\nursequeryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5A572F3C-EC98-417D-B063-1B1AD9FB96B2}|FinalProject.Core\\FinalProject.Core.csproj|solutionrelative:finalproject.core\\feature\\nurse\\query\\handler\\nursequeryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5A572F3C-EC98-417D-B063-1B1AD9FB96B2}|FinalProject.Core\\FinalProject.Core.csproj|c:\\users\\user\\desktop\\graduateproject\\finalproject\\finalproject.core\\mapping\\nursemapprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5A572F3C-EC98-417D-B063-1B1AD9FB96B2}|FinalProject.Core\\FinalProject.Core.csproj|solutionrelative:finalproject.core\\mapping\\nursemapprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\GraduateProject\\FinalProject\\FinalProject.App\\Areas\\Identity\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "FinalProject.App\\Areas\\Identity\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\GraduateProject\\FinalProject\\FinalProject.App\\Areas\\Identity\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "FinalProject.App\\Areas\\Identity\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAABQAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-03T18:12:33.29Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "NurseQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\GraduateProject\\FinalProject\\FinalProject.Core\\Feature\\Nurse\\Query\\Handler\\NurseQueryHandler.cs",
+              "RelativeDocumentMoniker": "FinalProject.Core\\Feature\\Nurse\\Query\\Handler\\NurseQueryHandler.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\GraduateProject\\FinalProject\\FinalProject.Core\\Feature\\Nurse\\Query\\Handler\\NurseQueryHandler.cs",
+              "RelativeToolTip": "FinalProject.Core\\Feature\\Nurse\\Query\\Handler\\NurseQueryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T13:34:05.695Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "NurseMapProfile.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\GraduateProject\\FinalProject\\FinalProject.Core\\Mapping\\NurseMapProfile.cs",
+              "RelativeDocumentMoniker": "FinalProject.Core\\Mapping\\NurseMapProfile.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\GraduateProject\\FinalProject\\FinalProject.Core\\Mapping\\NurseMapProfile.cs",
+              "RelativeToolTip": "FinalProject.Core\\Mapping\\NurseMapProfile.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABgAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-30T13:27:26.212Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
