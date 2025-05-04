@@ -54,7 +54,7 @@ namespace FinalProject.App.Areas.Customer.Controllers
                 var userId = _userManager.GetUserId(User);
                 var user = await _userManager.FindByIdAsync(userId);
 
-                // التحقق من كلمة المرور القديمة إذا تم تقديمها
+ 
                 if (!string.IsNullOrEmpty(registerVM.Password))
                 {
                     if (string.IsNullOrEmpty(OldPassword))
@@ -63,7 +63,6 @@ namespace FinalProject.App.Areas.Customer.Controllers
                         return View(registerVM);
                     }
 
-                    // التحقق من تطابق كلمة المرور القديمة
                     var isOldPasswordCorrect = await _userManager.CheckPasswordAsync(user, OldPassword);
                     if (!isOldPasswordCorrect)
                     {
@@ -103,7 +102,6 @@ namespace FinalProject.App.Areas.Customer.Controllers
                 user.Address = registerVM.Address;
                 user.PhoneNumber = registerVM.PhoneNumber;
 
-                // تغيير كلمة المرور إذا تم تقديم كلمة مرور جديدة
                 if (!string.IsNullOrEmpty(registerVM.Password) && !string.IsNullOrEmpty(OldPassword))
                 {
                     var changePassword = await _userManager.ChangePasswordAsync(user, OldPassword, registerVM.Password);
@@ -122,6 +120,7 @@ namespace FinalProject.App.Areas.Customer.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.RefreshSignInAsync(user);
+
                     TempData["Success"] = "Data Updated Successfully!";
                     return RedirectToAction("Index", "Home", new { area = "Customer" });
                 }
