@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Services;
 using FinalProject.Infrastructure;
+using FinalProject.Infrastructure.IRepositry;
+using FinalProject.Infrastructure.Repositry;
 namespace FinalProject.App
 {
     public class Program
@@ -43,6 +45,9 @@ namespace FinalProject.App
 
             builder.Services.AddHttpClient();
 
+            builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+
+
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", builder =>
@@ -52,6 +57,7 @@ namespace FinalProject.App
                            .AllowAnyHeader();
                 });
             });
+
 
             var app = builder.Build();
 

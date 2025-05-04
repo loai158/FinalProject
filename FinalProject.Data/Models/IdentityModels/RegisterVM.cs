@@ -19,6 +19,9 @@ namespace FinalProject.Data.Models.IdentityModels
         [DataType(DataType.Password)]
         [Compare(nameof(Password))]
         public string Password { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "Passwords do not match")]
         public string ConfirmPassword { get; set; }
         [RegularExpression("^.*\\.(png|jpg|pdf)$")]
         public string? ImgProfile { get; set; }

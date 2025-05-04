@@ -19,4 +19,8 @@
     <ProjectReference Include="..\FinalProject.Core\FinalProject.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\ProfImg\" />
+  </ItemGroup>
+
 </Project>
