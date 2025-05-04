@@ -1,0 +1,93 @@
+﻿ 
+@model FinalProject.Core.Feature.Doctor.Command.Models.EditDoctorCommand
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    ViewData["Title"] = "تعديل بيانات الدكتور";
+}
+
+<h2>تعديل بيانات الدكتور</h2>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+@if (TempData["ErrorMessage2"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage2"]</div>
+}
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Details"></label>
+        <textarea asp-for="Details" class="form-control"></textarea>
+        <span asp-validation-for="Details" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Phone"></label>
+        <input asp-for="Phone" class="form-control" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Gender"></label>
+        <select asp-for="Gender" class="form-control"
+                asp-items="Html.GetEnumSelectList<FinalProject.Data.Models.AppModels.Gender>()">
+            <option value="">-- اختر الجنس --</option>
+        </select>
+        <span asp-validation-for="Gender" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DepatrmentId"></label>
+        <select asp-for="DepatrmentId" class="form-control" asp-items="@(new SelectList(Model.Departments, "Id", "Name"))">
+            <option value="">-- اختر القسم --</option>
+        </select>
+        <span asp-validation-for="DepatrmentId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>الصورة الحالية</label>
+        @if (!string.IsNullOrEmpty(Model.Image))
+        {
+            <img src="@Model.Image" alt="Doctor Image" style="max-width: 200px;" />
+        }
+        else
+        {
+            <p>لا توجد صورة حالية</p>
+        }
+    </div>
+
+    <div class="form-group">
+        <label for="Image">تحميل صورة جديدة</label>
+        <input type="file" name="Image" class="form-control" />
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">حفظ التعديلات</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

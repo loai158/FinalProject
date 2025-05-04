@@ -1,6 +1,7 @@
 ﻿using FinalProject.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace FinalProject.Infrastructure.Bases
 {
@@ -18,6 +19,7 @@ namespace FinalProject.Infrastructure.Bases
         public async Task<string> Create(T entity)
         {
             await dbSet.AddAsync(entity);
+            
             return "success";
         }
 
@@ -77,6 +79,11 @@ namespace FinalProject.Infrastructure.Bases
         {
             return await Get(filter, includes, tracked).FirstOrDefaultAsync();
 
+        }
+
+        public async Task<bool> Exist(Expression<Func<T, bool>> predicate)
+        {
+          return await dbSet.AnyAsync(predicate);
         }
     }
 }

@@ -43,8 +43,20 @@ namespace FinalProject.App
                              .AddDefaultTokenProviders();
 
 
+            builder.Services.AddHttpClient();
 
             builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
 
 
             var app = builder.Build();

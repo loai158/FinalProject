@@ -1,4 +1,6 @@
 ﻿using FinalProject.Core.Behavior;
+using FinalProject.Core.Feature.Doctor.Command.Validators;
+using FinalProject.Core.Feature.Patient.Command.Validations;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using MediatR;
@@ -12,7 +14,9 @@ namespace FinalProject.Core
         public static IServiceCollection AddCoreDependences(this IServiceCollection services)
         {
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            services.AddFluentValidationAutoValidation();
+            services.AddFluentValidationClientsideAdapters();
+            services.AddValidatorsFromAssemblyContaining<AddDoctorCommandValidator>();
+            services.AddValidatorsFromAssemblyContaining<AddNewPatientValidator>();
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             services.AddMediatR(cfg =>
