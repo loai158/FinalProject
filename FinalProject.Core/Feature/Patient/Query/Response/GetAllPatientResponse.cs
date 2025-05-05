@@ -1,4 +1,5 @@
 ﻿using FinalProject.Data.Models.AppModels;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace FinalProject.Core.Feature.Patient.Query.Response
 {
@@ -12,7 +13,8 @@ namespace FinalProject.Core.Feature.Patient.Query.Response
         public string Address { get; set; }
         public Gender Gender { get; set; }
         public DateTime? DateOfBirth { get; set; }
-        public ICollection<Appointment>? Appointments { get; set; } 
+        [ValidateNever]
+        //public ICollection<Appointment>? Appointments { get; set; } 
         public ICollection<PreviousCondition>? PreviousConditions { get; set; } 
         public ICollection<PreviousMedicine>? PreviousMedicine { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿namespace FinalProject.Core.Feature.Appointment.Command.Models
 {
-    public class AddNewAppointment :
+    public class AddNewAppointment
     {
     }
 }

@@ -4,94 +4,116 @@
     ViewData["Title"] = "قائمة الأطباء";
 }
 
+<style>
+    .doctor-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-<h1 class="text-center mb-4">قائمة الأطباء</h1>
+        .doctor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
 
-<table class="table table-bordered table-striped text-center align-middle">
-    <thead class="table-dark">
-        <tr>
-            <th>#</th>
-            <th>الصورة</th>
-            <th>الاسم</th>
-            <th>التخصص</th>
-            <th>رقم الهاتف</th>
-            <th>البريد الإلكتروني</th>
-            <th>الجنس</th>
-            <th>مواعيد الدكتور</th>
-        </tr>
-    </thead>
-    <tbody>
+    .schedule-table th {
+        background-color: #f8f9fa;
+    }
+
+    .badge-success {
+        background-color: #28a745;
+    }
+
+    .badge-danger {
+        background-color: #dc3545;
+    }
+</style>
+
+<h1 class="text-center mb-5 fw-bold text-primary">قائمة الأطباء</h1>
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         @if (Model != null && Model.Any())
         {
             foreach (var doctor in Model)
             {
-                <tr>
-                    <td>@doctor.Id</td>
-                    <td>
-                        @if (!string.IsNullOrEmpty(doctor.Image))
-                        {
-                            <img src="@doctor.Image" alt="Doctor Image" width="70" height="70" class="rounded-circle" />
-                        }
-                        else
-                        {
-                            <span>لا يوجد صورة</span>
-                        }
-                    </td>
-                    <td>@doctor.Name</td>
-                    <td>@doctor.Department</td>
-                    <td>@doctor.Phone</td>
-                    <td>@doctor.Email</td>
-                    <td>@(doctor.Gender == FinalProject.Data.Models.AppModels.Gender.Male ? "ذكر" : "أنثى")</td>
-                    <td>
-                        @if (doctor.DoctorSchedules != null && doctor.DoctorSchedules.Any())
-                        {
-                            <table class="table table-sm table-bordered text-center mb-0">
-                                <thead class="table-light">
-                                    <tr>
-                                        <th>التاريخ</th>
-                                        <th>من</th>
-                                        <th>إلى</th>
-                                        <th>الحالة</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var schedule in doctor.DoctorSchedules)
-                                    {
-                                        <tr>
-                                            <td>@schedule.Date.ToString("yyyy/MM/dd")</td>
-                                            <td>@schedule.StartTime.ToString("HH:mm")</td>
-                                            <td>@schedule.EndTime.ToString("HH:mm")</td>
-                                            <td>
-                                                @if (schedule.IsAvailable)
+                <div class="col">
+                    <div class="card h-100 border-0 doctor-card shadow-sm">
+                        <div class="card-body text-center p-4">
+                            <!-- صورة الطبيب -->
+                            @if (!string.IsNullOrEmpty(doctor.Image))
+                            {
+                                <img src="~/image/@doctor.Image" class="rounded-circle mb-3 img-thumbnail" alt="صورة الطبيب" width="100" height="100" />
+                            }
+                            else
+                            {
+                                <div class="mb-3 text-muted">لا يوجد صورة</div>
+                            }
+
+                            <!-- اسم الطبيب -->
+                            <h5 class="card-title mb-3">@doctor.Name</h5>
+
+                            <!-- تفاصيل الطبيب -->
+                            <p class="card-text mb-1"><i class="bi bi-briefcase text-primary"></i> <strong>التخصص:</strong> @doctor.Department</p>
+                            <p class="card-text mb-1"><i class="bi bi-telephone text-primary"></i> <strong>الهاتف:</strong> @doctor.Phone</p>
+                            <p class="card-text mb-1"><i class="bi bi-envelope text-primary"></i> <strong>البريد:</strong> @doctor.Email</p>
+                            <p class="card-text mb-3"><i class="bi bi-gender-ambiguous text-primary"></i> <strong>الجنس:</strong> @(doctor.Gender == FinalProject.Data.Models.AppModels.Gender.Male ? "ذكر" : "أنثى")</p>
+
+                            <!-- مواعيد الطبيب -->
+                            <div class="mt-3">
+                                <h6 class="fw-bold text-secondary">مواعيد العمل</h6>
+                                @if (doctor.DoctorSchedules != null && doctor.DoctorSchedules.Any())
+                                {
+                                    <div class="table-responsive">
+                                        <table class="table table-sm schedule-table align-middle mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>التاريخ</th>
+                                                    <th>من</th>
+                                                    <th>إلى</th>
+                                                    <th>الحالة</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var schedule in doctor.DoctorSchedules)
                                                 {
-                                                    <span class="badge bg-success">متاح</span>
+                                                    <tr>
+                                                        <td>@schedule.Date.ToString("yyyy/MM/dd")</td>
+                                                        <td>@schedule.StartTime.ToString("HH:mm")</td>
+                                                        <td>@schedule.EndTime.ToString("HH:mm")</td>
+                                                        <td>
+                                                            @if (schedule.IsAvailable)
+                                                            {
+                                                                <span class="badge bg-success">متاح</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span class="badge bg-danger">محجوز</span>
+                                                            }
+                                                        </td>
+                                                    </tr>
                                                 }
-                                                else
-                                                {
-                                                    <span class="badge bg-danger">محجوز</span>
-                                                }
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        }
-                        else
-                        {
-                            <span>لا يوجد مواعيد مسجلة</span>
-                        }
-                    </td>
-                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <small class="text-muted">لا توجد مواعيد متاحة</small>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
             }
         }
         else
         {
-            <tr>
-                <td colspan="8" class="text-center">لا يوجد أطباء مسجلين حالياً.</td>
-            </tr>
+            <div class="col-12 text-center">
+                <div class="alert alert-info mb-0">لا يوجد أطباء مسجلين حالياً.</div>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+</div>
+
 @section Scripts {
     <script>
         $(document).ready(function () {
@@ -105,5 +127,41 @@
                 toastr.error(errorMessage, 'حدث خطأ', { timeOut: 4000 });
             }
         });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <script>
+        // تفعيل AOS (Animation On Scroll)
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // تبديل السمة
+        const toggleBtn = document.getElementById("themeToggle");
+        const body = document.body;
+
+        toggleBtn.addEventListener("click", () => {
+            if (body.classList.contains("light-mode")) {
+                body.classList.remove("light-mode");
+                body.classList.add("dark-mode");
+                toggleBtn.innerHTML = '<i class="bi bi-sun"></i> <span>الوضع النهاري</span>';
+            } else {
+                body.classList.remove("dark-mode");
+                body.classList.add("light-mode");
+                toggleBtn.innerHTML = '<i class="bi bi-moon"></i> <span>الوضع الليلي</span>';
+            }
+        });
+
+        // تحديد السمة الافتراضية
+        window.onload = () => {
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (prefersDark) {
+                body.classList.add('dark-mode');
+                toggleBtn.innerHTML = '<i class="bi bi-sun"></i> <span>الوضع النهاري</span>';
+            } else {
+                body.classList.add('light-mode');
+            }
+        };
     </script>
 }

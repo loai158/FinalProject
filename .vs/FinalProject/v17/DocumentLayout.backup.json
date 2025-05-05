@@ -1,34 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\.net\\projects\\FinalProject\\",
+  "WorkspaceRootPath": "D:\\Courses\\Projects\\IProjects\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|d:\\.net\\projects\\finalproject\\finalproject.app\\areas\\customer\\views\\doctor\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|solutionrelative:finalproject.app\\areas\\customer\\views\\doctor\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|d:\\courses\\projects\\iprojects\\finalproject.app\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|solutionrelative:finalproject.app\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|d:\\.net\\projects\\finalproject\\finalproject.app\\areas\\customer\\controllers\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|solutionrelative:finalproject.app\\areas\\customer\\controllers\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|d:\\courses\\projects\\iprojects\\finalproject.app\\areas\\customer\\views\\doctor\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|solutionrelative:finalproject.app\\areas\\customer\\views\\doctor\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5A572F3C-EC98-417D-B063-1B1AD9FB96B2}|FinalProject.Core\\FinalProject.Core.csproj|d:\\.net\\projects\\finalproject\\finalproject.core\\feature\\doctor\\command\\models\\adddoctorcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5A572F3C-EC98-417D-B063-1B1AD9FB96B2}|FinalProject.Core\\FinalProject.Core.csproj|solutionrelative:finalproject.core\\feature\\doctor\\command\\models\\adddoctorcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5A572F3C-EC98-417D-B063-1B1AD9FB96B2}|FinalProject.Core\\FinalProject.Core.csproj|d:\\courses\\projects\\iprojects\\finalproject.core\\feature\\appointment\\command\\models\\addnewappointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5A572F3C-EC98-417D-B063-1B1AD9FB96B2}|FinalProject.Core\\FinalProject.Core.csproj|solutionrelative:finalproject.core\\feature\\appointment\\command\\models\\addnewappointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5A572F3C-EC98-417D-B063-1B1AD9FB96B2}|FinalProject.Core\\FinalProject.Core.csproj|d:\\.net\\projects\\finalproject\\finalproject.core\\feature\\doctor\\command\\models\\editdoctorcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5A572F3C-EC98-417D-B063-1B1AD9FB96B2}|FinalProject.Core\\FinalProject.Core.csproj|solutionrelative:finalproject.core\\feature\\doctor\\command\\models\\editdoctorcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5A572F3C-EC98-417D-B063-1B1AD9FB96B2}|FinalProject.Core\\FinalProject.Core.csproj|d:\\.net\\projects\\finalproject\\finalproject.core\\feature\\doctor\\command\\handler\\doctorcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5A572F3C-EC98-417D-B063-1B1AD9FB96B2}|FinalProject.Core\\FinalProject.Core.csproj|solutionrelative:finalproject.core\\feature\\doctor\\command\\handler\\doctorcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5A572F3C-EC98-417D-B063-1B1AD9FB96B2}|FinalProject.Core\\FinalProject.Core.csproj|d:\\.net\\projects\\finalproject\\finalproject.core\\feature\\doctor\\query\\handler\\doctorqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5A572F3C-EC98-417D-B063-1B1AD9FB96B2}|FinalProject.Core\\FinalProject.Core.csproj|solutionrelative:finalproject.core\\feature\\doctor\\query\\handler\\doctorqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5A572F3C-EC98-417D-B063-1B1AD9FB96B2}|FinalProject.Core\\FinalProject.Core.csproj|d:\\.net\\projects\\finalproject\\finalproject.core\\mapping\\doctormapprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5A572F3C-EC98-417D-B063-1B1AD9FB96B2}|FinalProject.Core\\FinalProject.Core.csproj|solutionrelative:finalproject.core\\mapping\\doctormapprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5A572F3C-EC98-417D-B063-1B1AD9FB96B2}|FinalProject.Core\\FinalProject.Core.csproj|d:\\courses\\projects\\iprojects\\finalproject.core\\feature\\patient\\query\\response\\getallpatientresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5A572F3C-EC98-417D-B063-1B1AD9FB96B2}|FinalProject.Core\\FinalProject.Core.csproj|solutionrelative:finalproject.core\\feature\\patient\\query\\response\\getallpatientresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,20 +26,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 7,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AddDoctorCommand.cs",
-              "DocumentMoniker": "D:\\.net\\projects\\FinalProject\\FinalProject.Core\\Feature\\Doctor\\Command\\Models\\AddDoctorCommand.cs",
-              "RelativeDocumentMoniker": "FinalProject.Core\\Feature\\Doctor\\Command\\Models\\AddDoctorCommand.cs",
-              "ToolTip": "D:\\.net\\projects\\FinalProject\\FinalProject.Core\\Feature\\Doctor\\Command\\Models\\AddDoctorCommand.cs",
-              "RelativeToolTip": "FinalProject.Core\\Feature\\Doctor\\Command\\Models\\AddDoctorCommand.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAuwAsAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T13:37:57.14Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             },
             {
               "$type": "Bookmark",
@@ -79,81 +58,53 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "EditDoctorCommand.cs",
-              "DocumentMoniker": "D:\\.net\\projects\\FinalProject\\FinalProject.Core\\Feature\\Doctor\\Command\\Models\\EditDoctorCommand.cs",
-              "RelativeDocumentMoniker": "FinalProject.Core\\Feature\\Doctor\\Command\\Models\\EditDoctorCommand.cs",
-              "ToolTip": "D:\\.net\\projects\\FinalProject\\FinalProject.Core\\Feature\\Doctor\\Command\\Models\\EditDoctorCommand.cs",
-              "RelativeToolTip": "FinalProject.Core\\Feature\\Doctor\\Command\\Models\\EditDoctorCommand.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAQAAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T13:15:08.508Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "D:\\.net\\projects\\FinalProject\\FinalProject.App\\Areas\\Customer\\Views\\Doctor\\Edit.cshtml",
-              "RelativeDocumentMoniker": "FinalProject.App\\Areas\\Customer\\Views\\Doctor\\Edit.cshtml",
-              "ToolTip": "D:\\.net\\projects\\FinalProject\\FinalProject.App\\Areas\\Customer\\Views\\Doctor\\Edit.cshtml*",
-              "RelativeToolTip": "FinalProject.App\\Areas\\Customer\\Views\\Doctor\\Edit.cshtml*",
-              "ViewState": "AgIAADIAAAAAAAAAAAAUwD8AAABpAAAAAAAAAA==",
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "FinalProject.App\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "FinalProject.App\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAEIBAAAAAAAAAAAAAEIBAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-03T11:56:47.179Z",
+              "WhenOpened": "2025-05-04T15:34:43.597Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "DoctorController.cs",
-              "DocumentMoniker": "D:\\.net\\projects\\FinalProject\\FinalProject.App\\Areas\\Customer\\Controllers\\DoctorController.cs",
-              "RelativeDocumentMoniker": "FinalProject.App\\Areas\\Customer\\Controllers\\DoctorController.cs",
-              "ToolTip": "D:\\.net\\projects\\FinalProject\\FinalProject.App\\Areas\\Customer\\Controllers\\DoctorController.cs*",
-              "RelativeToolTip": "FinalProject.App\\Areas\\Customer\\Controllers\\DoctorController.cs*",
-              "ViewState": "AgIAACoAAAAAAAAAAMBAwDYAAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T18:24:59.78Z",
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\Areas\\Customer\\Views\\Doctor\\Index.cshtml",
+              "RelativeDocumentMoniker": "FinalProject.App\\Areas\\Customer\\Views\\Doctor\\Index.cshtml",
+              "ToolTip": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\Areas\\Customer\\Views\\Doctor\\Index.cshtml",
+              "RelativeToolTip": "FinalProject.App\\Areas\\Customer\\Views\\Doctor\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKEAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-04T14:38:58.535Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "DoctorQueryHandler.cs",
-              "DocumentMoniker": "D:\\.net\\projects\\FinalProject\\FinalProject.Core\\Feature\\Doctor\\Query\\Handler\\DoctorQueryHandler.cs",
-              "RelativeDocumentMoniker": "FinalProject.Core\\Feature\\Doctor\\Query\\Handler\\DoctorQueryHandler.cs",
-              "ToolTip": "D:\\.net\\projects\\FinalProject\\FinalProject.Core\\Feature\\Doctor\\Query\\Handler\\DoctorQueryHandler.cs",
-              "RelativeToolTip": "FinalProject.Core\\Feature\\Doctor\\Query\\Handler\\DoctorQueryHandler.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAswCoAAAAkAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "GetAllPatientResponse.cs",
+              "DocumentMoniker": "D:\\Courses\\Projects\\IProjects\\FinalProject.Core\\Feature\\Patient\\Query\\Response\\GetAllPatientResponse.cs",
+              "RelativeDocumentMoniker": "FinalProject.Core\\Feature\\Patient\\Query\\Response\\GetAllPatientResponse.cs",
+              "ToolTip": "D:\\Courses\\Projects\\IProjects\\FinalProject.Core\\Feature\\Patient\\Query\\Response\\GetAllPatientResponse.cs",
+              "RelativeToolTip": "FinalProject.Core\\Feature\\Patient\\Query\\Response\\GetAllPatientResponse.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAYwBAAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T22:36:55.959Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-04T14:27:11.691Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "DoctorMapProfile.cs",
-              "DocumentMoniker": "D:\\.net\\projects\\FinalProject\\FinalProject.Core\\Mapping\\DoctorMapProfile.cs",
-              "RelativeDocumentMoniker": "FinalProject.Core\\Mapping\\DoctorMapProfile.cs",
-              "ToolTip": "D:\\.net\\projects\\FinalProject\\FinalProject.Core\\Mapping\\DoctorMapProfile.cs",
-              "RelativeToolTip": "FinalProject.Core\\Mapping\\DoctorMapProfile.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "AddNewAppointment.cs",
+              "DocumentMoniker": "D:\\Courses\\Projects\\IProjects\\FinalProject.Core\\Feature\\Appointment\\Command\\Models\\AddNewAppointment.cs",
+              "RelativeDocumentMoniker": "FinalProject.Core\\Feature\\Appointment\\Command\\Models\\AddNewAppointment.cs",
+              "ToolTip": "D:\\Courses\\Projects\\IProjects\\FinalProject.Core\\Feature\\Appointment\\Command\\Models\\AddNewAppointment.cs",
+              "RelativeToolTip": "FinalProject.Core\\Feature\\Appointment\\Command\\Models\\AddNewAppointment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T11:52:46.116Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "DoctorCommandhandler.cs",
-              "DocumentMoniker": "D:\\.net\\projects\\FinalProject\\FinalProject.Core\\Feature\\Doctor\\Command\\Handler\\DoctorCommandhandler.cs",
-              "RelativeDocumentMoniker": "FinalProject.Core\\Feature\\Doctor\\Command\\Handler\\DoctorCommandhandler.cs",
-              "ToolTip": "D:\\.net\\projects\\FinalProject\\FinalProject.Core\\Feature\\Doctor\\Command\\Handler\\DoctorCommandhandler.cs",
-              "RelativeToolTip": "FinalProject.Core\\Feature\\Doctor\\Command\\Handler\\DoctorCommandhandler.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAywAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T17:39:13.937Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-03T15:30:00.347Z"
             }
           ]
         },
