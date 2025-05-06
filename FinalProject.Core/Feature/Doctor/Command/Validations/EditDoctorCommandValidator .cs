@@ -32,17 +32,8 @@ namespace FinalProject.Core.Feature.Doctor.Command.Validations
             RuleFor(x => x.DepatrmentId)
                 .GreaterThan(0).WithMessage("معرف القسم غير صالح");
 
-            RuleFor(x => x.Image)
-                .Must(BeAValidImage).WithMessage("الصورة يجب أن تكون من نوع صالح (jpg, png)");
-        }
-        private bool BeAValidImage(string file)
-        {
-            if (file == null)
-                return true; // الصورة اختيارية
 
-            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
-            var extension = Path.GetExtension(file).ToLower();
-            return allowedExtensions.Contains(extension);
         }
+
     }
 }

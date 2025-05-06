@@ -61,23 +61,13 @@
 
     <div class="form-group">
         <label asp-for="DepatrmentId"></label>
-        <select asp-for="DepatrmentId" class="form-control" asp-items="@(new SelectList(Model.Departments, "Id", "Name"))">
+        @*<select asp-for="DepatrmentId" class="form-control" asp-items="@(new SelectList(Model.Departments, "Id", "Name"))">
             <option value="">-- اختر القسم --</option>
-        </select>
+        </select>*@
         <span asp-validation-for="DepatrmentId" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label>الصورة الحالية</label>
-        @if (!string.IsNullOrEmpty(Model.Image))
-        {
-            <img src="@Model.Image" alt="Doctor Image" style="max-width: 200px;" />
-        }
-        else
-        {
-            <p>لا توجد صورة حالية</p>
-        }
-    </div>
+  
 
     <div class="form-group">
         <label for="Image">تحميل صورة جديدة</label>

@@ -12,8 +12,8 @@ namespace FinalProject.Core.Feature.Patient.Query.Response
         public string Address { get; set; }
         public Gender Gender { get; set; }
         public DateTime? DateOfBirth { get; set; }
-        public ICollection<Appointment>? Appointments { get; set; } 
-        public ICollection<PreviousCondition>? PreviousConditions { get; set; } 
+        //  public ICollection<Appointment>? Appointments { get; set; } 
+        public ICollection<PreviousCondition>? PreviousConditions { get; set; }
         public ICollection<PreviousMedicine>? PreviousMedicine { get; set; }
 
     }

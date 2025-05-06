@@ -1,6 +1,7 @@
 ﻿using FinalProject.Data.Models.AppModels;
 using FinalProject.Infrastructure.UnitOfWorks;
 using FinalProject.Services.Abstracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Services.Implemetations
 {
@@ -44,6 +45,19 @@ namespace FinalProject.Services.Implemetations
         {
             var doctor = await _unitOfWork.Repositry<Doctor>().GetOne(c => c.Id == id, includes: [a => a.Appointments, ds => ds.DoctorSchedules, dd => dd.Department], tracked: false);
             return doctor;
+        }
+
+        public async Task<int> GetTotalCount(string query)
+        {
+            var queryable = _unitOfWork.Repositry<Doctor>().Get().AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(query))
+            {
+                queryable = queryable.Where(d => d.Name.Contains(query, StringComparison.OrdinalIgnoreCase)
+                                               || d.Email.Contains(query, StringComparison.OrdinalIgnoreCase));
+            }
+
+            return await queryable.CountAsync();
         }
 
         public async Task<bool> IsDoctorNameExists(string name)

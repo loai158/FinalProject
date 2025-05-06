@@ -20,25 +20,7 @@ namespace FinalProject.App.Areas.Customer.Controllers
             var response = await _mediator.Send(new GetAllDoctorsQuery());
             return View(response);
         }
-        [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
-        [HttpPost]
-        public async Task<ActionResult> Create(AddDoctorCommand command)
-        {
-            var doctorId = await _mediator.Send(command);
-            if (doctorId == -1)
-            {
-                TempData["ErrorMessage"] = " الاسم موجود  بالفعل";
-                return View();
-            }
 
-            TempData["SuccessMessage"] = "تم إضافة الطبيب بنجاح";
-            return RedirectToAction("Index");
-
-        }
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -56,7 +38,7 @@ namespace FinalProject.App.Areas.Customer.Controllers
             {
                 Id = response.Id,
                 Name = response.Name,
-                Departments = response.Departments,
+                //Departments = response.Departments,
                 DepatrmentId = response.DepartmentId,
                 Phone = response.Phone,
                 Email = response.Email,
@@ -70,7 +52,26 @@ namespace FinalProject.App.Areas.Customer.Controllers
 
             return View(command); // View بتستقبل EditDoctorCommand
         }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create(AddDoctorCommand command)
+        {
+            var doctorId = await _mediator.Send(command);
+            if (doctorId == -1)
+            {
+                TempData["ErrorMessage"] = " الاسم موجود  بالفعل";
+                return View();
+            }
 
+            TempData["SuccessMessage"] = "تم إضافة الطبيب بنجاح";
+            return RedirectToAction("Index");
+
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(EditDoctorCommand command)

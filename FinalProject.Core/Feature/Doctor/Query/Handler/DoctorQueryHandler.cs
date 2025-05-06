@@ -20,7 +20,20 @@ namespace FinalProject.Core.Feature.Doctor.Query.Handler
         public async Task<IEnumerable<GetAllDoctorsResponse>> Handle(GetAllDoctorsQuery request, CancellationToken cancellationToken)
         {
             var doctors = _doctorServices.GetAll();
-            var response = doctors.MapDoctorsResponseDTOs();
+            if (!string.IsNullOrWhiteSpace(request.Query))
+            {
+                var searchQuery = request.Query.ToLower();
+                doctors = doctors
+                    .Where(d => d.Name.ToLower().Contains(searchQuery) ||
+                                d.Email.ToLower().Contains(searchQuery));
+            }
+
+            var totalCount = doctors.ToList().Count();
+            var pagedDoctors = doctors
+                .Skip((request.Page - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .ToList();
+            var response = pagedDoctors.MapDoctorsResponseDTOs();
             return response;
         }
 

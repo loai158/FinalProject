@@ -9,5 +9,6 @@ namespace FinalProject.Services.Abstracts
         public Task<Doctor> GetById(int id);
         public Task<bool> IsDoctorNameExists(string name);
         public string Edit(Doctor doctor);
+        public Task<int> GetTotalCount(string query);
     }
 }

@@ -31,12 +31,12 @@ namespace FinalProject.Core.Mapping
             return new Doctor
             {
                 Name = command.Name,
-                 DepartmentId = command.DepatrmentId,
-                 Details = command.Details,
-                  Email = command.Email,
-                   Image = command.Image,
-                  Phone = command.Phone,
-                  DoctorSchedules = command.DoctorSchedules,
+                DepartmentId = command.DepatrmentId,
+                Details = command.Details,
+                Email = command.Email,
+                Image = command.Image,
+                Phone = command.Phone,
+                DoctorSchedules = command.DoctorSchedules,
                 Gender = command.Gender,
             };
         }

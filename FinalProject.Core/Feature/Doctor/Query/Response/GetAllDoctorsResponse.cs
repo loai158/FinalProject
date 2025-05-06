@@ -1,5 +1,4 @@
 ﻿using FinalProject.Data.Models.AppModels;
-using MediatR;
 
 namespace FinalProject.Core.Feature.Doctor.Query.Response
 {
@@ -9,7 +8,7 @@ namespace FinalProject.Core.Feature.Doctor.Query.Response
         public string Name { get; set; }
         public string Details { get; set; }
         public string Phone { get; set; }
-        public string Department{ get; set; }
+        public string Department { get; set; }
         public string Image { get; set; }
         public string Email { get; set; }
         public Gender Gender { get; set; }
