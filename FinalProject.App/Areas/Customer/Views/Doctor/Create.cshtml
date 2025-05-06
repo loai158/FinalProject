@@ -48,9 +48,10 @@
 
     <div class="form-group">
         <label asp-for="DepatrmentId">القسم</label>
-        <input asp-for="DepatrmentId" class="form-control" />
+        <select asp-for="DepatrmentId" class="form-control" asp-items="ViewBag.Departments"></select>
         <span asp-validation-for="DepatrmentId" class="text-danger"></span>
     </div>
+
 
     <button type="submit" class="btn btn-primary">إضافة</button>
 </form>

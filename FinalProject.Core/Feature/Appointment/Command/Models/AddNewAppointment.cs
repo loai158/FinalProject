@@ -1,6 +1,7 @@
-﻿namespace FinalProject.Core.Feature.Appointment.Command.Models
+﻿using MediatR;
+namespace FinalProject.Core.Feature.Appointment.Command.Models
 {
-    public class AddNewAppointment :
+    public class AddNewAppointment : IRequest<string>
     {
     }
 }
