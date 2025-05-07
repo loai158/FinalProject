@@ -50,7 +50,7 @@
                                     @string.Join(", ", item.DoctorSchedules.Select(c => $"{c.Day}: {c.StartTime.ToString(@"hh\:mm")} - {c.EndTime.ToString(@"hh\:mm")}"))
                                 </td>
                                 <td>
-                                    <a class="btn btn-warning btn-sm" href="/Addmin/Cinema/Edit?cinemaId=@item.Id">Edit</a>
+                                    <a class="btn btn-warning btn-sm" href="/admin/Doctor/Edit?doctorId=@item.Id">Edit</a>
                                     <button class="btn btn-danger btn-sm" onclick="confirmDelete(@item.Id)">Delete</button>
                                 </td>
                             </tr>

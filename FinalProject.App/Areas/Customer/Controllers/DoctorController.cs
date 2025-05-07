@@ -39,7 +39,7 @@ namespace FinalProject.App.Areas.Customer.Controllers
                 Id = response.Id,
                 Name = response.Name,
                 //Departments = response.Departments,
-                DepatrmentId = response.DepartmentId,
+                // DepatrmentId = response.DepartmentId,
                 Phone = response.Phone,
                 Email = response.Email,
                 Image = response.Image,
@@ -72,38 +72,38 @@ namespace FinalProject.App.Areas.Customer.Controllers
             return RedirectToAction("Index");
 
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(EditDoctorCommand command)
-        {
-            try
-            {
-                var doctorId = await _mediator.Send(command);
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Edit(EditDoctorCommand command)
+        //{
+        //    try
+        //    {
+        //        var doctorId = await _mediator.Send(command);
 
-                if (doctorId == -1)
-                {
-                    TempData["ErrorMessage"] = "الدكتور غير موجود";
-                    return View(command);
-                }
-                else if (doctorId == 0)
-                {
-                    TempData["ErrorMessage2"] = "حدث خطأ أثناء التعديل";
-                    return View(command);
-                }
+        //        if (doctorId == -1)
+        //        {
+        //            TempData["ErrorMessage"] = "الدكتور غير موجود";
+        //            return View(command);
+        //        }
+        //        else if (doctorId == 0)
+        //        {
+        //            TempData["ErrorMessage2"] = "حدث خطأ أثناء التعديل";
+        //            return View(command);
+        //        }
 
-                TempData["SuccessMessage"] = "تم تعديل الدكتور بنجاح";
-                return RedirectToAction("Index");
-            }
-            catch (FluentValidation.ValidationException ex)
-            {
-                foreach (var error in ex.Errors)
-                {
-                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
-                }
+        //        TempData["SuccessMessage"] = "تم تعديل الدكتور بنجاح";
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch (FluentValidation.ValidationException ex)
+        //    {
+        //        foreach (var error in ex.Errors)
+        //        {
+        //            ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+        //        }
 
-                return View(command);
-            }
-        }
+        //        return View(command);
+        //    }
+        //}
 
     }
 }

@@ -1,8 +1,10 @@
 ﻿using FinalProject.Core.Feature.Doctor.Command.Models;
 using FinalProject.Core.Feature.Doctor.Query.Models;
 using FinalProject.Services.Abstracts;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FinalProject.App.Areas.Admin.Controllers
 {
@@ -65,6 +67,69 @@ namespace FinalProject.App.Areas.Admin.Controllers
 
             TempData["SuccessMessage"] = "تم إضافة الطبيب بنجاح";
             return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int doctorId)
+        {
+            var query = new GetDoctorByIdQuery(doctorId);
+            var response = await _mediator.Send(query);
+            if (response != null)
+            {
+                ViewBag.Departments = _departmentServices.getAll()
+               .Select(d => new SelectListItem
+               {
+                   Value = d.Id.ToString(),
+                   Text = d.Name
+               })
+                .ToList();
+                return View(response);
+            }
+            return RedirectToAction("Error", "Home", new { area = "Customer" });
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(EditDoctorCommand model, IFormFile? file)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+
+                    if (file != null && file.Length > 0)
+                    {
+                        // Save img in wwwroot
+                        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\Doctors", fileName);
+                        using (var stream = System.IO.File.Create(filePath))
+                        {
+                            file.CopyTo(stream);
+                        }
+                        // Save img name in db
+                        model.Image = fileName;
+                    }
+                    var response = await _mediator.Send(model);
+                    if (response)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+            }
+            catch (ValidationException ex)
+            {
+                // تحويل أخطاء التحقق إلى ModelState
+                foreach (var error in ex.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+            }
+            ViewBag.Departments = _departmentServices.getAll()
+               .Select(d => new SelectListItem
+               {
+                   Value = d.Id.ToString(),
+                   Text = d.Name
+               })
+                .ToList();
+            return View(model);
 
         }
     }

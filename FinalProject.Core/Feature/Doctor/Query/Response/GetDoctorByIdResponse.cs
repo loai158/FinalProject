@@ -2,9 +2,17 @@
 
 namespace FinalProject.Core.Feature.Doctor.Query.Response
 {
-    public class GetDoctorByIdResponse : GetAllDoctorsResponse
+    public class GetDoctorByIdResponse
     {
-        public List<Department> Departments { get; set; }
-        public int DepartmentId { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Details { get; set; }
+        public string Phone { get; set; }
+        public string Image { get; set; }
+        public string Email { get; set; }
+        public Gender Gender { get; set; }
+        public ICollection<Appointment>? Appointments { get; set; }
+        public int Department { get; set; }
+        public ICollection<DoctorSchedule>? DoctorSchedules { get; set; }
     }
 }

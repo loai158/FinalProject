@@ -20,11 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Feature\Appointment\Command\Handler\" />
-    <Folder Include="Feature\Appointment\query\Handler\" />
-    <Folder Include="Feature\Appointment\query\Modles\" />
-    <Folder Include="Feature\Appointment\Command\Validations\" />
-    <Folder Include="Feature\Appointment\query\Response\" />
     <Folder Include="Feature\PreviousConditions\Command\Handler\" />
     <Folder Include="Feature\PreviousConditions\Command\Models\" />
     <Folder Include="Feature\PreviousConditions\Query\" />

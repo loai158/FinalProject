@@ -13,7 +13,6 @@ namespace FinalProject.Core.Feature.Doctor.Query.Response
         public string Email { get; set; }
         public Gender Gender { get; set; }
         public ICollection<DoctorSchedule>? DoctorSchedules { get; set; }
-
-
+        public ICollection<Appointment>? Appointments { get; set; }
     }
 }

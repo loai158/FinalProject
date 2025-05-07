@@ -1,4 +1,5 @@
 ﻿using FinalProject.Core.Behavior;
+using FinalProject.Core.Feature.Doctor.Command.Validations;
 using FinalProject.Core.Feature.Doctor.Command.Validators;
 using FinalProject.Core.Feature.Patient.Command.Validations;
 using FluentValidation;
@@ -16,6 +17,7 @@ namespace FinalProject.Core
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddFluentValidationClientsideAdapters();
             services.AddValidatorsFromAssemblyContaining<AddDoctorCommandValidator>();
+            services.AddValidatorsFromAssemblyContaining<EditDoctorCommandValidator>();
             services.AddValidatorsFromAssemblyContaining<AddNewPatientValidator>();
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));

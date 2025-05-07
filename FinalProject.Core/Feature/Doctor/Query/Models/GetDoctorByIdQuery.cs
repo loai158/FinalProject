@@ -3,7 +3,7 @@ using MediatR;
 
 namespace FinalProject.Core.Feature.Doctor.Query.Models
 {
-    public class GetDoctorByIdQuery:IRequest<GetDoctorByIdResponse>
+    public class GetDoctorByIdQuery : IRequest<GetDoctorByIdResponse>
     {
         public int Id { get; set; }
         public GetDoctorByIdQuery(int id)
