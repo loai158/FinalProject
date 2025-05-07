@@ -3152,11 +3152,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Services\\FinalProject.Services.csproj",
+      "projectUniqueName": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Services\\FinalProject.Services.csproj",
       "projectName": "FinalProject.Services",
-      "projectPath": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Services\\FinalProject.Services.csproj",
+      "projectPath": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Services\\FinalProject.Services.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Services\\obj\\",
+      "outputPath": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Services\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -3177,11 +3177,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Data\\FinalProject.Data.csproj": {
-              "projectPath": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Data\\FinalProject.Data.csproj"
+            "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Data\\FinalProject.Data.csproj": {
+              "projectPath": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Data\\FinalProject.Data.csproj"
             },
-            "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj"
+            "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj"
             }
           }
         }

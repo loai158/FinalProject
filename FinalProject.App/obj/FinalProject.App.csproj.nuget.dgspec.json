@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.App\\FinalProject.App.csproj": {}
+    "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.App\\FinalProject.App.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.App\\FinalProject.App.csproj": {
+    "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.App\\FinalProject.App.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.App\\FinalProject.App.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.App\\FinalProject.App.csproj",
         "projectName": "FinalProject.App",
-        "projectPath": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.App\\FinalProject.App.csproj",
+        "projectPath": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.App\\FinalProject.App.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.App\\obj\\",
+        "outputPath": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.App\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,8 +32,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Core\\FinalProject.Core.csproj": {
-                "projectPath": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Core\\FinalProject.Core.csproj"
+              "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Core\\FinalProject.Core.csproj": {
+                "projectPath": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Core\\FinalProject.Core.csproj"
               }
             }
           }
@@ -92,14 +92,14 @@
         }
       }
     },
-    "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Core\\FinalProject.Core.csproj": {
+    "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Core\\FinalProject.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Core\\FinalProject.Core.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Core\\FinalProject.Core.csproj",
         "projectName": "FinalProject.Core",
-        "projectPath": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Core\\FinalProject.Core.csproj",
+        "projectPath": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Core\\FinalProject.Core.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Core\\obj\\",
+        "outputPath": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -120,14 +120,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Data\\FinalProject.Data.csproj": {
-                "projectPath": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Data\\FinalProject.Data.csproj"
+              "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Data\\FinalProject.Data.csproj": {
+                "projectPath": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Data\\FinalProject.Data.csproj"
               },
-              "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj"
+              "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj"
               },
-              "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Services\\FinalProject.Services.csproj": {
-                "projectPath": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Services\\FinalProject.Services.csproj"
+              "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Services\\FinalProject.Services.csproj": {
+                "projectPath": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Services\\FinalProject.Services.csproj"
               }
             }
           }
@@ -185,14 +185,14 @@
         }
       }
     },
-    "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Data\\FinalProject.Data.csproj": {
+    "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Data\\FinalProject.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Data\\FinalProject.Data.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Data\\FinalProject.Data.csproj",
         "projectName": "FinalProject.Data",
-        "projectPath": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Data\\FinalProject.Data.csproj",
+        "projectPath": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Data\\FinalProject.Data.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Data\\obj\\",
+        "outputPath": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -260,14 +260,14 @@
         }
       }
     },
-    "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj": {
+    "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj",
         "projectName": "FinalProject.Infrastructure",
-        "projectPath": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -288,8 +288,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Data\\FinalProject.Data.csproj": {
-                "projectPath": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Data\\FinalProject.Data.csproj"
+              "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Data\\FinalProject.Data.csproj": {
+                "projectPath": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Data\\FinalProject.Data.csproj"
               }
             }
           }
@@ -349,14 +349,14 @@
         }
       }
     },
-    "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Services\\FinalProject.Services.csproj": {
+    "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Services\\FinalProject.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Services\\FinalProject.Services.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Services\\FinalProject.Services.csproj",
         "projectName": "FinalProject.Services",
-        "projectPath": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Services\\FinalProject.Services.csproj",
+        "projectPath": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Services\\FinalProject.Services.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Services\\obj\\",
+        "outputPath": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Services\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -377,11 +377,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Data\\FinalProject.Data.csproj": {
-                "projectPath": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Data\\FinalProject.Data.csproj"
+              "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Data\\FinalProject.Data.csproj": {
+                "projectPath": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Data\\FinalProject.Data.csproj"
               },
-              "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\user\\Desktop\\finalProject\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj"
+              "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\user\\Desktop\\GraduatedProject\\FinalProject\\FinalProject.Infrastructure\\FinalProject.Infrastructure.csproj"
               }
             }
           }
