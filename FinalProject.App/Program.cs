@@ -1,12 +1,12 @@
 using FinalProject.Core;
 using FinalProject.Data.Models.IdentityModels;
-using FinalProject.Infrastructure.DataAccess;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using FinalProject.Services;
 using FinalProject.Infrastructure;
+using FinalProject.Infrastructure.DataAccess;
 using FinalProject.Infrastructure.IRepositry;
 using FinalProject.Infrastructure.Repositry;
+using FinalProject.Services;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 namespace FinalProject.App
 {
     public class Program
@@ -21,6 +21,11 @@ namespace FinalProject.App
                  AddCoreDependences()
                 .AddInfrastructureDependences()
                 .AddServicesDependences();
+            builder.Services.AddControllersWithViews()
+            .AddViewOptions(options =>
+            {
+                options.HtmlHelperOptions.ClientValidationEnabled = true;
+            });
             builder.Services.AddDbContext<ApplicationDbContext>(
                option =>
                {

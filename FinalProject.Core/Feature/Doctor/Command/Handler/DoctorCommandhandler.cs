@@ -6,7 +6,7 @@ using MediatR;
 namespace FinalProject.Core.Feature.Doctor.Command.Handler
 {
     public class DoctorCommandhandler : IRequestHandler<AddDoctorCommand, int>,
-        IRequestHandler<EditDoctorCommand, int>
+        IRequestHandler<EditDoctorCommand, bool>
 
     {
         private readonly IDoctorServices _doctorServices;
@@ -30,24 +30,24 @@ namespace FinalProject.Core.Feature.Doctor.Command.Handler
 
         }
 
-        public async Task<int> Handle(EditDoctorCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(EditDoctorCommand request, CancellationToken cancellationToken)
         {
             //check if the Doctor  is exist first
             var doctor = await _doctorServices.GetById(request.Id);
             if (doctor == null)
             {
-                return -1;
+                return false;
             }
             //map
-            var result = request.MapAddToDoctor();
-            var final = _doctorServices.Edit(doctor);
+            var result = request.MapEditToDoctor();
+            var final = _doctorServices.Edit(result);
             if (final == "success")
             {
-                return result.Id;
+                return true;
             }
             else
             {
-                return 0;
+                return false;
             }
         }
     }

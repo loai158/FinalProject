@@ -39,23 +39,10 @@ namespace FinalProject.Core.Feature.Doctor.Query.Handler
 
         public async Task<GetDoctorByIdResponse> Handle(GetDoctorByIdQuery request, CancellationToken cancellationToken)
         {
-            //retrn the doctor the map
+            //return the doctor then map
             var doctor = await _doctorServices.GetById(request.Id);
             var result = doctor.MapDoctorResponse();
-            var depts = _departmentServices.getAll().ToList();
-            var final = new GetDoctorByIdResponse
-            {
-                Id = result.Id,
-                Name = result.Name,
-                Details = result.Details,
-                Phone = result.Phone,
-                Image = result.Image,
-                Email = result.Email,
-                Gender = result.Gender,
-                DepartmentId = result.DepartmentId,
-                Departments = depts,
-            };
-            return final;
+            return result;
         }
     }
 }

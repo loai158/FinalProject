@@ -29,10 +29,6 @@ namespace FinalProject.Core.Feature.Doctor.Command.Validations
             RuleFor(x => x.Gender)
                 .NotNull().WithMessage("الجنس مطلوب");
 
-            RuleFor(x => x.DepatrmentId)
-                .GreaterThan(0).WithMessage("معرف القسم غير صالح");
-
-
         }
 
     }

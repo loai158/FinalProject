@@ -1,17 +1,10 @@
-﻿using MediatR;
+﻿using FinalProject.Core.Feature.Doctor.Query.Response;
+using MediatR;
 
 namespace FinalProject.Core.Feature.Doctor.Command.Models
 {
-    public class EditDoctorCommand : AddDoctorCommand, IRequest<int>
+    public class EditDoctorCommand : GetDoctorByIdResponse, IRequest<bool>
     {
-        public EditDoctorCommand() { }
-        public int Id { get; set; }
-        public EditDoctorCommand(int id)
-        {
-            this.Id = id;
-        }
-
-
 
     }
 }
