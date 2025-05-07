@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using FinalProject.Data.Models.IdentityModels
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -21,188 +24,16 @@
     <link href="~/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
     <!-- Main CSS File -->
     <link href="~/assets/css/main.css" rel="stylesheet" />
+    @* navbar stylying link *@
+    <link href="~/css/NavStyle.css" rel="stylesheet" />
     <!-- Toastr CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        /* Header Styling */
-        .navbar {
-            background: linear-gradient(135deg, #004d80, #0077b6);
-            padding: 1rem 0;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        .navbar-brand {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: #fff !important;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-            .navbar-brand::before {
-                content: '\f0f1';
-                font-family: 'Font Awesome 6 Free';
-                font-weight: 900;
-                font-size: 1.5rem;
-                color: #ffd700;
-                animation: pulse 2s infinite;
-            }
-
-        .nav-link {
-            font-size: 1rem;
-            color: #f8f9fa !important;
-            padding: 0.5rem 1rem;
-            position: relative;
-        }
-
-            .nav-link::after {
-                content: '';
-                position: absolute;
-                width: 0;
-                height: 2px;
-                bottom: 0;
-                left: 0;
-                background: #ffd700;
-                transition: width 0.3s ease;
-            }
-
-            .nav-link:hover::after,
-            .nav-link.active::after {
-                width: 100%;
-            }
-
-        .dropdown-menu {
-            background-color: #004d80;
-            border: none;
-        }
-
-        .dropdown-item {
-            color: #ffffff !important;
-        }
-
-            .dropdown-item:hover {
-                background-color: #005a80;
-                color: #ffd700 !important;
-            }
-
-        .btn-appointment {
-            background: #ffc107;
-            color: #000;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-            transition: all 0.3s ease;
-        }
-
-            .btn-appointment:hover {
-                background: #e0a800;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            }
-
-        .theme-toggle-btn {
-            background: #fff;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-            .theme-toggle-btn:hover {
-                background: #ffd700;
-                transform: scale(1.1);
-            }
-
-        footer {
-            padding: 2.5rem 0;
-            color: #f8f9fa;
-            background: linear-gradient(135deg, #1e1e2f, #2c2c3e);
-        }
-
-            footer a:hover {
-                color: #0d6efd !important;
-            }
-
-        .social-icons a {
-            color: #f8f9fa;
-            font-size: 1.3rem;
-            margin: 0 0.4rem;
-            transition: all 0.3s ease;
-        }
-
-            .social-icons a:hover {
-                color: #0d6efd;
-                transform: translateY(-2px);
-            }
-        /* Light Mode Default */
-        body {
-            background-color: #f8f9fa;
-            color: #212529;
-        }
-
-            body.dark-mode {
-                background-color: #1e1e2f;
-                color: #f8f9fa;
-            }
-
-                body.dark-mode .navbar {
-                    background: linear-gradient(135deg, #1e1e2f, #2c2c3e);
-                }
-
-                body.dark-mode .dropdown-menu {
-                    background: #2c2c3e;
-                }
-
-                body.dark-mode .btn-appointment {
-                    background: #ffd700;
-                    color: #000;
-                }
-
-                body.dark-mode .theme-toggle-btn {
-                    background: #2c2c3e;
-                    color: #fff;
-                }
-
-                    body.dark-mode .theme-toggle-btn:hover {
-                        background: #ffd700;
-                    }
-
-        main {
-            margin-top: 70px;
-            padding: 2rem 1rem;
-        }
-
-        .container.my-4 {
-            max-width: 1400px;
-        }
-    </style>
 </head>
+@{
+    var user = await UserManager.GetUserAsync(User);
+    var imageUrl = user?.ImgProfile ?? "default.jpg";
+}
 <body class="bg-light">
     <!-- Header -->
     <header id="header" class="header sticky-top shadow-sm">
@@ -218,26 +49,65 @@
                         <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">More</a>
-                            <ul class="dropdown-menu border-0 shadow-sm">
-                                <li><a class="dropdown-item" href="#departments">Departments</a></li>
-                                <li><a class="dropdown-item" href="/customer/doctor">Doctors</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#contact">Contact Us</a></li>
+                        @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("Company"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">Management System</a>
+                            </li>
+
+                        }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                   aria-expanded="false">More</a>
+                                <ul class="dropdown-menu border-0 shadow-sm">
+
+                                    <li><a class="dropdown-item" href="#departments">Departments</a></li>
+                                    <li><a class="dropdown-item" href="/customer/doctor">Doctors</a></li>
+                                    <li><hr class="dropdown-divider" /></li>
+
+                                    <li><a class="dropdown-item" href="#contact">Contact Us</a></li>
+                                    @* <li><hr class="dropdown-divider" /></li> *@
+                                    @* <li><a class="dropdown-item text-danger" asp-area="Identity" asp-controller="Account" asp-action="Logout">Logout</a></li> *@
+
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle d-flex align-items-center text-dark" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="~/ProfImg/@imageUrl" alt="User" class="rounded-circle me-2" style="width:30px; height:30px; object-fit:cover;">
+                                    <span>Welcome: @User.Identity.Name</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                    <li><a class="dropdown-item" href="/Customer/Profile/Edit">My Profile</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="/Identity/Account/Logout">Logout</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="#appointment" class="btn btn-appointment d-flex align-items-center justify-content-center" title="Make Appointment">
+                                    <i class="bi bi-calendar-check"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item ms-2">
+                                <button id="themeToggle" class="theme-toggle-btn" title="Toggle Theme">
+                                    <i class="bi bi-palette-fill"></i> <!-- Changed to Creative Icon -->
+                                </button>
+                            </li>
+                        }
+                        else
+                        {
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Identity" asp-controller="Account" asp-action="Register">Register</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Identity" asp-controller="Account" asp-action="Login">Login</a>
+                                </li>
                             </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#appointment" class="btn btn-appointment d-flex align-items-center justify-content-center" title="Make Appointment">
-                                <i class="bi bi-calendar-check"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item ms-2">
-                            <button id="themeToggle" class="theme-toggle-btn" title="Toggle Theme">
-                                <i class="bi bi-palette-fill"></i> <!-- Changed to Creative Icon -->
-                            </button>
-                        </li>
+                        }
                     </ul>
                 </div>
             </div>
