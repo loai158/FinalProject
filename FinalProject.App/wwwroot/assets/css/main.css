@@ -1983,4 +1983,45 @@ section,
         background-color: #1e1e2f;
         color: #fff;
     }
+    /*Testimonials*/
+<style >
+#testimonials {
+    background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb);
+    background-size: 400% 400%;
+    animation: animatedBackground 10s ease infinite;
+}
+
+@keyframes animatedBackground {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.testimonial-item {
+    background: rgba(255, 255, 255, 0.8); /* ????? ????? ???? */
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.testimonial-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    margin: 10px auto;
+    display: block;
+}
+
+</style >
+
+    /*Testomnials*/
 /*End css*/

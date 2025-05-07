@@ -7,16 +7,15 @@
       "RelativeMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|solutionrelative:finalproject.app\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|d:\\courses\\projects\\iprojects\\finalproject.app\\areas\\customer\\views\\doctor\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|solutionrelative:finalproject.app\\areas\\customer\\views\\doctor\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|d:\\courses\\projects\\iprojects\\finalproject.app\\areas\\customer\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|solutionrelative:finalproject.app\\areas\\customer\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5A572F3C-EC98-417D-B063-1B1AD9FB96B2}|FinalProject.Core\\FinalProject.Core.csproj|d:\\courses\\projects\\iprojects\\finalproject.core\\feature\\appointment\\command\\models\\addnewappointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5A572F3C-EC98-417D-B063-1B1AD9FB96B2}|FinalProject.Core\\FinalProject.Core.csproj|solutionrelative:finalproject.core\\feature\\appointment\\command\\models\\addnewappointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Courses\\MVC_PROJECTS\\MediCio-1.0.0\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5A572F3C-EC98-417D-B063-1B1AD9FB96B2}|FinalProject.Core\\FinalProject.Core.csproj|d:\\courses\\projects\\iprojects\\finalproject.core\\feature\\patient\\query\\response\\getallpatientresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5A572F3C-EC98-417D-B063-1B1AD9FB96B2}|FinalProject.Core\\FinalProject.Core.csproj|solutionrelative:finalproject.core\\feature\\patient\\query\\response\\getallpatientresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|d:\\courses\\projects\\iprojects\\finalproject.app\\areas\\customer\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|solutionrelative:finalproject.app\\areas\\customer\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,8 +25,60 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\Areas\\Customer\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "FinalProject.App\\Areas\\Customer\\Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\Areas\\Customer\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "FinalProject.App\\Areas\\Customer\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-07T14:10:04.431Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "FinalProject.App\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "FinalProject.App\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAANcAAAAAAAAAAAAAAOYAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-07T13:52:01.504Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\Areas\\Customer\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "FinalProject.App\\Areas\\Customer\\Views\\_ViewStart.cshtml",
+              "ToolTip": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\Areas\\Customer\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "FinalProject.App\\Areas\\Customer\\Views\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-07T13:51:47.716Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "index.html",
+              "DocumentMoniker": "D:\\Courses\\MVC_PROJECTS\\MediCio-1.0.0\\index.html",
+              "RelativeDocumentMoniker": "..\\..\\MVC_PROJECTS\\MediCio-1.0.0\\index.html",
+              "ToolTip": "D:\\Courses\\MVC_PROJECTS\\MediCio-1.0.0\\index.html",
+              "RelativeToolTip": "..\\..\\MVC_PROJECTS\\MediCio-1.0.0\\index.html",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-05-07T13:24:17.495Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
@@ -55,56 +106,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "FinalProject.App\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "FinalProject.App\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAEIBAAAAAAAAAAAAAEIBAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-04T15:34:43.597Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\Areas\\Customer\\Views\\Doctor\\Index.cshtml",
-              "RelativeDocumentMoniker": "FinalProject.App\\Areas\\Customer\\Views\\Doctor\\Index.cshtml",
-              "ToolTip": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\Areas\\Customer\\Views\\Doctor\\Index.cshtml",
-              "RelativeToolTip": "FinalProject.App\\Areas\\Customer\\Views\\Doctor\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKEAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-04T14:38:58.535Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "GetAllPatientResponse.cs",
-              "DocumentMoniker": "D:\\Courses\\Projects\\IProjects\\FinalProject.Core\\Feature\\Patient\\Query\\Response\\GetAllPatientResponse.cs",
-              "RelativeDocumentMoniker": "FinalProject.Core\\Feature\\Patient\\Query\\Response\\GetAllPatientResponse.cs",
-              "ToolTip": "D:\\Courses\\Projects\\IProjects\\FinalProject.Core\\Feature\\Patient\\Query\\Response\\GetAllPatientResponse.cs",
-              "RelativeToolTip": "FinalProject.Core\\Feature\\Patient\\Query\\Response\\GetAllPatientResponse.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAYwBAAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-04T14:27:11.691Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AddNewAppointment.cs",
-              "DocumentMoniker": "D:\\Courses\\Projects\\IProjects\\FinalProject.Core\\Feature\\Appointment\\Command\\Models\\AddNewAppointment.cs",
-              "RelativeDocumentMoniker": "FinalProject.Core\\Feature\\Appointment\\Command\\Models\\AddNewAppointment.cs",
-              "ToolTip": "D:\\Courses\\Projects\\IProjects\\FinalProject.Core\\Feature\\Appointment\\Command\\Models\\AddNewAppointment.cs",
-              "RelativeToolTip": "FinalProject.Core\\Feature\\Appointment\\Command\\Models\\AddNewAppointment.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T15:30:00.347Z"
             }
           ]
         },

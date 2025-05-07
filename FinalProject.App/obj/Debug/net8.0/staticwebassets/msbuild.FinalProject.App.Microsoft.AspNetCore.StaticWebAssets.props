@@ -12,8 +12,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>29gzgsw2qd</Fingerprint>
-      <Integrity>Br25q+HmWQI2XBIcuWtmZr5hjhlhMOTOPOeZd0rWMmA=</Integrity>
+      <Fingerprint>9i7pmtocn9</Fingerprint>
+      <Integrity>Qdy5BdlwiaQytAff8Xujss0cvI1UQoWnKWdr/K3YlAM=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\assets\css\main.css'))</OriginalItemSpec>
@@ -450,6 +450,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\assets\img\hero-carousel\hero-carousel-3.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\assets\img\HospitalLogo.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>FinalProject.App</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/FinalProject.App</BasePath>
+      <RelativePath>assets/img/HospitalLogo.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>zd4j7cx3m4</Fingerprint>
+      <Integrity>94NiGDNPuk1LavVEVVCaE/22jURUUVVmGf+pCSQ1L9g=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\assets\img\HospitalLogo.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\assets\img\logo.png'))">
       <SourceType>Package</SourceType>
       <SourceId>FinalProject.App</SourceId>
@@ -588,8 +606,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>my25fyqhlx</Fingerprint>
-      <Integrity>wkrvZa/0IELwweWjMFYGDBsFYNqVUpBKdaodk/SoXZM=</Integrity>
+      <Fingerprint>hwedn5v033</Fingerprint>
+      <Integrity>sSfe0AdpJWxZZ48EMcNcZ7uujzcwcT8FhUtXwVf9xj8=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\assets\js\main.js'))</OriginalItemSpec>

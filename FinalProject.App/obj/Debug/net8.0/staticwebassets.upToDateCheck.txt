@@ -23,6 +23,7 @@ wwwroot\assets\img\gallery\gallery-8.jpg
 wwwroot\assets\img\hero-carousel\hero-carousel-1.jpg
 wwwroot\assets\img\hero-carousel\hero-carousel-2.jpg
 wwwroot\assets\img\hero-carousel\hero-carousel-3.jpg
+wwwroot\assets\img\HospitalLogo.jpg
 wwwroot\assets\img\logo.png
 wwwroot\assets\img\services.jpg
 wwwroot\assets\img\testimonials\testimonials-1.jpg

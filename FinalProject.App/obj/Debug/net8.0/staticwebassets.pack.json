@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\assets\\css\\main.css"
     },
     {
+      "Id": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\wwwroot\\assets\\img\\HospitalLogo.jpg",
+      "PackagePath": "staticwebassets\\assets\\img\\HospitalLogo.jpg"
+    },
+    {
       "Id": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\wwwroot\\assets\\img\\about.jpg",
       "PackagePath": "staticwebassets\\assets\\img\\about.jpg"
     },

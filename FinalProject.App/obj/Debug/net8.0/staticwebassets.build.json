@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "nRQ5iAHY1LShRlaWcywXOqh8vw6qSLS+/joo838ME9s=",
+  "Hash": "R7iykOzIfhFbDtMAx92HWulvm4JMOuCneZre75IwhT0=",
   "Source": "FinalProject.App",
   "BasePath": "_content/FinalProject.App",
   "Mode": "Default",
@@ -73,8 +73,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "29gzgsw2qd",
-      "Integrity": "Br25q+HmWQI2XBIcuWtmZr5hjhlhMOTOPOeZd0rWMmA=",
+      "Fingerprint": "9i7pmtocn9",
+      "Integrity": "Qdy5BdlwiaQytAff8Xujss0cvI1UQoWnKWdr/K3YlAM=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\css\\main.css"
@@ -584,6 +584,27 @@
       "OriginalItemSpec": "wwwroot\\assets\\img\\hero-carousel\\hero-carousel-3.jpg"
     },
     {
+      "Identity": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\wwwroot\\assets\\img\\HospitalLogo.jpg",
+      "SourceId": "FinalProject.App",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\wwwroot\\",
+      "BasePath": "_content/FinalProject.App",
+      "RelativePath": "assets/img/HospitalLogo#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "zd4j7cx3m4",
+      "Integrity": "94NiGDNPuk1LavVEVVCaE/22jURUUVVmGf+pCSQ1L9g=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\img\\HospitalLogo.jpg"
+    },
+    {
       "Identity": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\wwwroot\\assets\\img\\logo.png",
       "SourceId": "FinalProject.App",
       "SourceType": "Discovered",
@@ -745,8 +766,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "my25fyqhlx",
-      "Integrity": "wkrvZa/0IELwweWjMFYGDBsFYNqVUpBKdaodk/SoXZM=",
+      "Fingerprint": "hwedn5v033",
+      "Integrity": "sSfe0AdpJWxZZ48EMcNcZ7uujzcwcT8FhUtXwVf9xj8=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\js\\main.js"
@@ -4219,7 +4240,7 @@
   ],
   "Endpoints": [
     {
-      "Route": "assets/css/main.29gzgsw2qd.css",
+      "Route": "assets/css/main.9i7pmtocn9.css",
       "AssetFile": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\wwwroot\\assets\\css\\main.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -4229,7 +4250,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "42828"
+          "Value": "43575"
         },
         {
           "Name": "Content-Type",
@@ -4237,11 +4258,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Br25q+HmWQI2XBIcuWtmZr5hjhlhMOTOPOeZd0rWMmA=\""
+          "Value": "\"Qdy5BdlwiaQytAff8Xujss0cvI1UQoWnKWdr/K3YlAM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 05 May 2025 13:50:38 GMT"
+          "Value": "Wed, 07 May 2025 14:44:13 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4251,7 +4272,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "29gzgsw2qd"
+          "Value": "9i7pmtocn9"
         },
         {
           "Name": "label",
@@ -4259,7 +4280,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Br25q+HmWQI2XBIcuWtmZr5hjhlhMOTOPOeZd0rWMmA="
+          "Value": "sha256-Qdy5BdlwiaQytAff8Xujss0cvI1UQoWnKWdr/K3YlAM="
         }
       ]
     },
@@ -4274,7 +4295,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "42828"
+          "Value": "43575"
         },
         {
           "Name": "Content-Type",
@@ -4282,11 +4303,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Br25q+HmWQI2XBIcuWtmZr5hjhlhMOTOPOeZd0rWMmA=\""
+          "Value": "\"Qdy5BdlwiaQytAff8Xujss0cvI1UQoWnKWdr/K3YlAM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 05 May 2025 13:50:38 GMT"
+          "Value": "Wed, 07 May 2025 14:44:13 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -4296,7 +4317,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Br25q+HmWQI2XBIcuWtmZr5hjhlhMOTOPOeZd0rWMmA="
+          "Value": "sha256-Qdy5BdlwiaQytAff8Xujss0cvI1UQoWnKWdr/K3YlAM="
         }
       ]
     },
@@ -6269,6 +6290,88 @@
       ]
     },
     {
+      "Route": "assets/img/HospitalLogo.jpg",
+      "AssetFile": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\wwwroot\\assets\\img\\HospitalLogo.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "38352"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"94NiGDNPuk1LavVEVVCaE/22jURUUVVmGf+pCSQ1L9g=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 07 May 2025 16:13:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-94NiGDNPuk1LavVEVVCaE/22jURUUVVmGf+pCSQ1L9g="
+        }
+      ]
+    },
+    {
+      "Route": "assets/img/HospitalLogo.zd4j7cx3m4.jpg",
+      "AssetFile": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\wwwroot\\assets\\img\\HospitalLogo.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "38352"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"94NiGDNPuk1LavVEVVCaE/22jURUUVVmGf+pCSQ1L9g=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 07 May 2025 16:13:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zd4j7cx3m4"
+        },
+        {
+          "Name": "label",
+          "Value": "assets/img/HospitalLogo.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-94NiGDNPuk1LavVEVVCaE/22jURUUVVmGf+pCSQ1L9g="
+        }
+      ]
+    },
+    {
       "Route": "assets/img/logo.9rvo0lcon6.png",
       "AssetFile": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\wwwroot\\assets\\img\\logo.png",
       "Selectors": [],
@@ -6843,6 +6946,51 @@
       ]
     },
     {
+      "Route": "assets/js/main.hwedn5v033.js",
+      "AssetFile": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\wwwroot\\assets\\js\\main.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6250"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"sSfe0AdpJWxZZ48EMcNcZ7uujzcwcT8FhUtXwVf9xj8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 07 May 2025 15:24:39 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "hwedn5v033"
+        },
+        {
+          "Name": "label",
+          "Value": "assets/js/main.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-sSfe0AdpJWxZZ48EMcNcZ7uujzcwcT8FhUtXwVf9xj8="
+        }
+      ]
+    },
+    {
       "Route": "assets/js/main.js",
       "AssetFile": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\wwwroot\\assets\\js\\main.js",
       "Selectors": [],
@@ -6853,7 +7001,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5760"
+          "Value": "6250"
         },
         {
           "Name": "Content-Type",
@@ -6861,11 +7009,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"wkrvZa/0IELwweWjMFYGDBsFYNqVUpBKdaodk/SoXZM=\""
+          "Value": "\"sSfe0AdpJWxZZ48EMcNcZ7uujzcwcT8FhUtXwVf9xj8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 26 Nov 2024 10:05:40 GMT"
+          "Value": "Wed, 07 May 2025 15:24:39 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6875,52 +7023,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-wkrvZa/0IELwweWjMFYGDBsFYNqVUpBKdaodk/SoXZM="
-        }
-      ]
-    },
-    {
-      "Route": "assets/js/main.my25fyqhlx.js",
-      "AssetFile": "D:\\Courses\\Projects\\IProjects\\FinalProject.App\\wwwroot\\assets\\js\\main.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "5760"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"wkrvZa/0IELwweWjMFYGDBsFYNqVUpBKdaodk/SoXZM=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 26 Nov 2024 10:05:40 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "my25fyqhlx"
-        },
-        {
-          "Name": "label",
-          "Value": "assets/js/main.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-wkrvZa/0IELwweWjMFYGDBsFYNqVUpBKdaodk/SoXZM="
+          "Value": "sha256-sSfe0AdpJWxZZ48EMcNcZ7uujzcwcT8FhUtXwVf9xj8="
         }
       ]
     },
@@ -14737,7 +14840,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 04 May 2025 15:22:58 GMT"
+          "Value": "Wed, 07 May 2025 15:19:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14782,7 +14885,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 04 May 2025 15:22:58 GMT"
+          "Value": "Wed, 07 May 2025 15:19:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14827,7 +14930,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 04 May 2025 15:22:58 GMT"
+          "Value": "Wed, 07 May 2025 15:19:42 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -14864,7 +14967,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sun, 04 May 2025 15:22:58 GMT"
+          "Value": "Wed, 07 May 2025 15:19:42 GMT"
         },
         {
           "Name": "Cache-Control",
