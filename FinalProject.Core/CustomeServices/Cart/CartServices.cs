@@ -23,11 +23,10 @@ namespace FinalProject.Services.Implemetations
 
         public IEnumerable<GetAllResponce> GetAll()
         {
-            var carts = _unitOfWork.CartRepository.Get(includes: [e=>e.Doctor,e=>e.Appointment]).ToList();
-            //var carts = new List<Cart>();
-            return carts.Select(e => e.GetAll()).ToList();
+            var carts = _unitOfWork.CartRepository.Get(includes: [e=>e.Doctor,e=>e.Appointment]) ;
+            return carts.Select(e => e.GetAll());
         }
-        public void AddCart(CartRequest cartRequest)
+        public void AddCart(CartRequest cartRequest  )
         {
             var cart = cartRequest.CreateToCart();
 

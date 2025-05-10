@@ -5,7 +5,7 @@ namespace FinalProject.Services.Implemetations
 {
     public interface ICartServices
     {
-        void AddCart(CartRequest cartRequest);
+        public void AddCart(CartRequest cartRequest);
         IEnumerable<GetAllResponce> GetAll();
     }
 }
