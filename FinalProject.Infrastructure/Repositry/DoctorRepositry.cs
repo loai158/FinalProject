@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Infrastructure.Repositry
 {
-    internal class DoctorRepositry : GenericRepositry<Doctor>, IDoctorRepositry
+  public  class DoctorRepositry : GenericRepositry<Doctor>, IDoctorRepositry
     {
         private readonly ApplicationDbContext dbContext;
 
