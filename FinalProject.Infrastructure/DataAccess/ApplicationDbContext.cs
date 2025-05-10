@@ -21,6 +21,9 @@ namespace FinalProject.Infrastructure.DataAccess
         DbSet<MedicalRecord> MedicalRecords { get; set; }
 
 
+        DbSet<Cart> Carts { get; set; }
+
+
 
 
 
