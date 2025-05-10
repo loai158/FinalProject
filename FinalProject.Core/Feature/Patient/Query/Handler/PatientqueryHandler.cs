@@ -6,7 +6,8 @@ using MediatR;
 
 namespace FinalProject.Core.Feature.Patient.Query.Handler
 {
-    public class PatientqueryHandler : IRequestHandler<GetAllPatientQuery, IEnumerable<GetAllPatientResponse>>
+    public class PatientqueryHandler : IRequestHandler<GetAllPatientQuery, IEnumerable<GetAllPatientResponse>>,
+        IRequestHandler<GetPatientById, GetPatientByIdResponse>
     {
         private readonly IPatientServices _patientServices;
 
@@ -16,9 +17,29 @@ namespace FinalProject.Core.Feature.Patient.Query.Handler
         }
         public async Task<IEnumerable<GetAllPatientResponse>> Handle(GetAllPatientQuery request, CancellationToken cancellationToken)
         {
-            //retrive the patients then map 
             var patients = _patientServices.GetAll();
-            var result =  patients.MapPatientsToResponse().AsEnumerable();
+            if (!string.IsNullOrWhiteSpace(request.Query))
+            {
+                var searchQuery = request.Query.ToLower();
+                patients = patients
+                    .Where(d => d.Name.ToLower().Contains(searchQuery) ||
+                                d.Email.ToLower().Contains(searchQuery));
+            }
+
+            var totalCount = patients.ToList().Count();
+            var pagedPatients = patients
+                .Skip((request.Page - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .ToList();
+            var response = pagedPatients.MapPatientsToResponse();
+            return response;
+        }
+
+        public async Task<GetPatientByIdResponse> Handle(GetPatientById request, CancellationToken cancellationToken)
+        {
+            //return the doctor then map
+            var patient = await _patientServices.GetById(request.Id);
+            var result = patient.PatientToResponse();
             return result;
         }
     }

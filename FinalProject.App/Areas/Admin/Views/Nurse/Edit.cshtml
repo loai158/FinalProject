@@ -1,0 +1,89 @@
+﻿@model FinalProject.Core.Feature.Nurse.Query.Response.NurseResponse
+
+@{
+    ViewData["Title"] = "Edit Nurse";
+}
+
+<h2>Edit Nurse</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Edit" asp-controller="Nurse" asp-area="Admin" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Hidden field for Email (to identify patient) -->
+            <input type="hidden" asp-for="Id" />
+
+            <!-- Patient Basic Information -->
+            <h4>Patient Information</h4>
+            <div class="form-group mb-3">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" type="file" name="file" accept="image/*" id="imageInput" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+                @if (!string.IsNullOrEmpty(Model.Image))
+                {
+                    <img src="@Model.Image" alt="Patient Image" id="imgPreview" class="img-thumbnail mt-2" style="max-width: 100px;" />
+                }
+                else
+                {
+                    <img id="imgPreview" class="img-thumbnail mt-2" style="max-width: 100px; display: none;" alt="Image Preview" />
+                }
+            </div>
+            <select asp-for="DepartmentId" class="form-control" asp-items="@ViewBag.Departments">
+                <option value="">Select a department</option>
+            </select>
+
+            <!-- Submit and Cancel Buttons -->
+            <div class="form-group mt-4">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a asp-action="Index" asp-controller="Nurse" asp-area="Admin" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+
+    <script>
+      
+        $('#imageInput').on('change', function (event) {
+            const file = event.target.files[0];
+            const preview = $('#imgPreview');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.attr('src', e.target.result);
+                    preview.show();
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.hide();
+            }
+        });
+     
+    </script>
+}

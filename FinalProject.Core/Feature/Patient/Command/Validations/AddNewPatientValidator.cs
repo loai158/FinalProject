@@ -1,7 +1,7 @@
 ﻿using FinalProject.Core.Feature.Patient.Command.Models;
-using FinalProject.Core.Feature.PreviousConditions.Command.Validations;
 using FinalProject.Core.Feature.PreviousMedicines.Command.Validations;
 using FluentValidation;
+
 
 namespace FinalProject.Core.Feature.Patient.Command.Validations
 {
@@ -15,7 +15,7 @@ namespace FinalProject.Core.Feature.Patient.Command.Validations
 
             RuleFor(x => x.Phone)
                 .NotEmpty().WithMessage("رقم الهاتف مطلوب.");
-                  
+
 
             RuleFor(x => x.Email)
                 .NotEmpty().WithMessage("البريد الإلكتروني مطلوب.")
@@ -33,11 +33,9 @@ namespace FinalProject.Core.Feature.Patient.Command.Validations
 
             RuleForEach(x => x.PreviousMedicines).SetValidator(new PreviousMedicineValidator());
 
-            // التحقق من PreviousConditions
-            RuleForEach(x => x.PreviousConditions).SetValidator(new PreviousConditionValidator());
+
         }
     }
-    
-    }
- 
-  
+
+}
+

@@ -9,8 +9,8 @@ namespace FinalProject.Core.Feature.Nurse.Query.Response
         public string Phone { get; set; }
         public string? Image { get; set; }
         public string Email { get; set; }
-        public ICollection<MedicalRecord>? MedicalRecords { get; set; } 
+        public ICollection<MedicalRecord>? MedicalRecords { get; set; }
 
-        public string Department { get; set; }
+        public int DepartmentId { get; set; }
     }
 }

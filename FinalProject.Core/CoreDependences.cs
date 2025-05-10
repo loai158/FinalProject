@@ -1,9 +1,5 @@
 ﻿using FinalProject.Core.Behavior;
-using FinalProject.Core.Feature.Doctor.Command.Validations;
-using FinalProject.Core.Feature.Doctor.Command.Validators;
-using FinalProject.Core.Feature.Patient.Command.Validations;
 using FluentValidation;
-using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -14,12 +10,8 @@ namespace FinalProject.Core
     {
         public static IServiceCollection AddCoreDependences(this IServiceCollection services)
         {
-            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            services.AddFluentValidationClientsideAdapters();
-            services.AddValidatorsFromAssemblyContaining<AddDoctorCommandValidator>();
-            services.AddValidatorsFromAssemblyContaining<EditDoctorCommandValidator>();
-            services.AddValidatorsFromAssemblyContaining<AddNewPatientValidator>();
 
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             services.AddMediatR(cfg =>
             {

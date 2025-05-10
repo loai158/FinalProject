@@ -6,7 +6,8 @@ using MediatR;
 namespace FinalProject.Core.Feature.Doctor.Command.Handler
 {
     public class DoctorCommandhandler : IRequestHandler<AddDoctorCommand, int>,
-        IRequestHandler<EditDoctorCommand, bool>
+        IRequestHandler<EditDoctorCommand, bool>,
+        IRequestHandler<DeleteDoctorCommand, string>
 
     {
         private readonly IDoctorServices _doctorServices;
@@ -24,6 +25,7 @@ namespace FinalProject.Core.Feature.Doctor.Command.Handler
             //Map First
 
             var doctor = request.MapAddToDoctor();
+
             var result = await _doctorServices.Create(doctor);
 
             return result;
@@ -49,6 +51,32 @@ namespace FinalProject.Core.Feature.Doctor.Command.Handler
             {
                 return false;
             }
+        }
+        public async Task<string> Handle(DeleteDoctorCommand request, CancellationToken cancellationToken)
+        {
+            var doctor = await _doctorServices.GetById(request.Id);
+            if (doctor.Image != null)
+            {
+                var oldPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\Doctors", doctor.Image);
+                if (System.IO.File.Exists(oldPath))
+                {
+                    System.IO.File.Delete(oldPath);
+                }
+            }
+            if (doctor == null)
+                return "doctor not found";
+            else
+            {
+                var result = _doctorServices.Delete(request.Id);
+
+                if (await result.ConfigureAwait(false) == "faild")
+
+                    return "faild";
+
+                else
+                    return "success";
+            }
+
         }
     }
 }

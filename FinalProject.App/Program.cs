@@ -21,11 +21,7 @@ namespace FinalProject.App
                  AddCoreDependences()
                 .AddInfrastructureDependences()
                 .AddServicesDependences();
-            builder.Services.AddControllersWithViews()
-            .AddViewOptions(options =>
-            {
-                options.HtmlHelperOptions.ClientValidationEnabled = true;
-            });
+
             builder.Services.AddDbContext<ApplicationDbContext>(
                option =>
                {

@@ -60,6 +60,7 @@ namespace FinalProject.Core.Mapping
         {
             return new Doctor
             {
+                Id = command.Id, // أضف هذا السطر
                 Name = command.Name,
                 DepartmentId = command.Department,
                 Details = command.Details,

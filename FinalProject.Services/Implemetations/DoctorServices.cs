@@ -28,6 +28,25 @@ namespace FinalProject.Services.Implemetations
                 return 0;
         }
 
+        public async Task<string> Delete(int id)
+        {
+            var trans = _unitOfWork.BeginTransactionAsync();
+            try
+            {
+                var doctor = await _unitOfWork.Repositry<Doctor>().GetOne(d => d.Id == id);
+                _unitOfWork.Repositry<Doctor>().Delete(doctor);
+                _unitOfWork.Repositry<Doctor>().Commit();
+                await _unitOfWork.CommitTransactionAsync();
+                return "success";
+            }
+            catch
+            {
+                await _unitOfWork.RollbackTransactionAsync();
+                return "faild";
+
+            }
+        }
+
         public string Edit(Doctor doctor)
         {
             _unitOfWork.Repositry<Doctor>().Edit(doctor);

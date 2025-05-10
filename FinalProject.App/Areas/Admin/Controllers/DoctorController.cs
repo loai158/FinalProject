@@ -1,7 +1,6 @@
 ﻿using FinalProject.Core.Feature.Doctor.Command.Models;
 using FinalProject.Core.Feature.Doctor.Query.Models;
 using FinalProject.Services.Abstracts;
-using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -92,45 +91,64 @@ namespace FinalProject.App.Areas.Admin.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+                if (file != null && file.Length > 0)
                 {
-
-                    if (file != null && file.Length > 0)
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\Doctors", fileName);
+                    using (var stream = System.IO.File.Create(filePath))
                     {
-                        // Save img in wwwroot
-                        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\Doctors", fileName);
-                        using (var stream = System.IO.File.Create(filePath))
-                        {
-                            file.CopyTo(stream);
-                        }
-                        // Save img name in db
-                        model.Image = fileName;
+                        file.CopyTo(stream);
                     }
-                    var response = await _mediator.Send(model);
-                    if (response)
-                    {
-                        return RedirectToAction("Index");
-                    }
+                    model.Image = fileName;
                 }
+
+                var response = await _mediator.Send(model);
+
+                if (response)
+                {
+                    return RedirectToAction("Index");
+                }
+
+
+                return View(model);
             }
-            catch (ValidationException ex)
+            catch (FluentValidation.ValidationException ex)
             {
-                // تحويل أخطاء التحقق إلى ModelState
+
                 foreach (var error in ex.Errors)
                 {
                     ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
                 }
+
+
+                ViewBag.Departments = _departmentServices.getAll()
+                .Select(d => new SelectListItem
+                {
+                    Value = d.Id.ToString(),
+                    Text = d.Name
+                })
+                 .ToList();
+
+                return View(model);
             }
-            ViewBag.Departments = _departmentServices.getAll()
-               .Select(d => new SelectListItem
-               {
-                   Value = d.Id.ToString(),
-                   Text = d.Name
-               })
-                .ToList();
-            return View(model);
 
         }
+
+        public async Task<IActionResult> Delete(int doctorId)
+        {
+            var response = await _mediator.Send(new DeleteDoctorCommand(doctorId));
+            if (response == "success")
+            {
+                TempData["Success"] = "تم الحذف بنجاح";
+                return RedirectToAction("index");
+            }
+            else
+            {
+                TempData["Error"] = "يرجي حذف المواعيد اولا";
+                return RedirectToAction("index");
+            }
+        }
     }
+
 }
+

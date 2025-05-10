@@ -7,8 +7,7 @@ namespace FinalProject.Core.Feature.Doctor.Command.Validations
     {
         public EditDoctorCommandValidator()
         {
-            RuleFor(x => x.Id)
-                .GreaterThan(0).WithMessage("معرف الدكتور غير صالح");
+
 
             RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("الاسم مطلوب")
@@ -28,7 +27,8 @@ namespace FinalProject.Core.Feature.Doctor.Command.Validations
 
             RuleFor(x => x.Gender)
                 .NotNull().WithMessage("الجنس مطلوب");
-
+            RuleFor(x => x.Image)
+              .NotEmpty().WithMessage("الصوره مطلوب");
         }
 
     }
