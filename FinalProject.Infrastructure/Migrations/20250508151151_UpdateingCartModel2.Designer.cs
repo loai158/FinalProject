@@ -4,6 +4,7 @@ using FinalProject.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250508151151_UpdateingCartModel2")]
+    partial class UpdateingCartModel2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,7 +91,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Appointments", (string)null);
+                    b.ToTable("Appointments");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Department", b =>
@@ -113,7 +116,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments", (string)null);
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Doctor", b =>
@@ -154,7 +157,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Doctors", (string)null);
+                    b.ToTable("Doctors");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.DoctorSchedule", b =>
@@ -184,7 +187,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("DoctorSchedules", (string)null);
+                    b.ToTable("DoctorSchedules");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Interaction", b =>
@@ -220,7 +223,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("PreviousMedicineId");
 
-                    b.ToTable("Interactions", (string)null);
+                    b.ToTable("Interactions");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.MedicalRecord", b =>
@@ -250,7 +253,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("NurseId");
 
-                    b.ToTable("MedicalRecords", (string)null);
+                    b.ToTable("MedicalRecords");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Nurse", b =>
@@ -283,7 +286,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Nurses", (string)null);
+                    b.ToTable("Nurses");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Patient", b =>
@@ -321,7 +324,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Patients", (string)null);
+                    b.ToTable("Patients");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Perscribtion", b =>
@@ -347,7 +350,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("AppointmentId");
 
-                    b.ToTable("Perscribtions", (string)null);
+                    b.ToTable("Perscribtions");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.PreviousCondition", b =>
@@ -368,7 +371,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("PreviousConditions", (string)null);
+                    b.ToTable("PreviousConditions");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.PreviousMedicine", b =>
@@ -400,7 +403,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("PreviousMedicines", (string)null);
+                    b.ToTable("PreviousMedicines");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.IdentityModels.ApplicationUser", b =>

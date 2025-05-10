@@ -4,6 +4,7 @@ using FinalProject.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250508112413_AddingCartModel")]
+    partial class AddingCartModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,38 +24,6 @@ namespace FinalProject.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Cart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AppointmentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DoctorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PaymentType")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("AppointmentId");
-
-                    b.HasIndex("DoctorId");
-
-                    b.ToTable("Carts");
-                });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Appointment", b =>
                 {
@@ -88,7 +59,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Appointments", (string)null);
+                    b.ToTable("Appointments");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Department", b =>
@@ -113,7 +84,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments", (string)null);
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Doctor", b =>
@@ -154,7 +125,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Doctors", (string)null);
+                    b.ToTable("Doctors");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.DoctorSchedule", b =>
@@ -184,7 +155,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("DoctorSchedules", (string)null);
+                    b.ToTable("DoctorSchedules");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Interaction", b =>
@@ -220,7 +191,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("PreviousMedicineId");
 
-                    b.ToTable("Interactions", (string)null);
+                    b.ToTable("Interactions");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.MedicalRecord", b =>
@@ -250,7 +221,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("NurseId");
 
-                    b.ToTable("MedicalRecords", (string)null);
+                    b.ToTable("MedicalRecords");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Nurse", b =>
@@ -283,7 +254,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Nurses", (string)null);
+                    b.ToTable("Nurses");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Patient", b =>
@@ -321,7 +292,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Patients", (string)null);
+                    b.ToTable("Patients");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Perscribtion", b =>
@@ -347,7 +318,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("AppointmentId");
 
-                    b.ToTable("Perscribtions", (string)null);
+                    b.ToTable("Perscribtions");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.PreviousCondition", b =>
@@ -368,7 +339,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("PreviousConditions", (string)null);
+                    b.ToTable("PreviousConditions");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.PreviousMedicine", b =>
@@ -400,7 +371,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("PreviousMedicines", (string)null);
+                    b.ToTable("PreviousMedicines");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.IdentityModels.ApplicationUser", b =>
@@ -605,33 +576,6 @@ namespace FinalProject.Infrastructure.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("Cart", b =>
-                {
-                    b.HasOne("FinalProject.Data.Models.IdentityModels.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FinalProject.Data.Models.AppModels.Appointment", "Appointment")
-                        .WithMany()
-                        .HasForeignKey("AppointmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("FinalProject.Data.Models.AppModels.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ApplicationUser");
-
-                    b.Navigation("Appointment");
-
-                    b.Navigation("Doctor");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Appointment", b =>

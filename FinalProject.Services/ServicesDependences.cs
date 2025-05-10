@@ -1,4 +1,6 @@
-﻿using FinalProject.Services.Abstracts;
+﻿using FinalProject.Infrastructure.IRepositry;
+using FinalProject.Infrastructure.Repositry;
+using FinalProject.Services.Abstracts;
 using FinalProject.Services.Implemetations;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,6 +14,8 @@ namespace FinalProject.Services
             services.AddScoped<INurseServices, NurseServices>();
             services.AddScoped<IPatientServices, PatientServices>();
             services.AddScoped<IDepartmentServices, DepartmentServices>();
+            services.AddScoped<ICartRepository, CartRepository>();
+
             return services;
         }
     }

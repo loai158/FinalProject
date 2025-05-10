@@ -1,5 +1,7 @@
 ﻿using FinalProject.Infrastructure.Bases;
 using FinalProject.Infrastructure.DataAccess;
+using FinalProject.Infrastructure.IRepositry;
+using FinalProject.Infrastructure.Repositry;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace FinalProject.Infrastructure.UnitOfWorks
@@ -10,9 +12,14 @@ namespace FinalProject.Infrastructure.UnitOfWorks
         private IDbContextTransaction _transaction;
         private readonly Dictionary<Type, object> _repositories = new Dictionary<Type, object>();
 
+
+        public ICartRepository CartRepository { get; }
+
         public UnitOfWork(ApplicationDbContext context)
         {
             this._context = context;
+            CartRepository = new CartRepository(_context);
+ 
         }
         public async Task<IDbContextTransaction> BeginTransactionAsync()
         {
