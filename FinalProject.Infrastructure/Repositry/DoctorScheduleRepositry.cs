@@ -5,11 +5,11 @@ using FinalProject.Infrastructure.IRepositry;
 
 namespace FinalProject.Infrastructure.Repositry
 {
-    public class AppointmentRepositry : GenericRepositry<Appointment>, IAppointmetRepositry
+    public class DoctorScheduleRepositry : GenericRepositry<DoctorSchedule>, IDoctorScheduleRepositry
     {
         private readonly ApplicationDbContext dbContext;
 
-        public AppointmentRepositry(ApplicationDbContext dbContext) : base(dbContext)
+        public DoctorScheduleRepositry(ApplicationDbContext dbContext) : base(dbContext)
         {
             this.dbContext = dbContext;
         }

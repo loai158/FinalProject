@@ -6,7 +6,8 @@ using MediatR;
 
 namespace FinalProject.Core.Feature.Apponitments.Query.Haandler
 {
-    public class AppointmentQueryHandler : IRequestHandler<GetAllApponintmentsQuery, GetAllApponintmentsResponse>
+    public class AppointmentQueryHandler : IRequestHandler<GetAllApponintmentsQuery, GetAllApponintmentsResponse>,
+        IRequestHandler<GetAppointmentByIdQuery, GetAppointmentByIdResponse>
     {
         private readonly IAppointmentServices _appointmentServices;
 
@@ -32,6 +33,13 @@ namespace FinalProject.Core.Feature.Apponitments.Query.Haandler
                 .ToList();
             var response = pagedAppointments.MapAppointmentsToGetAll();
             return response;
+        }
+
+        public async Task<GetAppointmentByIdResponse> Handle(GetAppointmentByIdQuery request, CancellationToken cancellationToken)
+        {
+            var appointment = await _appointmentServices.GetById(request.Id);
+            var result = appointment.MapAppointmentToGetById();
+            return result;
         }
     }
 }
