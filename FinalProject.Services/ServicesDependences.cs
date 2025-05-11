@@ -15,6 +15,7 @@ namespace FinalProject.Services
             services.AddScoped<IPatientServices, PatientServices>();
             services.AddScoped<IDepartmentServices, DepartmentServices>();
             services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<IAppointmentServices, AppointmentServices>();
 
             return services;
         }

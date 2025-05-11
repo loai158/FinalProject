@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="Feature\Apponitments\Command\" />
-    <Folder Include="Feature\Apponitments\Query\Haandler\" />
     <Folder Include="Feature\PreviousConditions\Command\Handler\" />
     <Folder Include="Feature\PreviousConditions\Command\Models\" />
     <Folder Include="Feature\PreviousConditions\Query\" />

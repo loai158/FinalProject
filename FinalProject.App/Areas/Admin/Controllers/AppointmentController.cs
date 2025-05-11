@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FinalProject.Core.Feature.Apponitments.Query.Models;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProject.App.Areas.Admin.Controllers
@@ -12,16 +13,16 @@ namespace FinalProject.App.Areas.Admin.Controllers
         {
             this._mediator = mediator;
         }
-        //[HttpGet]
-        //public IActionResult Index(string? query, int page = 1)
-        //{
-        //    var respone = _mediator.Send(new GetAllApponintmentsQuery
-        //    {
-        //        Query = query,
-        //        Page = page,
-        //        PageSize = 10
-        //    });
-        //    return View();
-        //}
+        [HttpGet]
+        public async Task<IActionResult> Index(string? query, int page = 1)
+        {
+            var respone = await _mediator.Send(new GetAllApponintmentsQuery
+            {
+                Query = query,
+                Page = page,
+                PageSize = 10
+            });
+            return View(respone);
+        }
     }
 }
