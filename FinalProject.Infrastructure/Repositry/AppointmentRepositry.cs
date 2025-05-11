@@ -5,7 +5,7 @@ using FinalProject.Infrastructure.IRepositry;
 
 namespace FinalProject.Infrastructure.Repositry
 {
-    public class AppointmentRepositry : GenericRepositry<Appointment>, IAppointmentRepositry
+    public class AppointmentRepositry : GenericRepositry<Appointment>, IAppointmentService
     {
         private readonly ApplicationDbContext dbContext;
 
