@@ -19,8 +19,7 @@
     }
     public enum Status
     {
-        Cancelled,
-        Completed,
-        Pending
+        Initial,
+        FollowUp
     }
 }

@@ -3,7 +3,7 @@ using FinalProject.Infrastructure.Bases;
 
 namespace FinalProject.Infrastructure.IRepositry
 {
-    public interface IAppointmetRepositry : IGenericRepositry<Appointment>
+    public interface IDoctorScheduleRepositry : IGenericRepositry<DoctorSchedule>
     {
     }
 }

@@ -1,0 +1,144 @@
+﻿@model FinalProject.Core.Feature.Apponitments.Query.Response.GetAppointmentByIdResponse
+
+@{
+    ViewData["Title"] = "تعديل الموعد";
+}
+
+<h2>تعديل الموعد</h2>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group mb-3">
+        <label asp-for="Status" class="form-label">نوع الحجز</label>
+        <select asp-for="Status" class="form-control" id="status" asp-items="Html.GetEnumSelectList<FinalProject.Data.Models.AppModels.Status>()">
+            <option value="">اختر نوع الحجز</option>
+        </select>
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="DepartmentId" class="form-label">القسم</label>
+        <select asp-for="DepartmentId" class="form-control" id="DepartmentId">
+            <option value="">اختر قسم</option>
+            @foreach (var item in ViewData["Departments"] as List<Department>)
+            {
+                <option value="@item.Id" selected="@(item.Id == Model.DepartmentId ? "selected" : null)">
+                    @item.Name
+                </option>
+
+            }
+        </select>
+        <span asp-validation-for="Department" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="DoctorId" class="form-label">الدكتور</label>
+        <select asp-for="DoctorId" class="form-control" id="DoctorId">
+            <option value="">اختر دكتور</option>
+            @foreach (var item in ViewData["Doctors"] as List<Doctor>)
+            {
+                <option value="@item.Id" selected="@(item.Id == Model.DoctorId ? "selected" : null)">
+                    @item.Name
+                </option>
+            }
+        </select>
+        <span asp-validation-for="Doctor" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="PatientId" class="form-label">المريض</label>
+        <select asp-for="PatientId" class="form-control">
+            <option value="">اختر المريض</option>
+            @foreach (var item in ViewData["Patients"] as List<Patient>)
+            {
+                <option value="@item.Id" selected="@(item.Id == Model.PatientId ? "selected" : null)">
+                    @item.Name
+                </option>
+            }
+        </select>
+        <span asp-validation-for="Patient" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Date" class="form-label">تاريخ الموعد</label>
+        <select asp-for="Date" class="form-control" id="date">
+            <option value="">اختر التاريخ</option>
+            @* لو حابب تحمّل القائمة بالـ JS *@
+            <option value="@Model.Date" selected>@Model.Date</option>
+        </select>
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="form-label">السعر</label>
+        <input asp-for="Price" id="price" class="form-control" readonly />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">حفظ التعديل</button>
+        <a asp-action="Index" class="btn btn-secondary">رجوع</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(function () {
+            // لو في خطأ
+            @if (TempData["Error"] != null)
+            {
+                <text>toastr.error('@TempData["Error"]');</text>
+            }
+
+            // تحميل الأطباء عند تغيير القسم
+            $('#DepartmentId').change(function () {
+                var deptId = $(this).val();
+                var $docSelect = $('#DoctorId');
+
+                $docSelect.empty().append('<option value="">اختر دكتور</option>');
+
+                if (!deptId) return;
+
+                $.getJSON('@Url.Action("GetDoctorsByDepartment")',
+                    { departmentId: deptId },
+                    function (data) {
+                        $.each(data, function (i, doc) {
+                            $docSelect.append($('<option>').val(doc.id).text(doc.name));
+                        });
+                    });
+            });
+
+            // السعر حسب نوع الحجز
+            $('#status').change(function () {
+                var type = $(this).val();
+                var price = 0;
+
+                if (type == '0') {
+                    price = 100;
+                } else if (type == '1') {
+                    price = 50;
+                }
+
+                $('#price').val(price);
+            });
+
+            // تحميل التواريخ المتاحة عند تغيير الدكتور
+            $('#DoctorId').change(function () {
+                var doctorId = $(this).val();
+                var $dateSelect = $('#date');
+                $dateSelect.empty().append('<option value="">اختر التاريخ</option>');
+
+                if (!doctorId) return;
+
+                $.getJSON('@Url.Action("GetAvailableDatesByDoctor")', { doctorId: doctorId }, function (data) {
+                    $.each(data, function (i, item) {
+                        var text = item.date + ' - من ' + item.startTime + ' إلى ' + item.endTime;
+                        $dateSelect.append($('<option>').val(item.date).text(text));
+                    });
+                });
+            });
+        });
+    </script>
+}
