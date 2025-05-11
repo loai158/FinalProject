@@ -69,7 +69,7 @@ namespace FinalProject.App.Areas.Identity.Controllers
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(applicationUser, "Admin");
+                    await _userManager.AddToRoleAsync(applicationUser, "Customer");
                     TempData["Success"] = "Register Successfully!";
                     return RedirectToAction("Login", "Account", new { area = "Identity" });
                 }

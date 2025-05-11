@@ -14,10 +14,10 @@ namespace FinalProject.Core.Mapping
         {
             return new Cart()
             {
-                ApplicationUserId=cartRequest.ApplicationUserId,
+                ApplicationUserId= cartRequest.ApplicationUserId,
                 DoctorId=cartRequest.DoctorId,
                 AppointmentId=(int)cartRequest.AppointmentId,
-                PaymentType= (Cart.TypePayment)cartRequest.PaymentType
+                PaymentType = (Cart.TypePayment)cartRequest.PaymentType
             };
         }
 
