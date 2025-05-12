@@ -1,5 +1,6 @@
 ﻿using FinalProject.Core.Feature.Doctor.Command.Models;
 using FinalProject.Core.Feature.Doctor.Query.Models;
+using FinalProject.Services.Abstracts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,15 +10,17 @@ namespace FinalProject.App.Areas.Customer.Controllers
     public class DoctorController : Controller
     {
         private readonly IMediator _mediator;
+        private readonly IDoctorServices _doctorServices;
 
-        public DoctorController(IMediator mediator)
+        public DoctorController(IMediator mediator, IDoctorServices doctorServices)
         {
             _mediator = mediator;
+            this._doctorServices = doctorServices;
         }
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public IActionResult MoreDetails(int deptId)
         {
-            var response = await _mediator.Send(new GetAllDoctorsQuery());
+            var response = _doctorServices.GetByDeptId(deptId).ToList();
             return View(response);
         }
 

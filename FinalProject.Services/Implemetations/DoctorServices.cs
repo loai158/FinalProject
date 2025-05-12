@@ -60,6 +60,12 @@ namespace FinalProject.Services.Implemetations
             return result;
         }
 
+        public IQueryable<Doctor> GetByDeptId(int id)
+        {
+            var result = _unitOfWork.Repositry<Doctor>().Get(filter: d => d.DepartmentId == id);
+            return result;
+        }
+
         public async Task<Doctor> GetById(int id)
         {
             var doctor = await _unitOfWork.Repositry<Doctor>().GetOne(c => c.Id == id, includes: [a => a.Appointments, ds => ds.DoctorSchedules, dd => dd.Department], tracked: false);

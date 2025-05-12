@@ -17,15 +17,9 @@ namespace FinalProject.Infrastructure.DataAccess
         DbSet<Interaction> Interactions { get; set; }
         DbSet<Perscribtion> Perscribtions { get; set; }
         DbSet<DoctorSchedule> DoctorSchedules { get; set; }
-
         DbSet<MedicalRecord> MedicalRecords { get; set; }
-
-
+        DbSet<Medicine> Medicines { get; set; }
         DbSet<Cart> Carts { get; set; }
-
-
-
-
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -50,6 +44,10 @@ namespace FinalProject.Infrastructure.DataAccess
                 .WithMany(p => p.Appointments)
                 .HasForeignKey(a => a.PatientId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Medicine>()
+                 .HasMany(s => s.Perscribtions)
+                .WithMany(c => c.Medicines);
         }
     }
 }
