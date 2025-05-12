@@ -5,55 +5,104 @@
 }
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
 
-<div class="container mt-5">
-    <h2 class="mb-4">Create Cart</h2>
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <form asp-action="Create" class="border p-4 shadow rounded bg-light">
-                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+<div class="container my-5">
+    <h2 class="text-center mb-5 fw-bold">Book an Appointment</h2>
 
-                  <div class="mb-3">  
-                      <label asp-for="ApplicationUserId" class="form-label"></label>  
-                     <input asp-for="ApplicationUserId" class="form-control" />  
-                      <span asp-validation-for="ApplicationUserId" class="text-danger"></span>  
-                 </div>  
+    <div class="row g-5">
+        <!-- Doctor Card -->
+        <div class="col-lg-5">
+            <div class="card shadow-sm rounded-4 border-0">
+                <div class="position-relative" style="height: 280px;">
+                    <img src="~/images/Doctors/@ViewBag.Dr.Image" class="card-img-top w-100 h-100 object-fit-cover rounded-top-4" alt="@ViewBag.Dr.Name" onerror="this.src='/images/default-doctor.jpg'">
+                    <span class="position-absolute top-0 start-0 m-2 badge bg-primary fs-6">@ViewBag.Dr.Department.Name</span>
+                </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Doctor</label>
-                    <select name="DoctorId" class="form-select">
-                        <option disabled selected>-- Select Doctor --</option>
-                        @foreach (var item in ViewBag.Drs)
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="mb-0">Dr. @ViewBag.Dr.Name</h4>
+                        <span class="badge @(ViewBag.Dr.Gender.ToString() == "Male" ? "bg-info" : "bg-danger") fs-6">
+                            <i class="fas @(ViewBag.Dr.Gender.ToString() == "Male" ? "fa-mars" : "fa-venus") me-1"></i>
+                            @ViewBag.Dr.Gender
+                        </span>
+                    </div>
+
+                    <div class="mb-2">
+                        <i class="fas fa-phone-alt text-secondary me-2"></i>
+                        <strong>@ViewBag.Dr.Phone</strong>
+                    </div>
+
+                    <div class="mt-4">
+                        <h6 class="text-muted mb-2">Select Available Appointment</h6>
+                        @if (ViewBag.Dr.DoctorSchedules != null && ViewBag.Dr.DoctorSchedules.Count > 0)
                         {
-                            <option value="@item.Id">@item.Name</option>
+                            <select class="form-select" name="SelectedScheduleId">
+                                <option disabled selected>-- Select a time slot --</option>
+                                @foreach (var schedule in ViewBag.Dr.DoctorSchedules)
+                                {
+                                    var timeRange = $"{schedule.StartTime:hh\\:mm} - {schedule.EndTime:hh\\:mm}";
+                                    <option value="@schedule.Id">
+                                        @schedule.Day | @timeRange
+                                    </option>
+                                }
+                            </select>
                         }
-                    </select>
+                        else
+                        {
+                            <p class="text-muted">Schedule not available</p>
+                        }
+                    </div>
+
                 </div>
 
-                <div class="mb-3">
-                    <label asp-for="AppointmentId" class="form-label"></label>
-                    <input asp-for="AppointmentId" class="form-control" />
-                    <span asp-validation-for="AppointmentId" class="text-danger"></span>
+                <div class="card-footer bg-transparent border-0">
+                    <a href="/Customer/Cart/Create?doctorId=@ViewBag.Dr.Id" class="btn btn-outline-primary w-100 py-2">
+                        <i class="far fa-calendar-check me-2"></i>Book Appointment
+                    </a>
                 </div>
+            </div>
+        </div>
 
-                <div class="mb-3">
-                    <label asp-for="PaymentType" class="form-label"></label>
-                    <select asp-for="PaymentType" class="form-select" asp-items="Html.GetEnumSelectList<FinalProject.Core.Feature.Cart.Requests.TypePayment>()">
-                        <option disabled selected>-- Select Payment Type --</option>
-                    </select>
-                    <span asp-validation-for="PaymentType" class="text-danger"></span>
+        <!-- Booking Form -->
+        <div class="col-lg-7">
+            <div class="card p-4 shadow-sm rounded-4 bg-light border-0">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="ApplicationUserId" class="form-label fw-semibold"></label>
+                        <input asp-for="ApplicationUserId" class="form-control" />
+                        <span asp-validation-for="ApplicationUserId" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="AppointmentId" class="form-label fw-semibold"></label>
+                        <input asp-for="AppointmentId" class="form-control" />
+                        <span asp-validation-for="AppointmentId" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-4">
+                        <label asp-for="PaymentType" class="form-label fw-semibold"></label>
+                        <select asp-for="PaymentType" class="form-select" asp-items="Html.GetEnumSelectList<FinalProject.Core.Feature.Cart.Requests.TypePayment>()">
+                            <option disabled selected>-- Select Payment Type --</option>
+                        </select>
+                        <span asp-validation-for="PaymentType" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary py-2 fw-semibold">
+                            <i class="fas fa-plus-circle me-1"></i> Create Appointment
+                        </button>
+                    </div>
+                </form>
+
+                <div class="text-center mt-3">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left me-1"></i> Back to List
+                    </a>
                 </div>
-
-                <div class="d-grid">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-            </form>
-
-            <div class="mt-3 text-center">
-                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
             </div>
         </div>
     </div>
 </div>
-
- 

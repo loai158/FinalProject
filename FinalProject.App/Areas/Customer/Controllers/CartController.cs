@@ -15,14 +15,14 @@ namespace FinalProject.App.Areas.Customer.Controllers
 ;
 
         public CartController(ICartServices cartServices,
-            IDoctorServices  doctorServices,
+            IDoctorServices doctorServices,
             UserManager<ApplicationUser> userManager
 )
         {
             this._cartServices = cartServices;
             this._doctorServices = doctorServices;
             this._userManager = userManager;
-        
+
         }
         public IActionResult Index()
         {
@@ -30,12 +30,12 @@ namespace FinalProject.App.Areas.Customer.Controllers
             return View(AllAppointes.ToList());
         }
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create(int doctorId)
         {
-            var Drs = _doctorServices.GetAll();
-           
-            ViewBag.Drs = Drs;
- 
+            var Dr = await _doctorServices.GetById(doctorId);
+
+            ViewBag.Dr = Dr;
+
             return View();
         }
 
@@ -52,7 +52,7 @@ namespace FinalProject.App.Areas.Customer.Controllers
             }
 
             _cartServices.AddCart(cartRequest);
-          
+
             return RedirectToAction("Index");
         }
 
