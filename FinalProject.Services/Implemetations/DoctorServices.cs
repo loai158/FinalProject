@@ -62,7 +62,7 @@ namespace FinalProject.Services.Implemetations
 
         public IQueryable<Doctor> GetByDeptId(int id)
         {
-            var result = _unitOfWork.Repositry<Doctor>().Get(filter: d => d.DepartmentId == id);
+            var result = _unitOfWork.Repositry<Doctor>().Get(includes: [e=>e.Department],filter: d => d.DepartmentId == id);
             return result;
         }
 
