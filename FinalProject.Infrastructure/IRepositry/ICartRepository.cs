@@ -1,13 +1,9 @@
-﻿using FinalProject.Infrastructure.Bases;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FinalProject.Data.Models.PaymentModels;
+using FinalProject.Infrastructure.Bases;
 
 namespace FinalProject.Infrastructure.IRepositry
 {
-  public  interface ICartRepository:IGenericRepositry<Cart>
+    public interface ICartRepository : IGenericRepositry<Cart>
     {
     }
 }

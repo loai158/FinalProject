@@ -1,11 +1,12 @@
-﻿using FinalProject.Infrastructure.Bases;
+﻿using FinalProject.Data.Models.PaymentModels;
+using FinalProject.Infrastructure.Bases;
 using FinalProject.Infrastructure.DataAccess;
 using FinalProject.Infrastructure.IRepositry;
 
 
 namespace FinalProject.Infrastructure.Repositry
 {
-   public class CartRepository: GenericRepositry<Cart>,ICartRepository
+    public class CartRepository : GenericRepositry<Cart>, ICartRepository
     {
         private readonly ApplicationDbContext dbContext;
 

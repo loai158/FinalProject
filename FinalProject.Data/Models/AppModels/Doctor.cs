@@ -8,6 +8,8 @@
         public string Phone { get; set; }
         public string Image { get; set; }
         public string Email { get; set; }
+        public decimal? IntialPrice { get; set; }
+        public decimal? FollowUpPrice { get; set; }
         public Gender Gender { get; set; }
         public ICollection<Appointment>? Appointments { get; set; } = new HashSet<Appointment>();
         public ICollection<DoctorSchedule>? DoctorSchedules { get; set; } = new HashSet<DoctorSchedule>();
@@ -15,6 +17,7 @@
         public Department? Department { get; set; }
 
     }
+
     public enum Gender
     {
         Male,

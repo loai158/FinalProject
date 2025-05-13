@@ -9,5 +9,7 @@ namespace FinalProject.Services.Abstracts
         public Task<Appointment> GetById(int id);
         public string Edit(Appointment appointment);
         public Task<string> Delete(int id);
+
+        public Task<int?> GetPatientIdFromUserAsync(string userId);
     }
 }

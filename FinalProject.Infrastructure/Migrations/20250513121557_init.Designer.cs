@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250506114101_updateImageToString")]
-    partial class updateImageToString
+    [Migration("20250513121557_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,10 +45,10 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TypePayment")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -106,12 +106,18 @@ namespace FinalProject.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal?>("FollowUpPrice")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
                     b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("IntialPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -139,7 +145,7 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Property<int>("Day")
                         .HasColumnType("int");
 
-                    b.Property<int>("DoctorId")
+                    b.Property<int?>("DoctorId")
                         .HasColumnType("int");
 
                     b.Property<TimeSpan>("EndTime")
@@ -224,6 +230,26 @@ namespace FinalProject.Infrastructure.Migrations
                     b.ToTable("MedicalRecords");
                 });
 
+            modelBuilder.Entity("FinalProject.Data.Models.AppModels.Medicine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Dose")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Medicines");
+                });
+
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Nurse", b =>
                 {
                     b.Property<int>("Id")
@@ -279,6 +305,10 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
+                    b.Property<string>("IdentityUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
@@ -291,6 +321,8 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdentityUserId");
 
                     b.ToTable("Patients");
                 });
@@ -305,14 +337,6 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.Property<int>("AppointmentId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Dose")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -443,6 +467,55 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("FinalProject.Data.Models.PaymentModels.Cart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AppointmentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DoctorScheduleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("AppointmentId");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("DoctorScheduleId");
+
+                    b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("MedicinePerscribtion", b =>
+                {
+                    b.Property<int>("MedicinesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PerscribtionsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("MedicinesId", "PerscribtionsId");
+
+                    b.HasIndex("PerscribtionsId");
+
+                    b.ToTable("MedicinePerscribtion");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -620,9 +693,7 @@ namespace FinalProject.Infrastructure.Migrations
                 {
                     b.HasOne("FinalProject.Data.Models.AppModels.Doctor", "Doctor")
                         .WithMany("DoctorSchedules")
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DoctorId");
 
                     b.Navigation("Doctor");
                 });
@@ -672,6 +743,17 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Navigation("Department");
                 });
 
+            modelBuilder.Entity("FinalProject.Data.Models.AppModels.Patient", b =>
+                {
+                    b.HasOne("FinalProject.Data.Models.IdentityModels.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("IdentityUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+                });
+
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Perscribtion", b =>
                 {
                     b.HasOne("FinalProject.Data.Models.AppModels.Appointment", "Appointment")
@@ -703,6 +785,54 @@ namespace FinalProject.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("FinalProject.Data.Models.PaymentModels.Cart", b =>
+                {
+                    b.HasOne("FinalProject.Data.Models.IdentityModels.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FinalProject.Data.Models.AppModels.Appointment", "Appointment")
+                        .WithMany()
+                        .HasForeignKey("AppointmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FinalProject.Data.Models.AppModels.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FinalProject.Data.Models.AppModels.DoctorSchedule", "DoctorSchedule")
+                        .WithMany()
+                        .HasForeignKey("DoctorScheduleId");
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Appointment");
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("DoctorSchedule");
+                });
+
+            modelBuilder.Entity("MedicinePerscribtion", b =>
+                {
+                    b.HasOne("FinalProject.Data.Models.AppModels.Medicine", null)
+                        .WithMany()
+                        .HasForeignKey("MedicinesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FinalProject.Data.Models.AppModels.Perscribtion", null)
+                        .WithMany()
+                        .HasForeignKey("PerscribtionsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

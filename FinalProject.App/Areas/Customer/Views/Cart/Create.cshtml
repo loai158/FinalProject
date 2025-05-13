@@ -1,4 +1,4 @@
-﻿@model FinalProject.Core.Feature.Cart.Requests.CartRequest
+﻿@model FinalProject.Core.Feature.Apponitments.Command.Models.AddNewAppointmentCommand
 
 @{
     ViewData["Title"] = "Create";
@@ -11,92 +11,121 @@
     <h2 class="text-center mb-5 fw-bold">Book an Appointment</h2>
 
     <div class="row g-5">
-        <!-- Doctor Card -->
-        <div class="col-lg-5">
-            <div class="card shadow-sm rounded-4 border-0">
-                <div class="position-relative" style="height: 280px;">
-                    <img src="~/images/Doctors/@ViewBag.Dr.Image" class="card-img-top w-100 h-100 object-fit-cover rounded-top-4" alt="@ViewBag.Dr.Name" onerror="this.src='/images/default-doctor.jpg'">
-                    <span class="position-absolute top-0 start-0 m-2 badge bg-primary fs-6">@ViewBag.Dr.Department.Name</span>
-                </div>
-
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="mb-0">Dr. @ViewBag.Dr.Name</h4>
-                        <span class="badge @(ViewBag.Dr.Gender.ToString() == "Male" ? "bg-info" : "bg-danger") fs-6">
-                            <i class="fas @(ViewBag.Dr.Gender.ToString() == "Male" ? "fa-mars" : "fa-venus") me-1"></i>
-                            @ViewBag.Dr.Gender
-                        </span>
-                    </div>
-
-                    <div class="mb-2">
-                        <i class="fas fa-phone-alt text-secondary me-2"></i>
-                        <strong>@ViewBag.Dr.Phone</strong>
-                    </div>
-
-                    <div class="mt-4">
-                        <h6 class="text-muted mb-2">Select Available Appointment</h6>
-                        @if (ViewBag.Dr.DoctorSchedules != null && ViewBag.Dr.DoctorSchedules.Count > 0)
-                        {
-                            <select class="form-select" name="SelectedScheduleId">
-                                <option disabled selected>-- Select a time slot --</option>
-                                @foreach (var schedule in ViewBag.Dr.DoctorSchedules)
-                                {
-                                    var timeRange = $"{schedule.StartTime:hh\\:mm} - {schedule.EndTime:hh\\:mm}";
-                                    <option value="@schedule.Id">
-                                        @schedule.Day | @timeRange
-                                    </option>
-                                }
-                            </select>
-                        }
-                        else
-                        {
-                            <p class="text-muted">Schedule not available</p>
-                        }
-                    </div>
-
-                </div>
-
-                <div class="card-footer bg-transparent border-0">
-                    <a href="/Customer/Cart/Create?doctorId=@ViewBag.Dr.Id" class="btn btn-outline-primary w-100 py-2">
-                        <i class="far fa-calendar-check me-2"></i>Book Appointment
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Booking Form -->
-        <div class="col-lg-7">
+        <!-- Booking Form with Doctor Card Integrated -->
+        <div class="col-lg-12">
             <div class="card p-4 shadow-sm rounded-4 bg-light border-0">
-                <form asp-action="Create">
-                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                <form action="/Customer/Cart/Create" method="post" enctype="multipart/form-data">
+                    <!-- Hidden Inputs for Doctor Details -->
+                    <input type="hidden" asp-for="DoctorId" value="@ViewBag.Dr.Id" />
+                    <input type="hidden" name="DoctorName" value="@ViewBag.Dr.Name" />
+                    <input type="hidden" name="DoctorPhone" value="@ViewBag.Dr.Phone" />
+                    <input type="hidden" name="DoctorGender" value="@ViewBag.Dr.Gender" />
+                    <input type="hidden" name="DepartmentName" value="@ViewBag.Dr.Department.Name" />
+                    <input type="hidden" name="DoctorImage" value="@ViewBag.Dr.Image" />
+                    @Html.AntiForgeryToken()
 
-                    <div class="mb-3">
-                        <label asp-for="ApplicationUserId" class="form-label fw-semibold"></label>
-                        <input asp-for="ApplicationUserId" class="form-control" />
-                        <span asp-validation-for="ApplicationUserId" class="text-danger"></span>
-                    </div>
+                    <div class="card-body">
+                        <!-- Doctor Card Display -->
+                        <div class="row mb-4">
+                            <div class="col-md-5">
+                                <div class="card shadow-sm rounded-4 border-0">
+                                    <div class="position-relative" style="height: 280px;">
+                                        <img src="~/images/Doctors/@ViewBag.Dr.Image" class="card-img-top w-100 h-100 object-fit-cover rounded-top-4" alt="@ViewBag.Dr.Name" onerror="this.src='/images/default-doctor.jpg'">
+                                        <span class="position-absolute top-0 start-0 m-2 badge bg-primary fs-6">@ViewBag.Dr.Department.Name</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h4 class="mb-0">Dr. @ViewBag.Dr.Name</h4>
+                                            <span class="badge @(ViewBag.Dr.Gender.ToString() == "Male" ? "bg-info" : "bg-danger") fs-6">
+                                                <i class="fas @(ViewBag.Dr.Gender.ToString() == "Male" ? "fa-mars" : "fa-venus") me-1"></i>
+                                                @ViewBag.Dr.Gender
+                                            </span>
+                                        </div>
+                                        <div class="mb-2">
+                                            <i class="fas fa-phone-alt text-secondary me-2"></i>
+                                            <strong>@ViewBag.Dr.Phone</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <!-- Patient Information -->
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h4 class="mb-0">@ViewBag.Patient.Name</h4>
+                                    <span class="badge @(ViewBag.Patient.Gender.ToString() == "Male" ? "bg-info" : "bg-danger") fs-6">
+                                        <i class="fas @(ViewBag.Patient.Gender.ToString() == "Male" ? "fa-mars" : "fa-venus") me-1"></i>
+                                        @ViewBag.Patient.Gender
+                                    </span>
+                                </div>
+                                <div class="mb-2">
+                                    <i class="fas fa-phone-alt text-secondary me-2"></i>
+                                    <strong>@ViewBag.Patient.Phone</strong>
+                                </div>
+                                <div class="mb-2">
+                                    <i class="fas fa-birthday-cake text-secondary me-2"></i>
+                                    <strong>@ViewBag.Patient.DateOfBirth.ToString("yyyy-MM-dd")</strong>
+                                </div>
+                            </div>
+                        </div>
 
-                    <div class="mb-3">
-                        <label asp-for="AppointmentId" class="form-label fw-semibold"></label>
-                        <input asp-for="AppointmentId" class="form-control" />
-                        <span asp-validation-for="AppointmentId" class="text-danger"></span>
-                    </div>
+                        <!-- Appointment Selection -->
+                        <div class="mt-4">
+                            <h6 class="text-muted mb-2">Select Available Appointment</h6>
+                            @if (ViewBag.Dr.DoctorSchedules != null && ViewBag.Dr.DoctorSchedules.Count > 0)
+                            {
+                                <select class="form-select" asp-for="Date">
+                                    <option disabled selected>-- Select a time slot --</option>
+                                    @foreach (var schedule in ViewBag.Dr.DoctorSchedules)
+                                    {
+                                        var timeRange = $"{schedule.StartTime:hh\\:mm} - {schedule.EndTime:hh\\:mm}";
+                                        <option value="@schedule.Id">
+                                            @schedule.Day | @timeRange
+                                        </option>
+                                    }
+                                </select>
+                            }
+                            else
+                            {
+                                <p class="text-muted">Schedule not available</p>
+                            }
+                        </div>
 
-                    <div class="mb-4">
-                        <label asp-for="PaymentType" class="form-label fw-semibold"></label>
-                        <select asp-for="PaymentType" class="form-select" asp-items="Html.GetEnumSelectList<FinalProject.Core.Feature.Cart.Requests.TypePayment>()">
-                            <option disabled selected>-- Select Payment Type --</option>
-                        </select>
-                        <span asp-validation-for="PaymentType" class="text-danger"></span>
-                    </div>
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-primary py-2 fw-semibold">
-                            <i class="fas fa-plus-circle me-1"></i> Create Appointment
-                        </button>
+                        <!-- Status Selection -->
+                        <div class="mb-4">
+                            <label asp-for="Status" class="form-label fw-semibold"></label>
+                            <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<FinalProject.Data.Models.AppModels.Status>()">
+                                <option disabled selected>-- Select Payment Type --</option>
+                            </select>
+                            <span asp-validation-for="Status" class="text-danger"></span>
+                        </div>
+
+                        <!-- Payment Type Selection -->
+                        <div class="mb-4">
+                            <label asp-for="TypePayment" class="form-label fw-semibold"></label>
+                            <select asp-for="TypePayment" class="form-select" asp-items="Html.GetEnumSelectList<FinalProject.Data.Models.AppModels.TypePayment>()">
+                                <option disabled selected>-- Select Price Type --</option>
+                            </select>
+                            <span asp-validation-for="TypePayment" class="text-danger"></span>
+                        </div>
+
+                        <!-- Price Input -->
+                        <div class="mb-4">
+                            <label for="price" class="form-label fw-semibold">Price</label>
+                            <input type="number" id="price" name="Price" class="form-control" readonly />
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary py-2 fw-semibold">
+                                <i class="fas fa-plus-circle me-1"></i> Create Appointment
+                            </button>
+                        </div>
                     </div>
                 </form>
 
+                <!-- Back to List Link -->
                 <div class="text-center mt-3">
                     <a asp-action="Index" class="btn btn-secondary">
                         <i class="fas fa-arrow-left me-1"></i> Back to List
@@ -106,3 +135,21 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            $('#Status').change(function () {
+                var type = $(this).val();
+                var price = 0;
+                if (type == '0') {
+                    price = 100;
+                } else if (type == '1') {
+                    price = 50;
+                }
+                $('#price').val(price);
+            });
+        });
+    </script>
+}

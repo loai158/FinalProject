@@ -89,6 +89,23 @@ namespace FinalProject.App.Areas.Admin.Controllers
 
             return Json(futureDates);
         }
+        [HttpGet]
+        public async Task<IActionResult> GetPriceByStatus(int doctorId, int status)
+        {
+            var doctor = await _doctorServices.GetById(doctorId);
+            if (doctor == null)
+                return NotFound();
+
+            decimal price = 0;
+
+            if ((Status)status == Status.Initial)
+                price = (decimal)doctor.IntialPrice;
+            else if ((Status)status == Status.FollowUp)
+                price = (decimal)doctor.FollowUpPrice;
+
+            return Json(price);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(AddNewAppointmentCommand command)

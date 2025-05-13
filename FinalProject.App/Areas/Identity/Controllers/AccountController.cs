@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using System.Threading.Tasks;
 
 namespace FinalProject.App.Areas.Identity.Controllers
 {
@@ -27,7 +26,7 @@ namespace FinalProject.App.Areas.Identity.Controllers
             {
                 await _roleManager.CreateAsync(new IdentityRole("SuperAdmin"));
                 await _roleManager.CreateAsync(new IdentityRole("Admin"));
-                await _roleManager.CreateAsync(new IdentityRole("Company"));
+                await _roleManager.CreateAsync(new IdentityRole("Patient"));
                 await _roleManager.CreateAsync(new IdentityRole("Customer"));
 
             }
@@ -65,18 +64,23 @@ namespace FinalProject.App.Areas.Identity.Controllers
                     PhoneNumber = registerVM.PhoneNumber,
                     ImgProfile = fileName
                 };
-                var result =await _userManager.CreateAsync(applicationUser, registerVM.Password);
+                var result = await _userManager.CreateAsync(applicationUser, registerVM.Password);
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(applicationUser, "Customer");
+                    await _userManager.AddToRoleAsync(applicationUser, "Patient");
+
                     TempData["Success"] = "Register Successfully!";
                     return RedirectToAction("Login", "Account", new { area = "Identity" });
                 }
                 else
                 {
-                    ModelState.AddModelError("Password", "Not Match the constrains");
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
                 }
+
 
 
             }

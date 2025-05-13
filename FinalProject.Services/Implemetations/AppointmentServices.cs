@@ -1,6 +1,7 @@
 ﻿using FinalProject.Data.Models.AppModels;
 using FinalProject.Infrastructure.UnitOfWorks;
 using FinalProject.Services.Abstracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Services.Implemetations
 {
@@ -57,5 +58,16 @@ namespace FinalProject.Services.Implemetations
                 return "faild";
             }
         }
+        public async Task<int?> GetPatientIdFromUserAsync(string userId)
+        {
+            var patient = await _unitOfWork.Repositry<Patient>().Get()
+              .Where(p => p.IdentityUserId == userId)
+              .Select(p => p.Id)
+              .FirstOrDefaultAsync();
+
+            return patient == 0 ? null : patient;
+        }
+
+
     }
 }
