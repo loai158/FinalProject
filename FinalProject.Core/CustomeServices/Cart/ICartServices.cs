@@ -1,11 +1,8 @@
-﻿using FinalProject.Core.Feature.Cart.Requests;
-using FinalProject.Core.Feature.Cart.Responces;
-
-namespace FinalProject.Services.Implemetations
+﻿namespace FinalProject.Core.CustomeServices.Cart
 {
     public interface ICartServices
     {
-        public void AddCart(CartRequest cartRequest);
-        IEnumerable<GetAllResponce> GetAll();
+        // public void Create( cartRequest);
+        // IEnumerable<GetAllResponce> GetAll();
     }
 }

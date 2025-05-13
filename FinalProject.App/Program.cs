@@ -4,10 +4,7 @@ using FinalProject.Infrastructure;
 using FinalProject.Infrastructure.DataAccess;
 using FinalProject.Infrastructure.IRepositry;
 using FinalProject.Infrastructure.Repositry;
-using FinalProject.Infrastructure.UnitOfWorks;
 using FinalProject.Services;
-using FinalProject.Services.Abstracts;
-using FinalProject.Services.Implemetations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 namespace FinalProject.App
@@ -34,15 +31,10 @@ namespace FinalProject.App
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(
              options =>
              {
-                 options.SignIn.RequireConfirmedEmail = true;
                  options.Password.RequireUppercase = false;
                  options.Password.RequireLowercase = false;
                  options.Password.RequireNonAlphanumeric = false;
                  options.Password.RequiredLength = 6;
-
-                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                 options.Lockout.MaxFailedAccessAttempts = 5;
-                 options.Lockout.AllowedForNewUsers = true;
              }).AddEntityFrameworkStores<ApplicationDbContext>()
                              .AddDefaultTokenProviders();
 
@@ -50,12 +42,6 @@ namespace FinalProject.App
             builder.Services.AddHttpClient();
 
             builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
-            builder.Services.AddScoped<ICartServices, CartServices>();
-            builder.Services.AddScoped<IDoctorServices, DoctorServices>();
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-
-
 
             builder.Services.AddCors(options =>
             {
@@ -82,7 +68,7 @@ namespace FinalProject.App
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

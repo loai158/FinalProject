@@ -1,58 +1,73 @@
-﻿using FinalProject.Core.Feature.Cart.Requests;
+﻿using FinalProject.Core.Feature.Apponitments.Command.Models;
+using FinalProject.Data.Models.AppModels;
 using FinalProject.Data.Models.IdentityModels;
 using FinalProject.Services.Abstracts;
-using FinalProject.Services.Implemetations;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+
 namespace FinalProject.App.Areas.Customer.Controllers
 {
     [Area("Customer")]
     public class CartController : Controller
     {
-        private readonly ICartServices _cartServices;
+        private readonly IMediator _mediator;
         private readonly IDoctorServices _doctorServices;
-        private readonly UserManager<ApplicationUser> _userManager
-;
+        private readonly IAppointmentServices _appointmentServices;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IPatientServices _patientServices;
+        private readonly FinalProject.Core.CustomeServices.Cart.ICartServices _cartServices;
 
-        public CartController(ICartServices cartServices,
+        public CartController(
+            IMediator mediator,
             IDoctorServices doctorServices,
-            UserManager<ApplicationUser> userManager
-)
+            IAppointmentServices appointmentServices,
+            UserManager<ApplicationUser> userManager,
+            IPatientServices patientServices,
+            FinalProject.Core.CustomeServices.Cart.ICartServices cartServices)
         {
-            this._cartServices = cartServices;
+            this._mediator = mediator;
             this._doctorServices = doctorServices;
+            this._appointmentServices = appointmentServices;
             this._userManager = userManager;
+            this._patientServices = patientServices;
+            this._cartServices = cartServices;
+        }
 
-        }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var AllAppointes = _cartServices.GetAll();
-            return View(AllAppointes.ToList());
+            return View();
         }
+
         [HttpGet]
-        public async Task<IActionResult> Create(int doctorId)
+        public async Task<IActionResult> Create(int doctorId, int patientId)
         {
             var Dr = await _doctorServices.GetById(doctorId);
-
             ViewBag.Dr = Dr;
-
+            var patient = await _patientServices.GetById(patientId);
+            ViewBag.Patient = patient;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(CartRequest cartRequest)
+        public async Task<IActionResult> Create(AddNewAppointmentCommand command)
         {
-            //var userId = _userManager.GetUserId(User);
-            if (!ModelState.IsValid)
+            var userId = _userManager.GetUserId(User);
+            var id = await _appointmentServices.GetPatientIdFromUserAsync(userId);
+            if (id == null)
             {
-                var Drs = _doctorServices.GetAll();
-                ViewBag.Drs = Drs;
-                return View(cartRequest);
+                ModelState.AddModelError("", "يرجى إكمال بيانات المريض أولاً.");
+                return View(command);
             }
+            command.PatientId = (int)id;
+            Doctor deptId = _doctorServices.GetByDeptId(command.DoctorId).FirstOrDefault();
 
-            _cartServices.AddCart(cartRequest);
+            command.DoctorId = deptId.Id;
+            var response = await _mediator.Send(command);
 
+            if (!ModelState.IsValid)
+                return View(command);
             return RedirectToAction("Index");
         }
 

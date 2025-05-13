@@ -3,8 +3,6 @@
     public class Appointment
     {
         public int Id { get; set; }
-
-        public decimal Price { get; set; }
         public DateOnly Date { get; set; }
         public int DoctorId { get; set; }
         public Doctor Doctor { get; set; }
@@ -13,9 +11,14 @@
         public Patient Patient { get; set; }
         public Department Department { get; set; }
         public Status Status { get; set; }
+        public TypePayment TypePayment { get; set; }
         public ICollection<Perscribtion>? Perscribtions { get; set; } = new HashSet<Perscribtion>();
+    }
 
-
+    public enum TypePayment
+    {
+        Online,
+        Cash
     }
     public enum Status
     {

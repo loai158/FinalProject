@@ -26,7 +26,6 @@
                             <th scope="col">Department</th>
                             <th scope="col">Date</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Price</th>
                             <th scope="col">Perscribtions</th>
                             <th scope="col">Actions</th>
                         </tr>
@@ -43,7 +42,6 @@
                                     <td>@item.Department</td>
                                     <td>@item.Date.ToString("MM-dd")</td>
                                     <td>@item.Status</td>
-                                    <td>@item.Price</td>
                                     <td>
                                         @if (item.Perscribtions != null && item.Perscribtions.Any())
                                         {

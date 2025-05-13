@@ -19,7 +19,6 @@ namespace FinalProject.Core.Mapping
                 PatientId = appointment.Patient.Id,
                 Patient = appointment.Patient.Name,
                 Status = appointment.Status,
-                Price = appointment.Price,
                 Perscribtions = appointment.Perscribtions
 
             };
@@ -41,8 +40,6 @@ namespace FinalProject.Core.Mapping
                 PatientId = command.PatientId,
                 Status = command.Status,
                 DepartmentId = command.DepartmentId,
-                Perscribtions = command.Perscribtions,
-                Price = command.Price,
             };
         }
         public static Appointment MapEditToAppointment(this EditAppointmentCommand command)
@@ -56,7 +53,6 @@ namespace FinalProject.Core.Mapping
                 Status = command.Status,
                 DepartmentId = command.DepartmentId,
                 Perscribtions = command.Perscribtions,
-                Price = command.Price,
             };
         }
 

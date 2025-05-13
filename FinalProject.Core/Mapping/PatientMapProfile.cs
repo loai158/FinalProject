@@ -10,7 +10,7 @@ namespace FinalProject.Core.Mapping
         {
             return new Patient
             {
-
+                IdentityUserId = patient.IdentityUserId,
                 Name = patient.Name,
                 Address = patient.Address,
                 DateOfBirth = patient.DateOfBirth,
@@ -29,6 +29,7 @@ namespace FinalProject.Core.Mapping
                 {
                     Name = c.Name
                 }).ToList() ?? new List<PreviousCondition>()
+
             };
         }
         public static IEnumerable<GetAllPatientResponse> MapPatientsToResponse(this IEnumerable<Patient> patients)

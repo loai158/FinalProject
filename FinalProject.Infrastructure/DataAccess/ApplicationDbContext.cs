@@ -1,5 +1,6 @@
 ﻿using FinalProject.Data.Models.AppModels;
 using FinalProject.Data.Models.IdentityModels;
+using FinalProject.Data.Models.PaymentModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -48,6 +49,12 @@ namespace FinalProject.Infrastructure.DataAccess
             modelBuilder.Entity<Medicine>()
                  .HasMany(s => s.Perscribtions)
                 .WithMany(c => c.Medicines);
+
+            modelBuilder.Entity<Patient>()
+                .HasOne(p => p.ApplicationUser)
+                .WithMany()
+                .HasForeignKey(p => p.IdentityUserId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
