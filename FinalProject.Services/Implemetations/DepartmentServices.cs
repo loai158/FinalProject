@@ -12,6 +12,14 @@ namespace FinalProject.Services.Implemetations
         {
             this._unitOfWork = unitOfWork;
         }
+
+        public async Task<int> findDeptByDocId(int doctorId)
+        {
+            Doctor doctor = await _unitOfWork.Repositry<Doctor>().GetOne(e => e.Id == doctorId);
+
+            return doctor.DepartmentId;
+        }
+
         public IQueryable<Department> getAll()
         {
             return _unitOfWork.Repositry<Department>().Get();
