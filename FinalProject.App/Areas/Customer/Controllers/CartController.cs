@@ -1,5 +1,5 @@
 ﻿using FinalProject.Core.Feature.Apponitments.Command.Models;
-using FinalProject.Data.Models.AppModels;
+using FinalProject.Core.Feature.Apponitments.Query.Models;
 using FinalProject.Data.Models.IdentityModels;
 using FinalProject.Services.Abstracts;
 using MediatR;
@@ -13,32 +13,31 @@ namespace FinalProject.App.Areas.Customer.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IDoctorServices _doctorServices;
+        private readonly IDepartmentServices _departmentServices;
         private readonly IAppointmentServices _appointmentServices;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IPatientServices _patientServices;
-        private readonly FinalProject.Core.CustomeServices.Cart.ICartServices _cartServices;
 
-        public CartController(
-            IMediator mediator,
-            IDoctorServices doctorServices,
-            IAppointmentServices appointmentServices,
-            UserManager<ApplicationUser> userManager,
-            IPatientServices patientServices,
-            FinalProject.Core.CustomeServices.Cart.ICartServices cartServices)
+        public CartController(IMediator mediator, UserManager<ApplicationUser> userManager, IDoctorServices doctorServices, IDepartmentServices departmentServices, IAppointmentServices appointmentServices, IPatientServices patientServices)
         {
             this._mediator = mediator;
             this._doctorServices = doctorServices;
+            this._departmentServices = departmentServices;
             this._appointmentServices = appointmentServices;
             this._userManager = userManager;
             this._patientServices = patientServices;
-            this._cartServices = cartServices;
         }
-
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> Index(string? query, int page = 1)
         {
-            return View();
+            var respone = await _mediator.Send(new GetAllApponintmentsQuery
+            {
+                Query = query,
+                Page = page,
+                PageSize = 10
+            });
+            return View(respone);
         }
-
         [HttpGet]
         public async Task<IActionResult> Create(int doctorId, int patientId)
         {
@@ -61,15 +60,17 @@ namespace FinalProject.App.Areas.Customer.Controllers
                 return View(command);
             }
             command.PatientId = (int)id;
-            Doctor deptId = _doctorServices.GetByDeptId(command.DoctorId).FirstOrDefault();
 
-            command.DoctorId = deptId.Id;
+            var DeptId = await _departmentServices.findDeptByDocId(command.DoctorId);
+
+            command.DepartmentId = DeptId;
             var response = await _mediator.Send(command);
+            if (response == 0)
+                return RedirectToAction("Create", "Cart", new { area = "Customer", doctorId = command.DoctorId, patientId = command.PatientId });
 
-            if (!ModelState.IsValid)
-                return View(command);
             return RedirectToAction("Index");
         }
+
 
     }
 }
