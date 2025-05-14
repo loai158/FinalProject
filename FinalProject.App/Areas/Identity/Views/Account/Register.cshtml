@@ -55,7 +55,7 @@
                                 <label asp-for="ImgProfile" class="form-label">Profile Image</label>
                                 <input asp-for="ImgProfile" name="Img" type="file" class="form-control" accept="image/*" id="imageUpload" />
                                 <span asp-validation-for="ImgProfile" class="text-danger"></span>
-                                 
+
                                 <div class="mt-2">
                                     <img id="imagePreview" src="#" alt="Preview" style="max-height: 200px; display: none;" class="img-thumbnail" />
                                 </div>
@@ -71,6 +71,14 @@
                         </div>
                     </form>
                 </div>
+            </div>
+
+            <div>
+                <label>نوع المستخدم</label>
+                <select asp-for="SelectedRole" asp-items="@(new SelectList(Model.Roles))" class="form-control">
+                    <option value="">اختر الدور</option>
+                </select>
+                <span asp-validation-for="SelectedRole" class="text-danger"></span>
             </div>
 
             <div class="text-center mt-3">

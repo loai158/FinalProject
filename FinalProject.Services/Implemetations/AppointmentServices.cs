@@ -67,6 +67,15 @@ namespace FinalProject.Services.Implemetations
 
             return patient == 0 ? null : patient;
         }
+        public async Task<int?> GetDoctorIdFromUserAsync(string userId)
+        {
+            var patient = await _unitOfWork.Repositry<Doctor>().Get()
+              .Where(p => p.IdentityUserId == userId)
+              .Select(p => p.Id)
+              .FirstOrDefaultAsync();
+
+            return patient == 0 ? null : patient;
+        }
 
 
     }

@@ -7,7 +7,9 @@ using MediatR;
 namespace FinalProject.Core.Feature.Apponitments.Query.Haandler
 {
     public class AppointmentQueryHandler : IRequestHandler<GetAllApponintmentsQuery, GetAllApponintmentsResponse>,
-        IRequestHandler<GetAppointmentByIdQuery, GetAppointmentByIdResponse>
+        IRequestHandler<GetAppointmentByIdQuery, GetAppointmentByIdResponse>,
+        IRequestHandler<GetAllApponintmentsByDoctorIdQuery, GetAllApponintmentsResponse>
+
     {
         private readonly IAppointmentServices _appointmentServices;
 
@@ -18,6 +20,7 @@ namespace FinalProject.Core.Feature.Apponitments.Query.Haandler
         public async Task<GetAllApponintmentsResponse> Handle(GetAllApponintmentsQuery request, CancellationToken cancellationToken)
         {
             var appointments = _appointmentServices.GetAll();
+
             if (!string.IsNullOrWhiteSpace(request.Query))
             {
                 var searchQuery = request.Query.ToLower();
@@ -26,20 +29,56 @@ namespace FinalProject.Core.Feature.Apponitments.Query.Haandler
                                 d.Department.Name.ToLower().Contains(searchQuery));
             }
 
-            var totalCount = appointments.ToList().Count();
+            var totalCount = appointments.Count(); // بدون ToList() لتوفير الأداء
+
             var pagedAppointments = appointments
                 .Skip((request.Page - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .ToList();
-            var response = pagedAppointments.MapAppointmentsToGetAll();
-            return response;
-        }
 
+            var mappedAppointments = pagedAppointments.MapAppointmentsToGetAll(); // Assuming this returns List<AppointmentDto>
+
+            return new GetAllApponintmentsResponse
+            {
+                Appointments = mappedAppointments.Appointments,
+                TotalCount = totalCount
+            };
+        }
+        public async Task<GetAllApponintmentsResponse> Handle(GetAllApponintmentsByDoctorIdQuery request, CancellationToken cancellationToken)
+        {
+            var appointments = _appointmentServices.GetAll().Where(d => d.DoctorId == request.doctorId);
+
+            if (!string.IsNullOrWhiteSpace(request.Query))
+            {
+                var searchQuery = request.Query.ToLower();
+                appointments = appointments
+                    .Where(d => d.Patient.Name.ToLower().Contains(searchQuery) ||
+                                d.Department.Name.ToLower().Contains(searchQuery));
+            }
+
+            var totalCount = appointments.Count(); // بدون ToList() لتوفير الأداء
+
+            var pagedAppointments = appointments
+                .Skip((request.Page - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .ToList();
+
+            var mappedAppointments = pagedAppointments.MapAppointmentsToGetAll(); // Assuming this returns List<AppointmentDto>
+
+            return new GetAllApponintmentsResponse
+            {
+                Appointments = mappedAppointments.Appointments,
+                TotalCount = totalCount
+            };
+
+        }
         public async Task<GetAppointmentByIdResponse> Handle(GetAppointmentByIdQuery request, CancellationToken cancellationToken)
         {
             var appointment = await _appointmentServices.GetById(request.Id);
             var result = appointment.MapAppointmentToGetById();
             return result;
         }
+
+
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace FinalProject.Data.Models.AppModels
+﻿using FinalProject.Data.Models.IdentityModels;
+
+namespace FinalProject.Data.Models.AppModels
 {
     public class Doctor
     {
@@ -8,6 +10,8 @@
         public string Phone { get; set; }
         public string Image { get; set; }
         public string Email { get; set; }
+        public string? IdentityUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
         public decimal? IntialPrice { get; set; }
         public decimal? FollowUpPrice { get; set; }
         public Gender Gender { get; set; }
