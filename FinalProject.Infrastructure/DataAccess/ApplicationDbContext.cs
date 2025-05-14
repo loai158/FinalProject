@@ -55,6 +55,11 @@ namespace FinalProject.Infrastructure.DataAccess
                 .WithMany()
                 .HasForeignKey(p => p.IdentityUserId)
                 .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Doctor>()
+                .HasOne(p => p.ApplicationUser)
+                .WithMany()
+                .HasForeignKey(p => p.IdentityUserId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿
+using FinalProject.Data.Models.AppModels;
 using Microsoft.AspNetCore.Identity;
 
 namespace FinalProject.Data.Models.IdentityModels
@@ -7,5 +8,8 @@ namespace FinalProject.Data.Models.IdentityModels
     {
         public string? Address { get; set; }
         public string? ImgProfile { get; set; }
+        public Doctor? DoctorProfile { get; set; }
+        public Patient? PatientProfile { get; set; }
+        public Nurse? NurseProfile { get; set; }
     }
 }

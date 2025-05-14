@@ -1,28 +1,70 @@
-﻿using FinalProject.Core.Feature.Doctor.Command.Models;
+﻿using FinalProject.Core.Feature.Apponitments.Query.Models;
+using FinalProject.Core.Feature.Doctor.Command.Models;
 using FinalProject.Core.Feature.Doctor.Query.Models;
+using FinalProject.Data.Models.IdentityModels;
 using FinalProject.Services.Abstracts;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProject.App.Areas.Customer.Controllers
 {
     [Area("Customer")]
+
     public class DoctorController : Controller
     {
         private readonly IMediator _mediator;
+        private readonly IAppointmentServices _appointmentServices;
         private readonly IDoctorServices _doctorServices;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IPatientServices _patientServices;
 
-        public DoctorController(IMediator mediator, IDoctorServices doctorServices)
+        public DoctorController(IMediator mediator, IAppointmentServices appointmentServices, IDoctorServices doctorServices, UserManager<ApplicationUser> userManager, IPatientServices patientServices)
         {
             _mediator = mediator;
+            this._appointmentServices = appointmentServices;
             this._doctorServices = doctorServices;
+            this._userManager = userManager;
+            this._patientServices = patientServices;
         }
         [HttpGet]
         public IActionResult MoreDetails(int deptId)
         {
             var response = _doctorServices.GetByDeptId(deptId).ToList();
+
             return View(response);
         }
+        [HttpGet]
+        public async Task<IActionResult> Home(string? query, int page = 1)
+        {
+            var userId = _userManager.GetUserId(User);
+            var id = await _appointmentServices.GetPatientIdFromUserAsync(userId);
+            var response = await _mediator.Send(new GetAllApponintmentsByDoctorIdQuery
+            {
+                doctorId = (int)id,
+                Query = query,
+                Page = page,
+                PageSize = 10
+            });
+
+            ViewBag.CurrentQuery = query;
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = (int)Math.Ceiling(response.TotalCount / 10.0);
+
+            return View(response);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)

@@ -27,8 +27,7 @@ namespace FinalProject.App.Areas.Identity.Controllers
                 await _roleManager.CreateAsync(new IdentityRole("SuperAdmin"));
                 await _roleManager.CreateAsync(new IdentityRole("Admin"));
                 await _roleManager.CreateAsync(new IdentityRole("Patient"));
-                await _roleManager.CreateAsync(new IdentityRole("Customer"));
-
+                await _roleManager.CreateAsync(new IdentityRole("Doctor"));
             }
             return View();
         }
@@ -61,14 +60,15 @@ namespace FinalProject.App.Areas.Identity.Controllers
                     UserName = registerVM.UserName,
                     Email = registerVM.Email,
                     Address = registerVM.Address,
+                    ImgProfile = registerVM.ImgProfile,
                     PhoneNumber = registerVM.PhoneNumber,
-                    ImgProfile = fileName
+
                 };
                 var result = await _userManager.CreateAsync(applicationUser, registerVM.Password);
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(applicationUser, "Patient");
+                    await _userManager.AddToRoleAsync(applicationUser, "Doctor");
 
                     TempData["Success"] = "Register Successfully!";
                     return RedirectToAction("Login", "Account", new { area = "Identity" });
@@ -102,32 +102,41 @@ namespace FinalProject.App.Areas.Identity.Controllers
                 var appUser = await _userManager.FindByEmailAsync(loginVM.Email);
                 if (appUser != null)
                 {
-                    //check block
                     if (await _userManager.IsLockedOutAsync(appUser))
                     {
-                        TempData["Error"] = "Sorry your Account Is Blocking you Con Not Use It !";
+                        TempData["Error"] = "عذرًا، تم حظر حسابك ولا يمكنك تسجيل الدخول!";
                         return View(loginVM);
                     }
+
                     var result = await _userManager.CheckPasswordAsync(appUser, loginVM.Password);
 
                     if (result)
                     {
                         await _signInManager.SignInAsync(appUser, loginVM.RememberMe);
-                        TempData["Success"] = "Login Successfully !";
+                        TempData["Success"] = "تم تسجيل الدخول بنجاح!";
+
+                        if (await _userManager.IsInRoleAsync(appUser, "Doctor"))
+                        {
+
+                            return RedirectToAction("Home", "Doctor", new { area = "Customer" });
+                        }
+
                         return RedirectToAction("Index", "Home", new { area = "Customer" });
                     }
                     else
                     {
-                        ModelState.AddModelError("Password", "Invalid Password Try Again!");
+                        ModelState.AddModelError(string.Empty, "كلمة المرور غير صحيحة!");
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("Email", "Invalid Email Try Again!");
+                    ModelState.AddModelError(string.Empty, "البريد الإلكتروني غير صحيح!");
                 }
             }
-            return View();
+
+            return View(loginVM);
         }
+
         public IActionResult Logout()
         {
             _signInManager.SignOutAsync();

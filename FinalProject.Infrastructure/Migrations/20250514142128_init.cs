@@ -223,6 +223,7 @@ namespace FinalProject.Infrastructure.Migrations
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IdentityUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     IntialPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     FollowUpPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     Gender = table.Column<int>(type: "int", nullable: false),
@@ -231,6 +232,11 @@ namespace FinalProject.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Doctors", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Doctors_AspNetUsers_IdentityUserId",
+                        column: x => x.IdentityUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Doctors_Departments_DepartmentId",
                         column: x => x.DepartmentId,
@@ -579,6 +585,11 @@ namespace FinalProject.Infrastructure.Migrations
                 name: "IX_Doctors_DepartmentId",
                 table: "Doctors",
                 column: "DepartmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Doctors_IdentityUserId",
+                table: "Doctors",
+                column: "IdentityUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DoctorSchedules_DoctorId",

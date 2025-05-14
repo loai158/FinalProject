@@ -30,13 +30,19 @@ namespace FinalProject.App.Areas.Customer.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(string? query, int page = 1)
         {
-            var respone = await _mediator.Send(new GetAllApponintmentsQuery
+
+            var response = await _mediator.Send(new GetAllApponintmentsQuery
             {
                 Query = query,
                 Page = page,
                 PageSize = 10
             });
-            return View(respone);
+
+            ViewBag.CurrentQuery = query;
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = (int)Math.Ceiling(response.TotalCount / 10.0);
+
+            return View(response);
         }
         [HttpGet]
         public async Task<IActionResult> Create(int doctorId, int patientId)
