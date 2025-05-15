@@ -6,6 +6,7 @@ namespace FinalProject.Data.Models.IdentityModels
 {
     public class ApplicationUser : IdentityUser
     {
+        public string? FullName { get; set; }
         public string? Address { get; set; }
         public string? ImgProfile { get; set; }
         public Doctor? DoctorProfile { get; set; }

@@ -11,6 +11,7 @@ namespace FinalProject.Core.Feature.Doctor.Command.Models
         public string Phone { get; set; }
         public string Image { get; set; }
         public string Email { get; set; }
+
         public Gender Gender { get; set; }
         public int DepatrmentId { get; set; }
         public ICollection<DoctorSchedule>? DoctorSchedules { get; set; }
