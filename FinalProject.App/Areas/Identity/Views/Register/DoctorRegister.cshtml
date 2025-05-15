@@ -1,0 +1,80 @@
+﻿@model FinalProject.Data.Models.IdentityModels.DoctorRegisterVM
+@{
+    ViewData["Title"] = "Doctor Register";
+}
+
+<h2>Doctor Registration</h2>
+
+<form asp-action="DoctorRegister" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="FullName"></label>
+        <input asp-for="FullName" class="form-control" />
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" type="password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Phone"></label>
+        <input asp-for="Phone" class="form-control" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Image"></label>
+        <input asp-for="Image" class="form-control" />
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Details"></label>
+        <textarea asp-for="Details" class="form-control"></textarea>
+        <span asp-validation-for="Details" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IntialPrice"></label>
+        <input asp-for="IntialPrice" class="form-control" />
+        <span asp-validation-for="IntialPrice" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="FollowUpPrice"></label>
+        <input asp-for="FollowUpPrice" class="form-control" />
+        <span asp-validation-for="FollowUpPrice" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Gender"></label>
+        <select asp-for="Gender" asp-items="Html.GetEnumSelectList<FinalProject.Data.Models.AppModels.Gender>()" class="form-control"></select>
+        <span asp-validation-for="Gender" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="DepartmentId">Department</label>
+        @Html.DropDownListFor(model => model.DepartmentId, (SelectList)ViewBag.Departments, "Select a Department", new { @class = "form-control" })
+    </div>
+
+    <div class="form-check">
+        <input asp-for="RememberMe" class="form-check-input" />
+        <label asp-for="RememberMe" class="form-check-label">Remember Me</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Register</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

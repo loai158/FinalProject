@@ -1,0 +1,43 @@
+﻿@model FinalProject.Data.Models.AppModels.Doctor
+
+@{
+    ViewData["Title"] = "Doctor Profile";
+}
+
+<h2>@Model.Name's Profile</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <img src="~/ProfImg/@(Model.Image ?? "default.jpg")" alt="Doctor Image" class="img-thumbnail" />
+    </div>
+    <div class="col-md-8">
+        <dl class="row">
+            <dt class="col-sm-4">Full Name:</dt>
+            <dd class="col-sm-8">@Model.Name</dd>
+
+            <dt class="col-sm-4">Email:</dt>
+            <dd class="col-sm-8">@Model.Email</dd>
+
+            <dt class="col-sm-4">Phone:</dt>
+            <dd class="col-sm-8">@Model.Phone</dd>
+
+            <dt class="col-sm-4">Gender:</dt>
+            <dd class="col-sm-8">@Model.Gender</dd>
+
+            <dt class="col-sm-4">Department:</dt>
+            <dd class="col-sm-8">@Model.Department?.Name</dd>
+
+            <dt class="col-sm-4">Initial Price:</dt>
+            <dd class="col-sm-8">@($"{Model.IntialPrice} EGP")</dd>
+
+            <dt class="col-sm-4">Follow-Up Price:</dt>
+            <dd class="col-sm-8">@($"{Model.FollowUpPrice} EGP")</dd>
+
+
+            <dt class="col-sm-4">Details:</dt>
+            <dd class="col-sm-8">@Model.Details</dd>
+        </dl>
+
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit Profile</a>
+    </div>
+</div>
