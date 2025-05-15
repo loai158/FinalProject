@@ -1,0 +1,43 @@
+﻿@model FinalProject.Data.Models.AppModels.Nurse
+@{
+    ViewData["Title"] = "Nurse Profile";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-success text-white text-center">
+                    <h4 class="mb-0">Nurse Profile</h4>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <img src="~/ProfImg/@(Model.Image ?? "default.jpg")"
+                             class="rounded-circle shadow"
+                             style="width: 120px; height: 120px; object-fit: cover;" alt="Nurse Image" />
+                    </div>
+
+                    <dl class="row">
+                        <dt class="col-sm-4">Name</dt>
+                        <dd class="col-sm-8">@Model.Name</dd>
+
+                        <dt class="col-sm-4">Email</dt>
+                        <dd class="col-sm-8">@Model.Email</dd>
+
+                        <dt class="col-sm-4">Phone</dt>
+                        <dd class="col-sm-8">@Model.Phone</dd>
+
+                          
+
+                        <dt class="col-sm-4">Department</dt>
+                        <dd class="col-sm-8">@Model.Department.Name</dd>
+                    </dl>
+
+                    <div class="d-flex justify-content-end">
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-outline-primary">Edit Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
