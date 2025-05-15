@@ -14,6 +14,7 @@ namespace FinalProject.App.Areas.Identity.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly INurseServices _nurseServices;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IPatientServices _patientServices;
         private readonly IDoctorServices _doctorServices;
@@ -25,11 +26,13 @@ namespace FinalProject.App.Areas.Identity.Controllers
             IDepartmentServices departmentServices,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
+            INurseServices nurseServices,
             RoleManager<IdentityRole> roleManager,
             ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            this._nurseServices = nurseServices;
             _roleManager = roleManager;
             this._patientServices = patientServices;
             _doctorServices = doctorServices;
@@ -179,6 +182,80 @@ namespace FinalProject.App.Areas.Identity.Controllers
                 ModelState.AddModelError("", error.Description);
             }
             return View(model);
+        }
+        [HttpGet]
+        public async Task<IActionResult> NurseRegister()
+        {
+            if (_roleManager.Roles.IsNullOrEmpty())
+            {
+                await _roleManager.CreateAsync(new IdentityRole("SuperAdmin"));
+                await _roleManager.CreateAsync(new IdentityRole("Admin"));
+                await _roleManager.CreateAsync(new IdentityRole("Patient"));
+                await _roleManager.CreateAsync(new IdentityRole("Doctor"));
+                await _roleManager.CreateAsync(new IdentityRole("Nurse"));
+            }
+
+            var departments = _departmentServices.getAll().ToList();
+            // إضافة الأقسام إلى ViewBag لتمريرها إلى الـ View
+            ViewBag.Departments = new SelectList(departments, "Id", "Name");
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> NurseRegister(NurseRgisterVM model, IFormFile? file)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            // إنشاء المستخدم في AspNetUsers
+            var user = new ApplicationUser
+            {
+                UserName = model.Name,
+                Email = model.Email,
+                PhoneNumber = model.Phone,
+                ImgProfile = model.Image,
+
+            };
+
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                    ModelState.AddModelError("", error.Description);
+
+                return View(model);
+            }
+
+
+            if (!await _roleManager.RoleExistsAsync("Nurse"))
+                await _roleManager.CreateAsync(new IdentityRole("Nurse"));
+
+            await _userManager.AddToRoleAsync(user, "Nurse");
+            if (file != null && file.Length > 0)
+            {
+                // Save img in wwwroot
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\Nurses", fileName);
+                using (var stream = System.IO.File.Create(filePath))
+                {
+                    file.CopyTo(stream);
+                }
+                // Save img name in db
+                model.Image = fileName;
+            }
+            // إنشاء السجل في جدول Doctor وربطه بالمستخدم
+            var nurse = new Nurse
+            {
+                Name = model.Name,
+                Email = model.Email,
+                Phone = model.Phone,
+                Image = model.Image,
+                DepartmentId = model.DepartmentId,
+                IdentityUserId = user.Id
+            };
+
+            await _nurseServices.Create(nurse);
+            await _signInManager.SignInAsync(user, model.RememberMe);
+            return RedirectToAction("Login", "Account", new { area = "Identity" });
         }
     }
 }
