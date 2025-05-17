@@ -75,11 +75,19 @@ namespace FinalProject.Infrastructure.Bases
             return query;
         }
 
-        public async Task<T?> GetOne(Expression<Func<T, bool>>? filter = null, Expression<Func<T, object>>[]? includes = null, bool tracked = true)
+        //public async Task<T?> GetOne(Expression<Func<T, bool>>? filter = null, Expression<Func<T, object>>[]? includes = null, bool tracked = true)
+        //{
+        //    return await Get(filter, includes, tracked).FirstOrDefaultAsync();
+
+        //}
+        public async Task<T?> GetOne(
+    Expression<Func<T, bool>>? filter = null,
+    Expression<Func<T, object>>[]? includes = null,
+    bool tracked = true)
         {
             return await Get(filter, includes, tracked).FirstOrDefaultAsync();
-
         }
+
 
         public async Task<bool> Exist(Expression<Func<T, bool>> predicate)
         {
