@@ -1,70 +1,72 @@
-﻿@model FinalProject.Data.Models.AppModels.Patient
-@{
-    ViewData["Title"] = "ملف المريض الشخصي";
-}
+﻿ @model FinalProject.Data.Models.AppModels.Patient  
+@* @{ *@
+@*     ViewData["Title"] = "ملف المريض الشخصي"; *@
+@* } *@
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+@* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" /> *@
 
-<div class="container mt-5 mb-5">
-    <div class="row justify-content-center">
-        <div class="col-md-10 col-lg-8">
-            <div class="card shadow-sm border-0 rounded-4">
-                <div class="card-header bg-primary text-white text-center py-3 rounded-top-4">
-                    <h3 class="mb-0">ملف @Model.Name الشخصي</h3>
-                </div>
-                <div class="card-body p-4">
-                    <div class="row align-items-center">
-                        <div class="col-md-4 text-center mb-4 mb-md-0">
-                            <div class="position-relative d-inline-block">
-                                <img src="~/images/Patients/@(Model.Image ?? "default.jpg")"
-                                     alt="صورة المريض"
-                                     class="rounded-circle img-fluid shadow-sm"
-                                     style="width: 150px; height: 150px; object-fit: cover;" />
-                                <div class="position-absolute top-0 start-0 w-100 h-100 rounded-circle hover-overlay"
-                                     style="background: rgba(0,0,0,0.1); opacity: 0; transition: opacity 0.3s;"
-                                     onmouseover="this.style.opacity='1'"
-                                     onmouseout="this.style.opacity='0'">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <dl class="row mb-0">
-                                <dt class="col-sm-4 fw-bold"><i class="fas fa-user me-2 text-primary"></i> الاسم الكامل</dt>
-                                <dd class="col-sm-8">@Model.Name</dd>
+@* <div class="container mt-5 mb-5"> *@
+@*     <div class="row justify-content-center"> *@
+@*         <div class="col-md-10 col-lg-8"> *@
+@*             <div class="card shadow-sm border-0 rounded-4"> *@
+@*                 <div class="card-header bg-primary text-white text-center py-3 rounded-top-4"> *@
+@*                     <h3 class="mb-0">ملف @Model.Name الشخصي</h3> *@
+@*                 </div> *@
+@*                 <div class="card-body p-4"> *@
+@*                     <div class="row align-items-center"> *@
+@*                         <div class="col-md-4 text-center mb-4 mb-md-0"> *@
+@*                             <div class="position-relative d-inline-block"> *@
+@*                                 <img src="~/images/Patients/@(Model.Image ?? "default.jpg")" *@
+@*                                      alt="صورة المريض" *@
+@*                                      class="rounded-circle img-fluid shadow-sm" *@
+@*                                      style="width: 150px; height: 150px; object-fit: cover;" /> *@
+@*                                 <div class="position-absolute top-0 start-0 w-100 h-100 rounded-circle hover-overlay" *@
+@*                                      style="background: rgba(0,0,0,0.1); opacity: 0; transition: opacity 0.3s;" *@
+@*                                      onmouseover="this.style.opacity='1'" *@
+@*                                      onmouseout="this.style.opacity='0'"> *@
+@*                                 </div> *@
+@*                             </div> *@
+@*                         </div> *@
+@*                         <div class="col-md-8"> *@
+@*                             <dl class="row mb-0"> *@
+@*                                 <dt class="col-sm-4 fw-bold"><i class="fas fa-user me-2 text-primary"></i> الاسم الكامل</dt> *@
+@*                                 <dd class="col-sm-8">@Model.Name</dd> *@
 
-                                <dt class="col-sm-4 fw-bold"><i class="fas fa-envelope me-2 text-primary"></i> البريد الإلكتروني</dt>
-                                <dd class="col-sm-8">@Model.Email</dd>
+@*                                 <dt class="col-sm-4 fw-bold"><i class="fas fa-envelope me-2 text-primary"></i> البريد الإلكتروني</dt> *@
+@*                                 <dd class="col-sm-8">@Model.Email</dd> *@
 
-                                <dt class="col-sm-4 fw-bold"><i class="fas fa-phone me-2 text-primary"></i> رقم الهاتف</dt>
-                                <dd class="col-sm-8">@Model.Phone</dd>
+@*                                 <dt class="col-sm-4 fw-bold"><i class="fas fa-phone me-2 text-primary"></i> رقم الهاتف</dt> *@
+@*                                 <dd class="col-sm-8">@Model.Phone</dd> *@
 
-                                <dt class="col-sm-4 fw-bold"><i class="fas fa-venus-mars me-2 text-primary"></i> الجنس</dt>
-                                <dd class="col-sm-8">@Model.Gender</dd>
+@*                                 <dt class="col-sm-4 fw-bold"><i class="fas fa-venus-mars me-2 text-primary"></i> الجنس</dt> *@
+@*                                 <dd class="col-sm-8">@Model.Gender</dd> *@
 
-                                <dt class="col-sm-4 fw-bold"><i class="fas fa-birthday-cake me-2 text-primary"></i> تاريخ الميلاد</dt>
-                                <dd class="col-sm-8">@String.Format(new System.Globalization.CultureInfo("ar-EG"), "{0:dd MMMM yyyy}", Model.DateOfBirth)</dd>
+@*                                 <dt class="col-sm-4 fw-bold"><i class="fas fa-birthday-cake me-2 text-primary"></i> تاريخ الميلاد</dt> *@
+@*                                 <dd class="col-sm-8">@String.Format(new System.Globalization.CultureInfo("ar-EG"), "{0:dd MMMM yyyy}", Model.DateOfBirth)</dd> *@
 
-                                <dt class="col-sm-4 fw-bold"><i class="fas fa-map-marker-alt me-2 text-primary"></i> العنوان</dt>
-                                <dd class="col-sm-8">@Model.Address</dd>
-                            </dl>
-                            <div class="d-flex justify-content-start gap-2 mt-4">
-                                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary px-4">
-                                    <i class="fas fa-edit me-2"></i> تعديل الملف الشخصي
-                                </a>
-                                <a href="@Url.Action("Index", "Home", new { area = "Customer" })" class="btn btn-secondary px-4">
-                                    <i class="fas fa-arrow-right me-2"></i> رجوع
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@*                                 <dt class="col-sm-4 fw-bold"><i class="fas fa-map-marker-alt me-2 text-primary"></i> العنوان</dt> *@
+@*                                 <dd class="col-sm-8">@Model.Address</dd> *@
+@*                             </dl> *@
+@*                             <div class="d-flex justify-content-start gap-2 mt-4"> *@
+@*                                 <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary px-4"> *@
+@*                                     <i class="fas fa-edit me-2"></i> تعديل الملف الشخصي *@
+@*                                 </a> *@
+@*                                 <a href="@Url.Action("Index", "Home", new { area = "Customer" })" class="btn btn-secondary px-4"> *@
+@*                                     <i class="fas fa-arrow-right me-2"></i> رجوع *@
+@*                                 </a> *@
+@*                             </div> *@
+@*                         </div> *@
+@*                     </div> *@
+@*                 </div> *@
+@*             </div> *@
+@*         </div> *@
+@*     </div> *@
+@* </div> *@
 
-<style>
-    .hover-overlay:hover {
-        opacity: 1 !important;
-    }
-</style>
+@* <style> *@
+@*     .hover-overlay:hover { *@
+@*         opacity: 1 !important; *@
+@*     } *@
+@* </style> *@
+
+<h1>@Model.Name</h1>

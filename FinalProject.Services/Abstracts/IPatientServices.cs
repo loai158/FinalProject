@@ -8,6 +8,7 @@ namespace FinalProject.Services.Abstracts
         public Task<int> Create(Patient patient);
         public string Edit(Patient patient);
         public Task<Patient> GetById(int id);
+ 
         public Task<string> Delete(int id);
     }
 
