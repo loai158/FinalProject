@@ -1,6 +1,10 @@
 ﻿using FinalProject.Data.Models.IdentityModels;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace FinalProject.App.Areas.Identity.Controllers
 {
@@ -75,7 +79,29 @@ namespace FinalProject.App.Areas.Identity.Controllers
             return View(loginVM);
         }
 
+        public IActionResult GoogleLogin()
+        {
+            var prop = new AuthenticationProperties()
+            {
+                RedirectUri = Url.Action("GoogleResponse")
+            };
+            return Challenge(prop, GoogleDefaults.AuthenticationScheme);
+        }
 
+        public async Task<IActionResult> GoogleResponse()
+        {
+            var Result = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
+            var Claims = Result.Principal.Identities.FirstOrDefault().Claims.Select(
+                 Claim => new
+                 {
+                     Claim.Issuer,
+                     Claim.OriginalIssuer,
+                     Claim.Type,
+                     Claim.Value
+                 }
+                );
+            return RedirectToAction("Index", "Home", new {area="Customer"});
+        }
 
         //    private readonly UserManager<ApplicationUser> _userManager;
         //    private readonly SignInManager<ApplicationUser> _signInManager;

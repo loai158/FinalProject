@@ -5,7 +5,10 @@ using FinalProject.Infrastructure.DataAccess;
 using FinalProject.Infrastructure.IRepositry;
 using FinalProject.Infrastructure.Repositry;
 using FinalProject.Services;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Identity;
+//using Microsoft.AspNetCore.Authentication.Google;
+
 using Microsoft.EntityFrameworkCore;
 namespace FinalProject.App
 {
@@ -52,6 +55,20 @@ namespace FinalProject.App
                            .AllowAnyHeader();
                 });
             });
+
+            //external Login with google
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = GoogleDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+            }).AddGoogle(options =>
+  {
+      IConfigurationSection GoogleAuth = builder.Configuration.GetSection("Authentication:Google");
+      options.ClientId = GoogleAuth["ClientId"];
+      options.ClientSecret = GoogleAuth["ClientSecret"];
+  });
+
 
 
             var app = builder.Build();
