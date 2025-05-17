@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
- 
+
 namespace FinalProject.App.Areas.Customer.Controllers
 {
     [Area("Customer")]
@@ -13,11 +13,11 @@ namespace FinalProject.App.Areas.Customer.Controllers
             _httpClient = httpClientFactory.CreateClient();
         }
 
-       
+
         public IActionResult Create()
         {
             return View();
-        } 
+        }
         [HttpGet]
         public async Task<IActionResult> SearchMedicines(string term)
         {

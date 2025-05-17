@@ -20,6 +20,10 @@ namespace FinalProject.Data.Models.IdentityModels
 
         public string Password { get; set; }
 
+        [Required]
+        [Compare(nameof(Password))]
+        public string ConfirmPassword { get; set; }
+
         [Required(ErrorMessage = "الرجاء إدخال رقم الهاتف")]
         [Phone(ErrorMessage = "صيغة رقم الهاتف غير صحيحة")]
 

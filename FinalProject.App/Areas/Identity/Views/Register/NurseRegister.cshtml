@@ -1,63 +1,70 @@
 ﻿@model FinalProject.Data.Models.IdentityModels.NurseRgisterVM
-@{
-    ViewData["Title"] = "Register as Nurse";
-}
-
-<div class="container my-5">
+<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-6">
-            <div class="card shadow-sm">
-                <div class="card-header text-center bg-primary text-white">
-                    <h4>Register as a Nurse</h4>
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h3 class="mb-0">تسجيل ممرض جديد</h3>
                 </div>
-                <div class="card-body">
-                    <form asp-action="NurseRegister" method="post">
-                        <div class="mb-3">
-                            <label asp-for="Name" class="form-label"></label>
-                            <input asp-for="Name" class="form-control" placeholder="Enter full name" />
+                <div class="card-body p-4">
+                    <form asp-action="NurseRegister" asp-controller="Register" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+                        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Name" class="form-label fw-bold">الاسم الكامل</label>
+                            <input asp-for="Name" class="form-control" placeholder="أدخل الاسم الكامل" required />
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
 
-                        <div class="mb-3">
-                            <label asp-for="Email" class="form-label"></label>
-                            <input asp-for="Email" class="form-control" placeholder="Enter email address" />
+                        <div class="form-group mb-3">
+                            <label asp-for="Email" class="form-label fw-bold">البريد الإلكتروني</label>
+                            <input asp-for="Email" class="form-control" type="email" placeholder="أدخل البريد الإلكتروني" required />
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
 
-                        <div class="mb-3">
-                            <label asp-for="Phone" class="form-label"></label>
-                            <input asp-for="Phone" class="form-control" placeholder="Enter phone number" />
+                        <div class="form-group mb-3">
+                            <label asp-for="Password" class="form-label fw-bold">كلمة المرور</label>
+                            <input asp-for="Password" class="form-control" type="password" placeholder="أدخل كلمة المرور" required />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="ConfirmPassword" class="form-label fw-bold">تأكيد كلمة المرور</label>
+                            <input asp-for="ConfirmPassword" class="form-control" type="password" placeholder="أدخل تأكيد كلمة المرور" required />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Phone" class="form-label fw-bold">رقم الهاتف</label>
+                            <input asp-for="Phone" class="form-control" type="tel" placeholder="أدخل رقم الهاتف" required />
                             <span asp-validation-for="Phone" class="text-danger"></span>
                         </div>
 
-                        <div class="mb-3">
-                            <label asp-for="Image" class="form-label">Profile Image (optional)</label>
-                            <input asp-for="Image" class="form-control" type="file" name="file" placeholder="Image URL or leave blank" />
-                            <span asp-validation-for="Image" class="text-danger"></span>
-                        </div>
-
-                        <div class="mb-3">
-                            <label asp-for="DepartmentId" class="form-label">Department</label>
-                            <select asp-for="DepartmentId" asp-items="ViewBag.Departments" class="form-select">
-                                <option value="">-- Select Department --</option>
+                        <div class="form-group mb-3">
+                            <label asp-for="DepartmentId" class="form-label fw-bold">القسم</label>
+                            <select asp-for="DepartmentId" class="form-select" asp-items="@ViewBag.Departments" required>
+                                <option value="">اختر القسم</option>
                             </select>
                             <span asp-validation-for="DepartmentId" class="text-danger"></span>
                         </div>
 
-                        <div class="mb-3">
-                            <label asp-for="Password" class="form-label"></label>
-                            <input asp-for="Password" class="form-control" type="password" placeholder="Enter password" />
-                            <span asp-validation-for="Password" class="text-danger"></span>
+                        <div class="form-group mb-3">
+                            <label asp-for="Image" class="form-label fw-bold">الصورة الشخصية (اختياري)</label>
+                            <input asp-for="Image" name="file" class="form-control" type="file" accept="image/*" id="imageInput" />
+                            <span asp-validation-for="Image" class="text-danger"></span>
+                            <div class="mt-2">
+                                <img id="imagePreview" src="#" alt="معاينة الصورة" class="img-fluid rounded" style="max-width: 150px; display: none;" />
+                            </div>
                         </div>
 
-                         
-                        <div class="form-check mb-3">
+                        <div class="form-group form-check mb-3">
                             <input asp-for="RememberMe" class="form-check-input" />
-                            <label asp-for="RememberMe" class="form-check-label">Remember Me</label>
+                            <label asp-for="RememberMe" class="form-check-label">تذكرني</label>
                         </div>
 
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">Register</button>
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-primary px-4">تسجيل</button>
+                            <a href="@Url.Action("Index", "Home", new { area = "Customer" })" class="btn btn-secondary px-4">إلغاء</a>
                         </div>
                     </form>
                 </div>
@@ -67,5 +74,38 @@
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        // Bootstrap form validation
+        (function () {
+            'use strict';
+            var forms = document.querySelectorAll('.needs-validation');
+            Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+
+        // Image preview
+        document.getElementById('imageInput').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById('imagePreview');
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                preview.src = '#';
+                preview.style.display = 'none';
+            }
+        });
+    </script>
 }
