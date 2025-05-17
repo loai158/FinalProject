@@ -17,11 +17,13 @@ namespace FinalProject.App.Areas.Identity.Controllers
         private readonly INurseServices _nurseServices;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IPatientServices _patientServices;
+        private readonly IApplicatioUserServices _applicatioUserServices;
         private readonly IDoctorServices _doctorServices;
         private readonly IDepartmentServices _departmentServices;
 
         public RegisterController(
             IPatientServices patientServices,
+            IApplicatioUserServices applicatioUserServices,
             IDoctorServices doctorServices,
             IDepartmentServices departmentServices,
             UserManager<ApplicationUser> userManager,
@@ -35,6 +37,7 @@ namespace FinalProject.App.Areas.Identity.Controllers
             this._nurseServices = nurseServices;
             _roleManager = roleManager;
             this._patientServices = patientServices;
+            this._applicatioUserServices = applicatioUserServices;
             _doctorServices = doctorServices;
             this._departmentServices = departmentServices;
         }
@@ -51,16 +54,53 @@ namespace FinalProject.App.Areas.Identity.Controllers
                 await _roleManager.CreateAsync(new IdentityRole("Nurse"));
             }
 
-            var departments = _departmentServices.getAll().ToList();
             // إضافة الأقسام إلى ViewBag لتمريرها إلى الـ View
-            ViewBag.Departments = new SelectList(departments, "Id", "Name");
+            ViewBag.Departments = _departmentServices.getAll()
+              .Select(d => new SelectListItem
+              {
+                  Value = d.Id.ToString(),
+                  Text = d.Name
+              }).ToList();
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> DoctorRegister(DoctorRegisterVM model)
+        public async Task<IActionResult> DoctorRegister(DoctorRegisterVM model, IFormFile? file)
         {
             if (!ModelState.IsValid)
+            {
+                ViewBag.Departments = _departmentServices.getAll()
+                .Select(d => new SelectListItem
+                {
+                    Value = d.Id.ToString(),
+                    Text = d.Name
+                }).ToList();
                 return View(model);
+            }
+
+            var existingUser = await _userManager.FindByEmailAsync(model.Email);
+            if (existingUser != null)
+            {
+                ModelState.AddModelError("Email", "Already Exist.");
+                ViewBag.Departments = _departmentServices.getAll()
+               .Select(d => new SelectListItem
+               {
+                   Value = d.Id.ToString(),
+                   Text = d.Name
+               }).ToList();
+                return View(model);
+            }
+            if (file != null && file.Length > 0)
+            {
+                // Save img in wwwroot
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\Doctors", fileName);
+                using (var stream = System.IO.File.Create(filePath))
+                {
+                    file.CopyTo(stream);
+                }
+                // Save img name in db
+                model.Image = fileName;
+            }
 
             // إنشاء المستخدم في AspNetUsers
             var user = new ApplicationUser
@@ -76,7 +116,12 @@ namespace FinalProject.App.Areas.Identity.Controllers
             {
                 foreach (var error in result.Errors)
                     ModelState.AddModelError("", error.Description);
-
+                ViewBag.Departments = _departmentServices.getAll()
+             .Select(d => new SelectListItem
+             {
+                 Value = d.Id.ToString(),
+                 Text = d.Name
+             }).ToList();
                 return View(model);
             }
 
@@ -124,13 +169,34 @@ namespace FinalProject.App.Areas.Identity.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
+            var existingUser = await _userManager.FindByEmailAsync(model.Email);
+            if (existingUser != null)
+            {
+                ModelState.AddModelError("Email", "Already Exist.");
+                return View(model);
+            }
+            if (file != null && file.Length > 0)
+            {
+                // Save img in wwwroot
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\Patients", fileName);
+                using (var stream = System.IO.File.Create(filePath))
+                {
+                    file.CopyTo(stream);
+                }
+                // Save img name in db
+                model.Image = fileName;
+            }
+
+
             // إنشاء مستخدم جديد
             var user = new ApplicationUser
             {
                 UserName = model.FullName,
                 Email = model.Email,
                 PhoneNumber = model.Phone,
-                FullName = model.FullName  // نُخزّن الاسم في AspNetUsers أيضًا
+                FullName = model.FullName,
+                ImgProfile = model.Image// نُخزّن الاسم في AspNetUsers أيضًا
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
@@ -141,6 +207,7 @@ namespace FinalProject.App.Areas.Identity.Controllers
                     await _roleManager.CreateAsync(new IdentityRole("Patient"));
                 }
                 await _userManager.AddToRoleAsync(user, "Patient");  // إضافة المستخدم للدور:contentReference[oaicite:1]{index=1}
+
 
                 // إنشاء كيان المريض المرتبط بالمستخدم
                 var patient = new Patient
@@ -155,18 +222,6 @@ namespace FinalProject.App.Areas.Identity.Controllers
                     Image = model.Image
 
                 };
-                if (file != null && file.Length > 0)
-                {
-                    // Save img in wwwroot
-                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\Patients", fileName);
-                    using (var stream = System.IO.File.Create(filePath))
-                    {
-                        file.CopyTo(stream);
-                    }
-                    // Save img name in db
-                    model.Image = fileName;
-                }
 
 
                 await _patientServices.Create(patient);
@@ -195,17 +250,54 @@ namespace FinalProject.App.Areas.Identity.Controllers
                 await _roleManager.CreateAsync(new IdentityRole("Nurse"));
             }
 
-            var departments = _departmentServices.getAll().ToList();
-            // إضافة الأقسام إلى ViewBag لتمريرها إلى الـ View
-            ViewBag.Departments = new SelectList(departments, "Id", "Name");
+            ViewBag.Departments = _departmentServices.getAll()
+             .Select(d => new SelectListItem
+             {
+                 Value = d.Id.ToString(),
+                 Text = d.Name
+             }).ToList();
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> NurseRegister(NurseRgisterVM model, IFormFile? file)
         {
             if (!ModelState.IsValid)
+            {
+                ViewBag.Departments = _departmentServices.getAll()
+                .Select(d => new SelectListItem
+                {
+                    Value = d.Id.ToString(),
+                    Text = d.Name
+                }).ToList();
                 return View(model);
 
+            }
+
+
+            var existingUser = await _userManager.FindByEmailAsync(model.Email);
+            if (existingUser != null)
+            {
+                ViewBag.Departments = _departmentServices.getAll()
+                         .Select(d => new SelectListItem
+                         {
+                             Value = d.Id.ToString(),
+                             Text = d.Name
+                         }).ToList();
+                ModelState.AddModelError("Email", "Already Exist.");
+                return View(model);
+            }
+            if (file != null && file.Length > 0)
+            {
+                // Save img in wwwroot
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\images\\Nurses", fileName);
+                using (var stream = System.IO.File.Create(filePath))
+                {
+                    file.CopyTo(stream);
+                }
+                // Save img name in db
+                model.Image = fileName;
+            }
             // إنشاء المستخدم في AspNetUsers
             var user = new ApplicationUser
             {
@@ -213,7 +305,6 @@ namespace FinalProject.App.Areas.Identity.Controllers
                 Email = model.Email,
                 PhoneNumber = model.Phone,
                 ImgProfile = model.Image,
-
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
@@ -222,6 +313,12 @@ namespace FinalProject.App.Areas.Identity.Controllers
                 foreach (var error in result.Errors)
                     ModelState.AddModelError("", error.Description);
 
+                ViewBag.Departments = _departmentServices.getAll()
+                    .Select(d => new SelectListItem
+                    {
+                        Value = d.Id.ToString(),
+                        Text = d.Name
+                    }).ToList();
                 return View(model);
             }
 

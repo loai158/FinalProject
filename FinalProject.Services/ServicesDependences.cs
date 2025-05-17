@@ -16,6 +16,9 @@ namespace FinalProject.Services
             services.AddScoped<IDepartmentServices, DepartmentServices>();
             services.AddScoped<ICartRepository, CartRepository>();
             services.AddScoped<IAppointmentServices, AppointmentServices>();
+            services.AddScoped<IApplicatioUserServices, ApplicatioUserServices>();
+            services.AddScoped<IPreviousConditionServices, PreviousConditionServices>();
+            services.AddScoped<IPreviousMedicineServices, PreviousMedicineServices>();
 
             return services;
         }

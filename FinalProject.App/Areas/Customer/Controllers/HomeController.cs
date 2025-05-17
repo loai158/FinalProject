@@ -6,6 +6,7 @@ using System.Diagnostics;
 namespace FinalProject.App.Areas.Customer.Controllers
 {
     [Area("Customer")]
+
     public class HomeController : Controller
     {
         private readonly IDepartmentServices _departmentServices;

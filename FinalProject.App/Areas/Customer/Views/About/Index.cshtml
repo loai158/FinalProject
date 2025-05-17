@@ -1,0 +1,385 @@
+﻿@model FinalProject.Data.Models.Medical.MedicalHistoryViM
+
+@{
+    ViewData["Title"] = "السجل الطبي للمريض";
+}
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .table {
+            margin-bottom: 0;
+        }
+
+        .form-section {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .btn-sm {
+            margin-left: 5px;
+        }
+
+        .alert-dismissible {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            min-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4 text-center">السجل الطبي لـ @Model.PatientName</h1>
+
+        <!-- عرض رسائل النجاح أو الخطأ -->
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        <!-- الحالات السابقة -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">الحالات السابقة</h3>
+            </div>
+            <div class="card-body">
+                @if (Model.PreviousConditions.Any())
+                {
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>اسم الحالة</th>
+                                <th>إجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var condition in Model.PreviousConditions)
+                            {
+                                <tr>
+                                    <td>
+                                        @switch (condition.Name)
+                                        {
+                                            case FinalProject.Data.Models.AppModels.Name.Diabetes:
+                                                @: السكري
+                                                break;
+                                            case FinalProject.Data.Models.AppModels.Name.Hypertension:
+                                                @: ارتفاع ضغط الدم
+                                                break;
+                                            case FinalProject.Data.Models.AppModels.Name.Heart:
+                                                @: أمراض القلب
+                                                break;
+                                            case FinalProject.Data.Models.AppModels.Name.Arthritis:
+                                                @: التهاب المفاصل
+                                                break;
+                                            case FinalProject.Data.Models.AppModels.Name.Asthma:
+                                                @: الربو
+                                                break;
+                                        }
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-sm edit-condition-btn"
+                                                data-bs-toggle="modal" data-bs-target="#editConditionModal"
+                                                data-id="@condition.Id"
+                                                data-name="@condition.Name">
+                                            تعديل
+                                        </button>
+                                        <form asp-action="DeleteCondition" asp-route-id="@condition.Id" method="post" style="display:inline;" class="delete-form">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn btn-danger btn-sm">حذف</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p class="text-muted text-center">لا توجد حالات سابقة.</p>
+                }
+
+                <!-- إضافة حالة جديدة -->
+                <div class="form-section mt-4">
+                    <h4>إضافة حالة جديدة</h4>
+                    <form asp-action="AddCondition" method="post">
+                        <input type="hidden" asp-for="PatientId" />
+                        <input type="hidden" asp-for="PatientName" />
+                        <div class="mb-3">
+                            <label class="form-label">اختر الحالة</label>
+                            <select asp-for="NewConditionName" class="form-select" asp-items="Html.GetEnumSelectList<FinalProject.Data.Models.AppModels.Name>()">
+                                <option value="">اختر حالة</option>
+                            </select>
+                            <span asp-validation-for="NewConditionName" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-success">إضافة</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- الأدوية السابقة -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">الأدوية السابقة</h3>
+            </div>
+            <div class="card-body">
+                @if (Model.PreviousMedicines.Any())
+                {
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>اسم الدواء</th>
+                                <th>الجرعة</th>
+                                <th>تاريخ البدء</th>
+                                <th>تاريخ الانتهاء</th>
+                                <th>إجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var medicine in Model.PreviousMedicines)
+                            {
+                                <tr>
+                                    <td>@medicine.Name</td>
+                                    <td>@medicine.Dose</td>
+                                    <td>@medicine.StartDate.ToString("yyyy-MM-dd")</td>
+                                    <td>@medicine.EndDate.ToString("yyyy-MM-dd")</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-sm edit-medicine-btn"
+                                                data-bs-toggle="modal" data-bs-target="#editMedicineModal"
+                                                data-id="@medicine.Id"
+                                                data-name="@medicine.Name"
+                                                data-dose="@medicine.Dose"
+                                                data-start="@medicine.StartDate.ToString("yyyy-MM-dd")"
+                                                data-end="@medicine.EndDate.ToString("yyyy-MM-dd")">
+                                            تعديل
+                                        </button>
+                                        <form asp-action="DeleteMedicine" asp-route-id="@medicine.Id" method="post" style="display:inline;" class="delete-form">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn btn-danger btn-sm">حذف</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p class="text-muted text-center">لا توجد أدوية سابقة.</p>
+                }
+
+                <!-- إضافة دواء جديد -->
+                <div class="form-section mt-4" id="medicines-container">
+                    <h4>إضافة دواء جديد</h4>
+                    <form asp-action="AddMedicine" method="post">
+                        <input type="hidden" asp-for="PatientId" />
+                        <input type="hidden" asp-for="PatientName" />
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="NewMedicineName" class="form-label">اسم الدواء</label>
+                                <input asp-for="NewMedicineName" class="form-control" id="autocomplete-medicine-name" />
+                                <span asp-validation-for="NewMedicineName" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="NewMedicineDose" class="form-label">الجرعة</label>
+                                <input asp-for="NewMedicineDose" class="form-control" />
+                                <span asp-validation-for="NewMedicineDose" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="NewMedicineStartDate" class="form-label">تاريخ البدء</label>
+                                <input asp-for="NewMedicineStartDate" type="date" class="form-control" />
+                                <span asp-validation-for="NewMedicineStartDate" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="NewMedicineEndDate" class="form-label">تاريخ الانتهاء</label>
+                                <input asp-for="NewMedicineEndDate" type="date" class="form-control" />
+                                <span asp-validation-for="NewMedicineEndDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success">إضافة</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal لتعديل الحالة -->
+    <div class="modal fade" id="editConditionModal" tabindex="-1" aria-labelledby="editConditionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editConditionModalLabel">تعديل الحالة</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form asp-action="EditCondition" method="post">
+                    <div class="modal-body">
+                        <input type="hidden" asp-for="PatientId" />
+                        <input type="hidden" asp-for="PatientName" />
+                        <input type="hidden" asp-for="EditConditionId" id="edit-condition-id" />
+                        <div class="mb-3">
+                            <label class="form-label">اسم الحالة</label>
+                            <select asp-for="EditConditionName" class="form-select" asp-items="Html.GetEnumSelectList<FinalProject.Data.Models.AppModels.Name>()">
+                                <option value="">اختر حالة</option>
+                            </select>
+                            <span asp-validation-for="EditConditionName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                        <button type="submit" class="btn btn-primary">حفظ التعديل</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal لتعديل الدواء -->
+    <div class="modal fade" id="editMedicineModal" tabindex="-1" aria-labelledby="editMedicineModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editMedicineModalLabel">تعديل الدواء</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form asp-action="EditMedicine" method="post">
+                    <div class="modal-body">
+                        <input type="hidden" asp-for="PatientId" />
+                        <input type="hidden" asp-for="PatientName" />
+                        <input type="hidden" asp-for="EditMedicineId" id="edit-medicine-id" />
+                        <div class="mb-3">
+                            <label asp-for="EditMedicineName" class="form-label">اسم الدواء</label>
+                            <input asp-for="EditMedicineName" class="form-control" id="edit-medicine-name" />
+
+                            <span asp-validation-for="EditMedicineName" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="EditMedicineDose" class="form-label">الجرعة</label>
+                            <input asp-for="EditMedicineDose" class="form-control" />
+                            <span asp-validation-for="EditMedicineDose" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="EditMedicineStartDate" class="form-label">تاريخ البدء</label>
+                            <input asp-for="EditMedicineStartDate" type="date" class="form-control" />
+                            <span asp-validation-for="EditMedicineStartDate" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="EditMedicineEndDate" class="form-label">تاريخ الانتهاء</label>
+                            <input asp-for="EditMedicineEndDate" type="date" class="form-control" />
+                            <span asp-validation-for="EditMedicineEndDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إلغاء</button>
+                        <button type="submit" class="btn btn-primary">حفظ التعديل</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @section Scripts {
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+        <script>
+        $(document).ready(function () {
+            // تعديل حالة
+            $('.edit-condition-btn').click(function () {
+                var id = $(this).data('id');
+                var name = $(this).data('name');
+                $('#edit-condition-id').val(id);
+                $('#EditConditionName').val(name);
+            });
+
+            // تعديل دواء
+            $('.edit-medicine-btn').click(function () {
+                var id = $(this).data('id');
+                var name = $(this).data('name');
+                var dose = $(this).data('dose');
+                var start = $(this).data('start');
+                var end = $(this).data('end');
+                $('#edit-medicine-id').val(id);
+                $('#EditMedicineName').val(name);
+                $('#EditMedicineDose').val(dose);
+                $('#EditMedicineStartDate').val(start);
+                $('#EditMedicineEndDate').val(end);
+            });
+
+            // تأكيد الحذف
+            $('.delete-form').submit(function (e) {
+                e.preventDefault();
+                var form = $(this);
+                if (confirm('هل أنت متأكد من حذف هذا العنصر؟')) {
+                    form.unbind('submit').submit();
+                }
+            });
+         function initializeAutocomplete(element) {
+    if (!$.ui || !$.ui.autocomplete) {
+        console.error('jQuery UI autocomplete غير محمّل!');
+        return;
+    }
+
+    if (element.length === 0) {
+        console.error('العنصر غير موجود للـ autocomplete!');
+        return;
+    }
+
+    element.autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: '@Url.Action("SearchMedicines", "Interaction", new { area = "Customer" })',
+                dataType: "json",
+                data: { term: request.term },
+                success: response
+            });
+        },
+        minLength: 2
+    });
+}
+
+            initializeAutocomplete($('#autocomplete-medicine-name'));
+            $('#editMedicineModal').on('shown.bs.modal', function () {
+                initializeAutocomplete($('#edit-medicine-name'));
+            });
+
+            // إغلاق التنبيهات تلقائيًا بعد 5 ثوانٍ
+            setTimeout(function () {
+                $('.alert').alert('close');
+            }, 5000);
+        });
+        </script>
+    }
+    </body>
+</html>

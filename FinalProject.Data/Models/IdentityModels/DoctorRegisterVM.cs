@@ -15,6 +15,9 @@ namespace FinalProject.Data.Models.IdentityModels
         public string Password { get; set; }
 
         [Required]
+        [Compare(nameof(Password))]
+        public string ConfirmPassword { get; set; }
+        [Required]
         public string Phone { get; set; }
 
         public string? Image { get; set; }

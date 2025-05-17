@@ -1,5 +1,6 @@
 ﻿using FinalProject.Core.Feature.Apponitments.Query.Models;
 using FinalProject.Core.Feature.Doctor.Command.Models;
+using FinalProject.Data.Models.AppModels;
 using FinalProject.Data.Models.IdentityModels;
 using FinalProject.Services.Abstracts;
 using MediatR;
@@ -41,19 +42,18 @@ namespace FinalProject.App.Areas.Customer.Controllers
         public async Task<IActionResult> Home(string? query, int page = 1)
         {
             var userId = _userManager.GetUserId(User);
-            var id = await _appointmentServices.GetPatientIdFromUserAsync(userId);
+            Doctor doctor = _doctorServices.GetAll().FirstOrDefault(d => d.IdentityUserId == userId);
+            //  var id = await _appointmentServices.GetPatientIdFromUserAsync(userId);
             var response = await _mediator.Send(new GetAllApponintmentsByDoctorIdQuery
             {
-                doctorId = (int)id,
+                doctorId = doctor.Id,
                 Query = query,
                 Page = page,
                 PageSize = 10
             });
-
             ViewBag.CurrentQuery = query;
             ViewBag.CurrentPage = page;
             ViewBag.TotalPages = (int)Math.Ceiling(response.TotalCount / 10.0);
-
             return View(response);
         }
 
@@ -155,7 +155,8 @@ namespace FinalProject.App.Areas.Customer.Controllers
                 IntialPrice = doctor.IntialPrice,
                 FollowUpPrice = doctor.FollowUpPrice,
                 Gender = doctor.Gender,
-                DepartmentId = doctor.DepartmentId
+                DepartmentId = doctor.DepartmentId,
+                Email = doctor.Email,
             };
             var departments = _departmentServices.getAll().ToList();
             // إضافة الأقسام إلى ViewBag لتمريرها إلى الـ View
