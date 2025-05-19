@@ -1,8 +1,12 @@
-﻿using FinalProject.Data.Models.IdentityModels;
+﻿using FinalProject.Data.Models.AppModels;
+using FinalProject.Data.Models.IdentityModels;
+using FinalProject.Infrastructure.UnitOfWorks;
+using FinalProject.Services.Abstracts;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -13,11 +17,16 @@ namespace FinalProject.App.Areas.Identity.Controllers
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IPatientServices _patientServices;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager)
+        public AccountController(SignInManager<ApplicationUser> signInManager,
+            UserManager<ApplicationUser> userManager, IPatientServices patientServices, IUnitOfWork unitOfWork)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _patientServices = patientServices;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpGet]
@@ -87,8 +96,6 @@ namespace FinalProject.App.Areas.Identity.Controllers
             };
             return Challenge(prop, GoogleDefaults.AuthenticationScheme);
         }
- 
-
         public async Task<IActionResult> GoogleResponse()
         {
             var result = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
@@ -108,7 +115,7 @@ namespace FinalProject.App.Areas.Identity.Controllers
                 user = new ApplicationUser
                 {
                     UserName = email,
-                    Email = email 
+                    Email = email
                 };
 
                 var createResult = await _userManager.CreateAsync(user);
@@ -118,19 +125,81 @@ namespace FinalProject.App.Areas.Identity.Controllers
                     return RedirectToAction("Login", "Account");
                 }
                 await _userManager.AddToRoleAsync(user, "Patient");
+                var patient = new Patient
+                {
+                    IdentityUserId = user.Id,
+                    Name = name,
+                    Email = email,
+                    Gender = Gender.Male
+                };
+                await _patientServices.Create(patient);
+
                 // ربط الدخول الخارجي بالمستخدم
                 await _userManager.AddLoginAsync(user, new UserLoginInfo(
                     result.Principal.Identity.AuthenticationType,
                     result.Principal.FindFirst(ClaimTypes.NameIdentifier)?.Value,
                     result.Principal.Identity.AuthenticationType));
+                await _signInManager.SignInAsync(user, isPersistent: false);
             }
-
-            // تسجيل الدخول
             await _signInManager.SignInAsync(user, isPersistent: false);
 
-            //return RedirectToAction("Index", "Home", new { area = "Customer" });
-            return RedirectToAction("Profile", "Patient", new { area = "Customer" });
+              return RedirectToAction("Profile", "Patient", new { area = "Customer" });
         }
+
+        //public async Task<IActionResult> GoogleResponse()
+        //{
+        //    var result = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
+
+        //    if (!result.Succeeded)
+        //        return RedirectToAction("Login", "Account");
+
+        //    var email = result.Principal.FindFirst(ClaimTypes.Email)?.Value;
+        //    var name = result.Principal.FindFirst(ClaimTypes.Name)?.Value;
+
+        //    // تحقق إذا كان المستخدم موجود
+        //    var user = await _userManager.FindByEmailAsync(email);
+        //    if (user == null)
+        //    {
+        //        // new user
+        //        user = new ApplicationUser
+        //        {
+        //            UserName = email,
+        //            Email = email
+        //        };
+
+        //        var createResult = await _userManager.CreateAsync(user);
+        //        if (!createResult.Succeeded)
+        //        {
+        //            return RedirectToAction("Login", "Account");
+        //        }
+
+        //        // adding him as Patient
+        //        await _userManager.AddToRoleAsync(user, "Patient");
+
+        //        // ربط الدخول الخارجي بالمستخدم
+        //        await _userManager.AddLoginAsync(user, new UserLoginInfo(
+        //            result.Principal.Identity.AuthenticationType,
+        //            result.Principal.FindFirst(ClaimTypes.NameIdentifier)?.Value,
+        //            result.Principal.Identity.AuthenticationType));
+
+        //        //  add  Patient 
+        //        var patient = new Patient
+        //        {
+        //            IdentityUserId = user.Id,
+        //            Name = name,
+        //            Email = email,
+        //            Gender = Gender.Male
+        //        };
+        //        _patientServices.Create(patient);
+
+
+        //    }
+
+        //    // تسجيل الدخول
+        //    await _signInManager.SignInAsync(user, isPersistent: false);
+
+        //    return RedirectToAction("Profile", "Patient", new { area = "Customer" });
+        //}
 
 
 

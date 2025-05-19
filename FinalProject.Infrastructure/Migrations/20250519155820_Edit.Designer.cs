@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250514142128_init")]
-    partial class init
+    [Migration("20250519155820_Edit")]
+    partial class Edit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -116,7 +116,6 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Image")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("IntialPrice")
@@ -270,6 +269,9 @@ namespace FinalProject.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("IdentityUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
@@ -285,6 +287,8 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("DepartmentId");
 
+                    b.HasIndex("IdentityUserId");
+
                     b.ToTable("Nurses");
                 });
 
@@ -297,7 +301,6 @@ namespace FinalProject.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("DateOfBirth")
@@ -322,7 +325,6 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -418,12 +420,18 @@ namespace FinalProject.Infrastructure.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("DoctorProfileId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImgProfile")
                         .HasColumnType("nvarchar(max)");
@@ -442,8 +450,14 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<int?>("NurseProfileId")
+                        .HasColumnType("int");
+
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PatientProfileId")
+                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
@@ -463,6 +477,8 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DoctorProfileId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -470,6 +486,10 @@ namespace FinalProject.Infrastructure.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("NurseProfileId");
+
+                    b.HasIndex("PatientProfileId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -752,6 +772,13 @@ namespace FinalProject.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("FinalProject.Data.Models.IdentityModels.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("IdentityUserId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("ApplicationUser");
+
                     b.Navigation("Department");
                 });
 
@@ -797,6 +824,27 @@ namespace FinalProject.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("FinalProject.Data.Models.IdentityModels.ApplicationUser", b =>
+                {
+                    b.HasOne("FinalProject.Data.Models.AppModels.Doctor", "DoctorProfile")
+                        .WithMany()
+                        .HasForeignKey("DoctorProfileId");
+
+                    b.HasOne("FinalProject.Data.Models.AppModels.Nurse", "NurseProfile")
+                        .WithMany()
+                        .HasForeignKey("NurseProfileId");
+
+                    b.HasOne("FinalProject.Data.Models.AppModels.Patient", "PatientProfile")
+                        .WithMany()
+                        .HasForeignKey("PatientProfileId");
+
+                    b.Navigation("DoctorProfile");
+
+                    b.Navigation("NurseProfile");
+
+                    b.Navigation("PatientProfile");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.PaymentModels.Cart", b =>
