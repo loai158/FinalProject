@@ -6,8 +6,9 @@ namespace FinalProject.Infrastructure.UnitOfWorks
 {
     public interface IUnitOfWork:IDisposable
     {
-
-        public ICartRepository CartRepository { get; }
+        public ICartRepository   CartRepository { get; }
+        public IOrderRepository  OrderRepository { get; }
+        public IOrderItemRepository  OrderItemRepository { get; }
         IGenericRepositry<T> Repositry<T>() where T : class;
         public Task<IDbContextTransaction> BeginTransactionAsync();
         public Task CommitTransactionAsync();
