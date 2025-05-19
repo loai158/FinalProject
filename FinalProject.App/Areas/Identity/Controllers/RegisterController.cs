@@ -206,7 +206,7 @@ namespace FinalProject.App.Areas.Identity.Controllers
                 {
                     await _roleManager.CreateAsync(new IdentityRole("Patient"));
                 }
-                await _userManager.AddToRoleAsync(user, "Patient");  // إضافة المستخدم للدور:contentReference[oaicite:1]{index=1}
+                await _userManager.AddToRoleAsync(user, "Patient");   
 
 
                 // إنشاء كيان المريض المرتبط بالمستخدم

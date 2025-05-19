@@ -58,16 +58,23 @@ namespace FinalProject.App
 
             //external Login with google
 
-            builder.Services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = GoogleDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-            }).AddGoogle(options =>
-  {
-      IConfigurationSection GoogleAuth = builder.Configuration.GetSection("Authentication:Google");
-      options.ClientId = GoogleAuth["ClientId"];
-      options.ClientSecret = GoogleAuth["ClientSecret"];
-  });
+            //          builder.Services.AddAuthentication(options =>
+            //          {
+            //              options.DefaultAuthenticateScheme = GoogleDefaults.AuthenticationScheme;
+            //              options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+            //          }).AddGoogle(options =>
+            //{
+            //    IConfigurationSection GoogleAuth = builder.Configuration.GetSection("Authentication:Google");
+            //    options.ClientId = GoogleAuth["ClientId"];
+            //    options.ClientSecret = GoogleAuth["ClientSecret"];
+            //});
+            builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)  
+                        .AddGoogle(options =>
+                        {
+                            IConfigurationSection googleAuth = builder.Configuration.GetSection("Authentication:Google");
+                            options.ClientId = googleAuth["ClientId"];
+                            options.ClientSecret = googleAuth["ClientSecret"];
+                        });
 
 
 
