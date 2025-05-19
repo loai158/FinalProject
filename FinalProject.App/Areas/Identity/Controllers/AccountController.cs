@@ -128,8 +128,8 @@ namespace FinalProject.App.Areas.Identity.Controllers
             // تسجيل الدخول
             await _signInManager.SignInAsync(user, isPersistent: false);
 
-            return RedirectToAction("Index", "Home", new { area = "Customer" });
-            //return RedirectToAction("Profile", "Patient", new { area = "Customer" });
+            //return RedirectToAction("Index", "Home", new { area = "Customer" });
+            return RedirectToAction("Profile", "Patient", new { area = "Customer" });
         }
 
 
