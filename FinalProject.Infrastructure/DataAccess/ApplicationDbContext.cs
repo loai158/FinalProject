@@ -21,6 +21,8 @@ namespace FinalProject.Infrastructure.DataAccess
         DbSet<MedicalRecord> MedicalRecords { get; set; }
         DbSet<Medicine> Medicines { get; set; }
         DbSet<Cart> Carts { get; set; }
+        DbSet<Order> Orders { get; set; }
+        DbSet<OrderItem> OrderItems { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

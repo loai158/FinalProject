@@ -4,6 +4,7 @@
     <div class="row">
         <div class="col-12 d-flex justify-content-between align-items-center">
             <h1>All Appointments</h1>
+            <a href="/Customer/Cart/Pay">Pay</a>
             <form action="/Customer/Cart/Index" method="get">
                 <div class="col-12 d-flex justify-content-between">
                     <input type="text" class="form-control mx-3" id="search" aria-describedby="searchHelp" name="query" value="" placeholder="Search...">
@@ -24,6 +25,7 @@
                             <th scope="col">Patient Name</th>
                             <th scope="col">Doctor Name</th>
                             <th scope="col">Department</th>
+                            <th scope="col">Price</th>  
                             <th scope="col">Date</th>
                             <th scope="col">Status</th>
                             <th scope="col">Perscribtions</th>
@@ -39,6 +41,8 @@
                                     <td>@item.Patient</td>
                                     <td>@item.Doctor</td>
                                     <td>@item.Department</td>
+                                    @* <td>@item.Doctor.IntialPrice</td>   *@
+                                    @* <td>@item.Doctor.FollowUpPrice</td>   *@
                                     <td>@item.Date.ToString("MM-dd")</td>
                                     <td>@item.Status</td>
                                     <td>

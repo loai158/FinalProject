@@ -54,7 +54,7 @@
                         {
                             <li class="nav-item"><a class="nav-link" href="/Customer/Nurse/Home">Home</a></li>
                         } 
-                        @if (User.IsInRole("Patient"))
+                        @if (User.IsInRole("Patient") || User.IsInRole("Admin"))
                         {
                             <li class="nav-item"><a class="nav-link" href="/Customer/Home">Home</a></li>
                         }
