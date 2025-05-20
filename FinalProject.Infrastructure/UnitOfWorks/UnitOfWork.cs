@@ -13,12 +13,16 @@ namespace FinalProject.Infrastructure.UnitOfWorks
         private readonly Dictionary<Type, object> _repositories = new Dictionary<Type, object>();
 
 
-        public ICartRepository CartRepository { get; }
+        public ICartRepository   CartRepository { get; }
+        public IOrderItemRepository  OrderItemRepository { get; }
+        public IOrderRepository  OrderRepository { get; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
             this._context = context;
             CartRepository = new CartRepository(_context);
+            OrderItemRepository = new OrderItemRepository(_context);
+            OrderRepository = new OrderRepository(_context);
  
         }
         public async Task<IDbContextTransaction> BeginTransactionAsync()

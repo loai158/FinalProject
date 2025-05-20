@@ -1,3 +1,4 @@
+using FinalProject.App.Utility;
 using FinalProject.Core;
 using FinalProject.Data.Models.IdentityModels;
 using FinalProject.Infrastructure;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 //using Microsoft.AspNetCore.Authentication.Google;
 
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 namespace FinalProject.App
 {
     public class Program
@@ -41,10 +43,17 @@ namespace FinalProject.App
              }).AddEntityFrameworkStores<ApplicationDbContext>()
                              .AddDefaultTokenProviders();
 
+            //stripe services
+            builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+            StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
+
 
             builder.Services.AddHttpClient();
 
             builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+            builder.Services.AddScoped<ICartRepository, CartRepository>();
+            builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
             builder.Services.AddCors(options =>
             {
@@ -56,18 +65,6 @@ namespace FinalProject.App
                 });
             });
 
-            //external Login with google
-
-            //          builder.Services.AddAuthentication(options =>
-            //          {
-            //              options.DefaultAuthenticateScheme = GoogleDefaults.AuthenticationScheme;
-            //              options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-            //          }).AddGoogle(options =>
-            //{
-            //    IConfigurationSection GoogleAuth = builder.Configuration.GetSection("Authentication:Google");
-            //    options.ClientId = GoogleAuth["ClientId"];
-            //    options.ClientSecret = GoogleAuth["ClientSecret"];
-            //});
             builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)  
                         .AddGoogle(options =>
                         {
@@ -87,6 +84,7 @@ namespace FinalProject.App
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+  
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
