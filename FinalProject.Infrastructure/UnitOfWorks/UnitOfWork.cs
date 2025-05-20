@@ -14,8 +14,12 @@ namespace FinalProject.Infrastructure.UnitOfWorks
 
 
         public ICartRepository   CartRepository { get; }
+        public IApplicationUserRepository  ApplicationUserRepository { get; }
         public IOrderItemRepository  OrderItemRepository { get; }
         public IOrderRepository  OrderRepository { get; }
+        public IDoctorRepositry  DoctorRepositry { get; }
+        public INurseRepositry  NurseRepositry { get; }
+        public IPatientRepositry  PatientRepositry { get; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -23,6 +27,10 @@ namespace FinalProject.Infrastructure.UnitOfWorks
             CartRepository = new CartRepository(_context);
             OrderItemRepository = new OrderItemRepository(_context);
             OrderRepository = new OrderRepository(_context);
+            ApplicationUserRepository = new ApplicationUserRepository(_context);
+            DoctorRepositry = new DoctorRepositry(_context);
+            NurseRepositry = new NurseRepositry(_context);
+            PatientRepositry = new PatientRepositry(_context);
  
         }
         public async Task<IDbContextTransaction> BeginTransactionAsync()

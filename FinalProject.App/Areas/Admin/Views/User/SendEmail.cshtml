@@ -1,0 +1,26 @@
+﻿@model FinalProject.Data.Models.IdentityModels.ApplicationUser
+
+<div class="container my-5">
+    <h2 class="text-primary">Send Email to @Model.UserName</h2>
+
+    <form asp-action="SendEmail" method="post">
+        <input type="hidden" name="id" value="@Model.Id" />
+
+        <div class="mb-3">
+            <label>Email</label>
+            <input type="email" class="form-control" value="@Model.Email" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label>Subject</label>
+            <input type="text" class="form-control" name="subject" required />
+        </div>
+
+        <div class="mb-3">
+            <label>Message</label>
+            <textarea class="form-control" name="message" rows="5" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success">Send Email</button>
+    </form>
+</div>
