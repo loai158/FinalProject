@@ -58,7 +58,7 @@ namespace FinalProject.App.Areas.Admin.Controllers
         public IActionResult GetAvailableDatesByDoctor(int doctorId)
         {
             var schedules = _unitOfWork.Repositry<DoctorSchedule>().Get()
-                .Where(s => s.DoctorId == doctorId && s.IsAvailable)
+                .Where(s => s.DoctorId == doctorId)
                 .Select(s => new
                 {
                     Day = s.Day,
@@ -68,26 +68,7 @@ namespace FinalProject.App.Areas.Admin.Controllers
                 .Distinct()
                 .ToList();
 
-            var today = DateTime.Today;
-            var futureDates = new List<object>();
-
-            for (int i = 0; i < 14; i++) // 14 يوم قدام
-            {
-                var date = today.AddDays(i);
-                var matchingSchedule = schedules.FirstOrDefault(s => s.Day == date.DayOfWeek);
-
-                if (matchingSchedule != null)
-                {
-                    futureDates.Add(new
-                    {
-                        Date = date.ToString("yyyy-MM-dd"),
-                        StartTime = matchingSchedule.StartTime.ToString(@"hh\:mm"),// بصيغة 08:30 مثلاً
-                        EndTime = matchingSchedule.EndTime.ToString(@"hh\:mm") // بصيغة 08:30 مثلاً
-                    });
-                }
-            }
-
-            return Json(futureDates);
+            return Json(schedules);
         }
         [HttpGet]
         public async Task<IActionResult> GetPriceByStatus(int doctorId, int status)
@@ -119,7 +100,8 @@ namespace FinalProject.App.Areas.Admin.Controllers
             TempData["Success"] = "تم إضافة الحجز بنجاح";
             return RedirectToAction("Index");
         }
-        [HttpGet]
+        [HttpGet("/Admin/Appointment/Edit/{appointmentId}")]
+
         public async Task<IActionResult> Edit(int appointmentId)
         {
             var query = new GetAppointmentByIdQuery(appointmentId);

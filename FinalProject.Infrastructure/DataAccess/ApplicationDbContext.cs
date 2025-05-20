@@ -23,6 +23,7 @@ namespace FinalProject.Infrastructure.DataAccess
         DbSet<Cart> Carts { get; set; }
         DbSet<Order> Orders { get; set; }
         DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<PerscribtionMedicine> PerscribtionMedicines { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -48,9 +49,28 @@ namespace FinalProject.Infrastructure.DataAccess
                 .HasForeignKey(a => a.PatientId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+
+
+            modelBuilder.Entity<Perscribtion>()
+                .HasMany(p => p.PerscribtionMedicines)
+                .WithOne(pm => pm.Perscribtion)
+                .HasForeignKey(pm => pm.PerscribtionId)
+                .OnDelete(DeleteBehavior.Cascade); // لو حذفت الروشتة، يتم حذف الأدوية المرتبطة بها
+
+
             modelBuilder.Entity<Medicine>()
-                 .HasMany(s => s.Perscribtions)
-                .WithMany(c => c.Medicines);
+                 .HasMany(m => m.PerscribtionMedicines)
+                 .WithOne(pm => pm.Medicine)
+                 .HasForeignKey(pm => pm.MedicineId)
+                 .OnDelete(DeleteBehavior.Restrict); // لو حذفت دواء، لا تحذف السجلات المرتبطة تلقائيًا
+
+
+            modelBuilder.Entity<Appointment>()
+               .HasOne(a => a.Perscribtion)
+               .WithOne(p => p.Appointment)
+               .HasForeignKey<Perscribtion>(p => p.AppointmentId)
+               .OnDelete(DeleteBehavior.Cascade); // لو حذفت الموعد، يحذف الروشتة
+
 
             modelBuilder.Entity<Patient>()
                 .HasOne(p => p.ApplicationUser)

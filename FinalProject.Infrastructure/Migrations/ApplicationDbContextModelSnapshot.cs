@@ -247,9 +247,15 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Property<int>("Dose")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -349,9 +355,42 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppointmentId");
+                    b.HasIndex("AppointmentId")
+                        .IsUnique();
 
                     b.ToTable("Perscribtions");
+                });
+
+            modelBuilder.Entity("FinalProject.Data.Models.AppModels.PerscribtionMedicine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Dose")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MedicineId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PerscribtionId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicineId");
+
+                    b.HasIndex("PerscribtionId");
+
+                    b.ToTable("PerscribtionMedicines");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.PreviousCondition", b =>
@@ -875,12 +914,31 @@ namespace FinalProject.Infrastructure.Migrations
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Perscribtion", b =>
                 {
                     b.HasOne("FinalProject.Data.Models.AppModels.Appointment", "Appointment")
-                        .WithMany("Perscribtions")
-                        .HasForeignKey("AppointmentId")
+                        .WithOne("Perscribtion")
+                        .HasForeignKey("FinalProject.Data.Models.AppModels.Perscribtion", "AppointmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Appointment");
+                });
+
+            modelBuilder.Entity("FinalProject.Data.Models.AppModels.PerscribtionMedicine", b =>
+                {
+                    b.HasOne("FinalProject.Data.Models.AppModels.Medicine", "Medicine")
+                        .WithMany("PerscribtionMedicines")
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("FinalProject.Data.Models.AppModels.Perscribtion", "Perscribtion")
+                        .WithMany("PerscribtionMedicines")
+                        .HasForeignKey("PerscribtionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Medicine");
+
+                    b.Navigation("Perscribtion");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.PreviousCondition", b =>
@@ -1053,7 +1111,7 @@ namespace FinalProject.Infrastructure.Migrations
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Appointment", b =>
                 {
-                    b.Navigation("Perscribtions");
+                    b.Navigation("Perscribtion");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Department", b =>
@@ -1072,6 +1130,11 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Navigation("DoctorSchedules");
                 });
 
+            modelBuilder.Entity("FinalProject.Data.Models.AppModels.Medicine", b =>
+                {
+                    b.Navigation("PerscribtionMedicines");
+                });
+
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Nurse", b =>
                 {
                     b.Navigation("MedicalRecords");
@@ -1084,6 +1147,11 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Navigation("PreviousConditions");
 
                     b.Navigation("PreviousMedicine");
+                });
+
+            modelBuilder.Entity("FinalProject.Data.Models.AppModels.Perscribtion", b =>
+                {
+                    b.Navigation("PerscribtionMedicines");
                 });
 #pragma warning restore 612, 618
         }

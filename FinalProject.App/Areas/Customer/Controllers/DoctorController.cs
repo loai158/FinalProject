@@ -43,7 +43,6 @@ namespace FinalProject.App.Areas.Customer.Controllers
         {
             var userId = _userManager.GetUserId(User);
             Doctor doctor = _doctorServices.GetAll().FirstOrDefault(d => d.IdentityUserId == userId);
-            //  var id = await _appointmentServices.GetPatientIdFromUserAsync(userId);
             var response = await _mediator.Send(new GetAllApponintmentsByDoctorIdQuery
             {
                 doctorId = doctor.Id,

@@ -19,7 +19,7 @@ namespace FinalProject.Core.Mapping
                 PatientId = appointment.Patient.Id,
                 Patient = appointment.Patient.Name,
                 Status = appointment.Status,
-                Perscribtions = appointment.Perscribtions,
+                //Perscribtions = appointment.Perscribtion,
                 ScheduleDate = appointment.Schedule != null
                 ? $"{appointment.Schedule.Day} from {appointment.Schedule.StartTime} to {appointment.Schedule.EndTime}"
                          : "Not Scheduled",
@@ -57,7 +57,7 @@ namespace FinalProject.Core.Mapping
                 PatientId = command.PatientId,
                 Status = command.Status,
                 DepartmentId = command.DepartmentId,
-                Perscribtions = command.Perscribtions,
+                //  Perscribtion = command.Perscribtions,
             };
         }
 
