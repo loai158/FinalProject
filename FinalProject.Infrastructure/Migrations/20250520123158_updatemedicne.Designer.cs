@@ -4,6 +4,7 @@ using FinalProject.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250520123158_updatemedicne")]
+    partial class updatemedicne
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -247,15 +250,9 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Property<int>("Dose")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -355,40 +352,25 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppointmentId")
-                        .IsUnique();
+                    b.HasIndex("AppointmentId");
 
                     b.ToTable("Perscribtions");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.PerscribtionMedicine", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("PerscribtionId")
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Dose")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("MedicineId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PerscribtionId")
+                    b.Property<int>("Dose")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
+                    b.HasKey("PerscribtionId", "MedicineId");
 
                     b.HasIndex("MedicineId");
-
-                    b.HasIndex("PerscribtionId");
 
                     b.ToTable("PerscribtionMedicines");
                 });
@@ -830,8 +812,8 @@ namespace FinalProject.Infrastructure.Migrations
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Perscribtion", b =>
                 {
                     b.HasOne("FinalProject.Data.Models.AppModels.Appointment", "Appointment")
-                        .WithOne("Perscribtion")
-                        .HasForeignKey("FinalProject.Data.Models.AppModels.Perscribtion", "AppointmentId")
+                        .WithMany("Perscribtions")
+                        .HasForeignKey("AppointmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -843,7 +825,7 @@ namespace FinalProject.Infrastructure.Migrations
                     b.HasOne("FinalProject.Data.Models.AppModels.Medicine", "Medicine")
                         .WithMany("PerscribtionMedicines")
                         .HasForeignKey("MedicineId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FinalProject.Data.Models.AppModels.Perscribtion", "Perscribtion")
@@ -986,7 +968,7 @@ namespace FinalProject.Infrastructure.Migrations
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Appointment", b =>
                 {
-                    b.Navigation("Perscribtion");
+                    b.Navigation("Perscribtions");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Department", b =>

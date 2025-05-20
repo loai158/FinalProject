@@ -6,6 +6,6 @@
 
         public int AppointmentId { get; set; }
         public Appointment Appointment { get; set; }
-        public ICollection<Medicine> Medicines { get; set; } = new HashSet<Medicine>();
+        public ICollection<PerscribtionMedicine> PerscribtionMedicines { get; set; }
     }
 }

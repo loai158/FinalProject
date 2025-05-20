@@ -4,7 +4,11 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public DateTime StartDate { get; set; }
         public int Dose { get; set; }
-        public ICollection<Perscribtion> Perscribtions { set; get; } = new HashSet<Perscribtion>();
+        public ICollection<PerscribtionMedicine> PerscribtionMedicines { get; set; }
+
+        public DateTime EndDate { get; set; }
     }
 }

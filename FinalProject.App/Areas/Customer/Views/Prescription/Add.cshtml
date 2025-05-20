@@ -1,0 +1,31 @@
+﻿@model FinalProject.Data.Models.Medical.PrescriptionVM
+
+<div class="form-section mt-4" id="medicines-container">
+    <h4>إضافة دواء جديد</h4>
+    <form asp-action="Add" method="post">
+        <input type="hidden" asp-for="AppointmentId" />
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="NewMedicineName" class="form-label"></label>
+                <input asp-for="NewMedicineName" class="form-control" />
+                <span asp-validation-for="NewMedicineName" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="NewMedicineDose" class="form-label"></label>
+                <input asp-for="NewMedicineDose" class="form-control" />
+                <span asp-validation-for="NewMedicineDose" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="NewMedicineStartDate" class="form-label"></label>
+                <input asp-for="NewMedicineStartDate" type="date" class="form-control" />
+                <span asp-validation-for="NewMedicineStartDate" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="NewMedicineEndDate" class="form-label"></label>
+                <input asp-for="NewMedicineEndDate" type="date" class="form-control" />
+                <span asp-validation-for="NewMedicineEndDate" class="text-danger"></span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success">إضافة</button>
+    </form>
+</div>
