@@ -19,7 +19,7 @@ namespace FinalProject.Core.Feature.Apponitments.Query.Haandler
         }
         public async Task<GetAllApponintmentsResponse> Handle(GetAllApponintmentsQuery request, CancellationToken cancellationToken)
         {
-            var appointments = _appointmentServices.GetAll();
+            var appointments = _appointmentServices.GetAll(request.id);
 
             if (!string.IsNullOrWhiteSpace(request.Query))
             {

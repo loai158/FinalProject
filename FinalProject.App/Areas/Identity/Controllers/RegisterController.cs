@@ -108,7 +108,7 @@ namespace FinalProject.App.Areas.Identity.Controllers
                 UserName = model.FullName,
                 Email = model.Email,
                 PhoneNumber = model.Phone,
-                ImgProfile = model.Image
+                ImgProfile = model.Image,
             };
 
             var result = await _userManager.CreateAsync(user, model.Password);
@@ -206,7 +206,7 @@ namespace FinalProject.App.Areas.Identity.Controllers
                 {
                     await _roleManager.CreateAsync(new IdentityRole("Patient"));
                 }
-                await _userManager.AddToRoleAsync(user, "Patient");   
+                await _userManager.AddToRoleAsync(user, "Patient");
 
 
                 // إنشاء كيان المريض المرتبط بالمستخدم

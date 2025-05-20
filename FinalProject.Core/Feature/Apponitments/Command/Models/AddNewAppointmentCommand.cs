@@ -27,5 +27,7 @@ namespace FinalProject.Core.Feature.Apponitments.Command.Models
         [EnumDataType(typeof(Status), ErrorMessage = "Status must be a valid value.")]
         public Status Status { get; set; }
 
+        public int SelectedScheduleId { get; set; } // ✅ مضاف جديد
+
     }
 }

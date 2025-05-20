@@ -13,6 +13,9 @@
         public Status Status { get; set; }
         public TypePayment TypePayment { get; set; }
         public ICollection<Perscribtion>? Perscribtions { get; set; } = new HashSet<Perscribtion>();
+        public int ScheduleId { get; set; }
+        public DoctorSchedule Schedule { get; set; }
+
     }
 
     public enum TypePayment

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FinalProject.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Edit : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -86,7 +86,8 @@ namespace FinalProject.Infrastructure.Migrations
                     DepartmentId = table.Column<int>(type: "int", nullable: false),
                     PatientId = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
-                    TypePayment = table.Column<int>(type: "int", nullable: false)
+                    TypePayment = table.Column<int>(type: "int", nullable: false),
+                    ScheduleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -503,6 +504,11 @@ namespace FinalProject.Infrastructure.Migrations
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Appointments_ScheduleId",
+                table: "Appointments",
+                column: "ScheduleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -647,6 +653,14 @@ namespace FinalProject.Infrastructure.Migrations
                 column: "PatientId");
 
             migrationBuilder.AddForeignKey(
+                name: "FK_Appointments_DoctorSchedules_ScheduleId",
+                table: "Appointments",
+                column: "ScheduleId",
+                principalTable: "DoctorSchedules",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
                 name: "FK_Appointments_Doctors_DoctorId",
                 table: "Appointments",
                 column: "DoctorId",
@@ -765,9 +779,6 @@ namespace FinalProject.Infrastructure.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "DoctorSchedules");
-
-            migrationBuilder.DropTable(
                 name: "PreviousMedicines");
 
             migrationBuilder.DropTable(
@@ -778,6 +789,9 @@ namespace FinalProject.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Appointments");
+
+            migrationBuilder.DropTable(
+                name: "DoctorSchedules");
 
             migrationBuilder.DropTable(
                 name: "Departments");
