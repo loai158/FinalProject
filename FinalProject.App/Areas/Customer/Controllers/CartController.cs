@@ -39,12 +39,14 @@ namespace FinalProject.App.Areas.Customer.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(string? query, int page = 1)
         {
-
+            var user = await _userManager.GetUserAsync(User);
+            var userId = user.Id;
             var response = await _mediator.Send(new GetAllApponintmentsQuery
             {
                 Query = query,
                 Page = page,
-                PageSize = 10
+                PageSize = 10,
+                id = userId
             });
 
             ViewBag.CurrentQuery = query;

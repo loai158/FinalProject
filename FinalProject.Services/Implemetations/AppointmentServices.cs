@@ -1,6 +1,8 @@
 ﻿using FinalProject.Data.Models.AppModels;
+using FinalProject.Data.Models.IdentityModels;
 using FinalProject.Infrastructure.UnitOfWorks;
 using FinalProject.Services.Abstracts;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Services.Implemetations
@@ -8,16 +10,23 @@ namespace FinalProject.Services.Implemetations
     public class AppointmentServices : IAppointmentServices
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public AppointmentServices(IUnitOfWork unitOfWork)
+        public AppointmentServices(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager)
         {
             this._unitOfWork = unitOfWork;
+            this._userManager = userManager;
         }
-        public IQueryable<Appointment> GetAll()
+        public IQueryable<Appointment> GetAll(string userId)
         {
-            var Appointments = _unitOfWork.Repositry<Appointment>().Get(includes: [d => d.Perscribtions, x => x.Department, z => z.Patient, p => p.Doctor]);
+            var Appointments = _unitOfWork.Repositry<Appointment>().Get(
+                includes: [
+                    d => d.Perscribtions,
+                    s => s.Schedule,
+                    x => x.Department,
+                    z => z.Patient,
+                    p => p.Doctor]).Where(u => u.Patient.IdentityUserId == userId);
             return Appointments;
-            throw new NotImplementedException();
         }
         public async Task<int> Create(Appointment appointment)
         {
@@ -77,6 +86,16 @@ namespace FinalProject.Services.Implemetations
             return patient == 0 ? null : patient;
         }
 
-
+        public IQueryable<Appointment> GetAll()
+        {
+            var Appointments = _unitOfWork.Repositry<Appointment>().Get(
+                 includes: [
+                     d => d.Perscribtions,
+                    s => s.Schedule,
+                    x => x.Department,
+                    z => z.Patient,
+                    p => p.Doctor]);
+            return Appointments;
+        }
     }
 }

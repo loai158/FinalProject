@@ -19,7 +19,10 @@ namespace FinalProject.Core.Mapping
                 PatientId = appointment.Patient.Id,
                 Patient = appointment.Patient.Name,
                 Status = appointment.Status,
-                Perscribtions = appointment.Perscribtions
+                Perscribtions = appointment.Perscribtions,
+                ScheduleDate = appointment.Schedule != null
+                ? $"{appointment.Schedule.Day} from {appointment.Schedule.StartTime} to {appointment.Schedule.EndTime}"
+                         : "Not Scheduled",
 
             };
         }
@@ -40,6 +43,8 @@ namespace FinalProject.Core.Mapping
                 PatientId = command.PatientId,
                 Status = command.Status,
                 DepartmentId = command.DepartmentId,
+                TypePayment = command.TypePayment,
+                ScheduleId = command.SelectedScheduleId
             };
         }
         public static Appointment MapEditToAppointment(this EditAppointmentCommand command)

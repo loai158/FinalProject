@@ -41,9 +41,13 @@
                                     <td>@item.Patient</td>
                                     <td>@item.Doctor</td>
                                     <td>@item.Department</td>
+ 
+                                    <td>@item.ScheduleDate</td>
+
                                     @* <td>@item.Doctor.IntialPrice</td>   *@
                                     @* <td>@item.Doctor.FollowUpPrice</td>   *@
                                     <td>@item.Date.ToString("MM-dd")</td>
+
                                     <td>@item.Status</td>
                                     <td>
                                         @if (item.Perscribtions != null && item.Perscribtions.Any())
@@ -60,7 +64,7 @@
                                             <span>No prescriptions</span>
                                         }
                                     </td>
-                                    
+
                                 </tr>
                             }
                         }
