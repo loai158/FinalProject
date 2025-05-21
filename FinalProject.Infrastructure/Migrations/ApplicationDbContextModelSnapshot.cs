@@ -42,9 +42,6 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ScheduleId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -59,9 +56,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.HasIndex("ScheduleId");
-
-                    b.ToTable("Appointments");
+                    b.ToTable("Appointments", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Department", b =>
@@ -86,7 +81,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Doctor", b =>
@@ -137,7 +132,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Doctors");
+                    b.ToTable("Doctors", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.DoctorSchedule", b =>
@@ -167,7 +162,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("DoctorSchedules");
+                    b.ToTable("DoctorSchedules", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Interaction", b =>
@@ -203,7 +198,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("PreviousMedicineId");
 
-                    b.ToTable("Interactions");
+                    b.ToTable("Interactions", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.MedicalRecord", b =>
@@ -233,7 +228,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("NurseId");
 
-                    b.ToTable("MedicalRecords");
+                    b.ToTable("MedicalRecords", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Medicine", b =>
@@ -253,7 +248,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Medicines");
+                    b.ToTable("Medicines", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Nurse", b =>
@@ -291,7 +286,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Nurses");
+                    b.ToTable("Nurses", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Patient", b =>
@@ -333,7 +328,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Patients");
+                    b.ToTable("Patients", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Perscribtion", b =>
@@ -351,7 +346,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("AppointmentId");
 
-                    b.ToTable("Perscribtions");
+                    b.ToTable("Perscribtions", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.PreviousCondition", b =>
@@ -372,7 +367,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("PreviousConditions");
+                    b.ToTable("PreviousConditions", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.PreviousMedicine", b =>
@@ -404,7 +399,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("PreviousMedicines");
+                    b.ToTable("PreviousMedicines", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.IdentityModels.ApplicationUser", b =>
@@ -527,7 +522,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("DoctorScheduleId");
 
-                    b.ToTable("Carts");
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.PaymentModels.Order", b =>
@@ -570,7 +565,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.PaymentModels.OrderItem", b =>
@@ -596,7 +591,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("MedicinePerscribtion", b =>
@@ -611,7 +606,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("PerscribtionsId");
 
-                    b.ToTable("MedicinePerscribtion");
+                    b.ToTable("MedicinePerscribtion", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -767,19 +762,11 @@ namespace FinalProject.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FinalProject.Data.Models.AppModels.DoctorSchedule", "Schedule")
-                        .WithMany()
-                        .HasForeignKey("ScheduleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Department");
 
                     b.Navigation("Doctor");
 
                     b.Navigation("Patient");
-
-                    b.Navigation("Schedule");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Doctor", b =>

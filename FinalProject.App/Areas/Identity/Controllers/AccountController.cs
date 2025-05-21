@@ -65,7 +65,7 @@ namespace FinalProject.App.Areas.Identity.Controllers
 
                         if (roles.Contains("Patient"))
                         {
-                            return RedirectToAction("Profile", "Patient", new { area = "Customer" });
+                            return RedirectToAction("Index", "Home", new { area = "Customer" });
                         }
 
                         if (roles.Contains("Nurse"))
@@ -73,7 +73,7 @@ namespace FinalProject.App.Areas.Identity.Controllers
                             return RedirectToAction("Profile", "Nurse", new { area = "Customer" });
                         }
 
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Home", new { area = "Customer" });
                     }
                     else
                     {
@@ -143,70 +143,12 @@ namespace FinalProject.App.Areas.Identity.Controllers
             }
             await _signInManager.SignInAsync(user, isPersistent: false);
 
-              return RedirectToAction("Profile", "Patient", new { area = "Customer" });
+              return RedirectToAction("Index", "Home", new { area = "Customer" });
         }
-
-        //public async Task<IActionResult> GoogleResponse()
-        //{
-        //    var result = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
-
-        //    if (!result.Succeeded)
-        //        return RedirectToAction("Login", "Account");
-
-        //    var email = result.Principal.FindFirst(ClaimTypes.Email)?.Value;
-        //    var name = result.Principal.FindFirst(ClaimTypes.Name)?.Value;
-
-        //    // تحقق إذا كان المستخدم موجود
-        //    var user = await _userManager.FindByEmailAsync(email);
-        //    if (user == null)
-        //    {
-        //        // new user
-        //        user = new ApplicationUser
-        //        {
-        //            UserName = email,
-        //            Email = email
-        //        };
-
-        //        var createResult = await _userManager.CreateAsync(user);
-        //        if (!createResult.Succeeded)
-        //        {
-        //            return RedirectToAction("Login", "Account");
-        //        }
-
-        //        // adding him as Patient
-        //        await _userManager.AddToRoleAsync(user, "Patient");
-
-        //        // ربط الدخول الخارجي بالمستخدم
-        //        await _userManager.AddLoginAsync(user, new UserLoginInfo(
-        //            result.Principal.Identity.AuthenticationType,
-        //            result.Principal.FindFirst(ClaimTypes.NameIdentifier)?.Value,
-        //            result.Principal.Identity.AuthenticationType));
-
-        //        //  add  Patient 
-        //        var patient = new Patient
-        //        {
-        //            IdentityUserId = user.Id,
-        //            Name = name,
-        //            Email = email,
-        //            Gender = Gender.Male
-        //        };
-        //        _patientServices.Create(patient);
-
-
-        //    }
-
-        //    // تسجيل الدخول
-        //    await _signInManager.SignInAsync(user, isPersistent: false);
-
-        //    return RedirectToAction("Profile", "Patient", new { area = "Customer" });
-        //}
-
-
-
         public IActionResult Logout()
         {
             _signInManager.SignOutAsync();
-            return RedirectToAction("Login", "Account", new { area = "Identity" });
+            return RedirectToAction("Index", "Home", new { area = "Customer" });
 
         }
     }

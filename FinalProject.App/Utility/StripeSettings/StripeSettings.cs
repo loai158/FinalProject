@@ -1,4 +1,4 @@
-﻿namespace FinalProject.App.Utility
+﻿namespace FinalProject.App.Utility.StripeSettings
 {
     public class StripeSettings
     {

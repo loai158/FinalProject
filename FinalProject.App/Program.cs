@@ -1,4 +1,6 @@
-using FinalProject.App.Utility;
+using FinalProject.App.Helper.EmailSettings;
+using FinalProject.App.Utility.EmailSettings;
+using FinalProject.App.Utility.StripeSettings;
 using FinalProject.Core;
 using FinalProject.Data.Models.IdentityModels;
 using FinalProject.Infrastructure;
@@ -46,7 +48,8 @@ namespace FinalProject.App
             //stripe services
             builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
             StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
-
+            //send email
+             builder.Services.Configure<EmailSetting>(builder.Configuration.GetSection("EmailSetting"));
 
             builder.Services.AddHttpClient();
 
@@ -57,6 +60,7 @@ namespace FinalProject.App
              builder.Services.AddScoped<IPatientRepositry ,PatientRepositry >();
              builder.Services.AddScoped<IDoctorRepositry ,DoctorRepositry >();
              builder.Services.AddScoped<INurseRepositry ,NurseRepositry >();
+             builder.Services.AddScoped<IEmailSettings,EmailSettings>();
 
             builder.Services.AddCors(options =>
             {
