@@ -54,6 +54,9 @@ namespace FinalProject.App
             builder.Services.AddScoped<ICartRepository, CartRepository>();
             builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+             builder.Services.AddScoped<IPatientRepositry ,PatientRepositry >();
+             builder.Services.AddScoped<IDoctorRepositry ,DoctorRepositry >();
+             builder.Services.AddScoped<INurseRepositry ,NurseRepositry >();
 
             builder.Services.AddCors(options =>
             {
