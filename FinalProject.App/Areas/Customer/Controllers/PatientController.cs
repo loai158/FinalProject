@@ -32,27 +32,27 @@ namespace FinalProject.App.Areas.Customer.Controllers
 
         }
         [HttpGet]
-        public IActionResult Create([FromQuery] int doctorId)
+        public async Task<IActionResult> Create([FromQuery] int doctorId)
         {
-            var patients = _patientServices.GetAll().Select(e => new { e.IdentityUserId, e.Id });
 
             var userId = _userManager.GetUserId(User);
-            foreach (var patient in patients)
-            {
-                if (patient.IdentityUserId == userId)
-                {
-                    TempData["Error"] = "الاسم موجود بالفعل";
-                    return RedirectToAction("Create", "Cart", new { area = "Customer", doctorId = doctorId, patientId = patient.Id });
-                }
-                else
-                {
-                    var model = new AddNewPatient
-                    {
-                        DoctorId = doctorId
-                    };
-                    return View(model);
-                }
 
+            var patient = await _patientServices.GetAll()
+                                            .Select(e => new { e.IdentityUserId, e.Id })
+                                            .FirstOrDefaultAsync(p => p.IdentityUserId == userId);
+
+            if (patient.IdentityUserId == userId)
+            {
+                TempData["Error"] = "الاسم موجود بالفعل";
+                return RedirectToAction("Create", "Cart", new { area = "Customer", doctorId = doctorId, patientId = patient.Id });
+            }
+            else
+            {
+                var model = new AddNewPatient
+                {
+                    DoctorId = doctorId
+                };
+                return View(model);
             }
             return View();
         }

@@ -81,7 +81,13 @@
                                                 data-end="@med.EndDate.ToString("yyyy-MM-dd")">
                                             تعديل
                                         </button>
-                                        <form asp-action="DeleteMedicine"  method="post" style="display:inline;" class="delete-form">
+                                        <button type="button" class="btn btn-sm btn-primary edit-medicine-btn"
+                                                data-bs-toggle="modal" data-bs-target="#checkMedicineModal"
+                                                data-appointment-id="@Model.AppointmentId"
+                                                data-name="@med.Medicine.Name">
+                                            كشف الضرر
+                                        </button>
+                                        <form asp-action="DeleteMedicine" method="post" style="display:inline;" class="delete-form">
                                             @Html.AntiForgeryToken()
                                             <input type="hidden" name="id" value="@med.Id" />
                                             <input type="hidden" name="appointmentId" value="@Model.AppointmentId" />
@@ -177,6 +183,23 @@
             </form>
         </div>
     </div>
+    <!-- Modal لكشف التفاعل -->
+    <div class="modal fade" id="checkMedicineModal" tabindex="-1" aria-labelledby="checkMedicineModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">كشف التفاعلات الدوائية</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="interaction-results">
+                        <!-- هنا هيظهر التفاعل -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     @section Scripts {
         <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
@@ -235,6 +258,33 @@
                 $('.alert').alert('close');
             }, 5000);
         });
+
+
+       $(document).ready(function () {
+            $('.edit-medicine-btn[data-bs-target="#checkMedicineModal"]').click(function () {
+                var medicineName = $(this).data('name');
+                var appointmentId = $(this).data('appointment-id');
+
+                console.log("Sending request for:", medicineName, appointmentId);
+
+                $('#interaction-results').html('<p class="text-center">جاري البحث عن التفاعلات...</p>');
+
+                $.ajax({
+                    url: '@Url.Action("CheckInteractions", "Interaction", new { area = "Customer" })',
+                    type: 'GET',
+                    data: { medicineName: medicineName, appointmentId: appointmentId },
+                    success: function (data) {
+                        console.log("Success: ", data);
+                        $('#interaction-results').html(data); // الـ response هيكون HTML جاهز
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error: ", xhr.status, error);
+                        $('#interaction-results').html('<p class="text-danger text-center">حدث خطأ أثناء جلب البيانات: ' + error + '</p>');
+                    }
+                });
+            });
+});
+
         </script>
     }
 </body>
