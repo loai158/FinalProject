@@ -19,6 +19,9 @@ namespace FinalProject.Services
             services.AddScoped<IApplicatioUserServices, ApplicatioUserServices>();
             services.AddScoped<IPreviousConditionServices, PreviousConditionServices>();
             services.AddScoped<IPreviousMedicineServices, PreviousMedicineServices>();
+            services.AddScoped<IPrescriptionService, PrescriptionService>();
+            services.AddScoped<IMedicineServices, MedicineServices>();
+            services.AddScoped<IPerscribtionMedicineService, PerscribtionMedicineService>();
 
             return services;
         }

@@ -21,7 +21,7 @@ namespace FinalProject.Services.Implemetations
         {
             var Appointments = _unitOfWork.Repositry<Appointment>().Get(
                 includes: [
-                    d => d.Perscribtions,
+                    d => d.Perscribtion,
                     s => s.Schedule,
                     x => x.Department,
                     z => z.Patient,
@@ -41,7 +41,7 @@ namespace FinalProject.Services.Implemetations
         }
         public async Task<Appointment> GetById(int id)
         {
-            var appointment = await _unitOfWork.Repositry<Appointment>().GetOne(n => n.Id == id, tracked: false, includes: [d => d.Department, W => W.Patient, x => x.Doctor, Q => Q.Perscribtions]);
+            var appointment = await _unitOfWork.Repositry<Appointment>().GetOne(n => n.Id == id, tracked: false, includes: [d => d.Department, W => W.Patient, x => x.Doctor, Q => Q.Perscribtion]);
             return appointment;
         }
         public string Edit(Appointment appointment)
@@ -90,7 +90,7 @@ namespace FinalProject.Services.Implemetations
         {
             var Appointments = _unitOfWork.Repositry<Appointment>().Get(
                  includes: [
-                     d => d.Perscribtions,
+                     d => d.Perscribtion,
                     s => s.Schedule,
                     x => x.Department,
                     z => z.Patient,
