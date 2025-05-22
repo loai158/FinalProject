@@ -25,9 +25,8 @@
                             <th scope="col">Patient Name</th>
                             <th scope="col">Doctor Name</th>
                             <th scope="col">Department</th>
-                            <th scope="col">Price</th>  
-                            <th scope="col">Date</th>
-                            <th scope="col">Status</th>
+                            <th scope="col">Date</th>  
+                            <th scope="col">Price</th>
                             <th scope="col">Perscribtions</th>
                         </tr>
                     </thead>
@@ -46,9 +45,8 @@
 
                                     @* <td>@item.Doctor.IntialPrice</td>   *@
                                     @* <td>@item.Doctor.FollowUpPrice</td>   *@
-                                    <td>@item.Date.ToString("MM-dd")</td>
+                                    <td>@item.Price.ToString("MM-dd")</td>
 
-                                    <td>@item.Status</td>
                                     <td>
                                         @if (item.Perscribtions != null && item.Perscribtions.Any())
                                         {
