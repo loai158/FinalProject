@@ -1,6 +1,7 @@
 ﻿using FinalProject.Data.Models.AppModels;
 using FinalProject.Data.Models.IdentityModels;
 using FinalProject.Data.Models.PaymentModels;
+using FinalProject.Data.Models.SendEmailModel;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,7 +24,10 @@ namespace FinalProject.Infrastructure.DataAccess
         DbSet<Cart> Carts { get; set; }
         DbSet<Order> Orders { get; set; }
         DbSet<OrderItem> OrderItems { get; set; }
+    
+
         public DbSet<PerscribtionMedicine> PerscribtionMedicines { get; set; }
+ 
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

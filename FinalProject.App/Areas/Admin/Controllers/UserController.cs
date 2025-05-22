@@ -1,6 +1,8 @@
 ﻿using Azure;
+using FinalProject.App.Helper.EmailSettings;
 using FinalProject.Data.Models.AppModels;
 using FinalProject.Data.Models.IdentityModels;
+using FinalProject.Data.Models.SendEmailModel;
 using FinalProject.Infrastructure.IRepositry;
 using FinalProject.Infrastructure.Repositry;
 using FinalProject.Infrastructure.UnitOfWorks;
@@ -23,11 +25,13 @@ namespace FinalProject.App.Areas.Admin.Controllers
         private readonly IDoctorRepositry _doctorRepositry;
         private readonly IPatientRepositry _patientRepositry;
         private readonly INurseRepositry _nurseRepositry;
+        private readonly IEmailSettings _emailSettings;
 
         public UserController(UserManager<ApplicationUser> userManager,
-          RoleManager<IdentityRole> roleManager,IUnitOfWork unitOfWork,
-            IApplicationUserRepository applicationUser ,IDoctorRepositry doctorRepositry,
-            IPatientRepositry patientRepositry,INurseRepositry nurseRepositry
+          RoleManager<IdentityRole> roleManager, IUnitOfWork unitOfWork,
+            IApplicationUserRepository applicationUser, IDoctorRepositry doctorRepositry,
+            IPatientRepositry patientRepositry, INurseRepositry nurseRepositry,
+            IEmailSettings emailSettings
             )
         {
             this._userManager = userManager;
@@ -37,6 +41,7 @@ namespace FinalProject.App.Areas.Admin.Controllers
             this._doctorRepositry = doctorRepositry;
             this._patientRepositry = patientRepositry;
             this._nurseRepositry = nurseRepositry;
+            this._emailSettings = emailSettings;
         }
         [HttpGet]
         public IActionResult Index(string query, int page = 1)
@@ -55,9 +60,9 @@ namespace FinalProject.App.Areas.Admin.Controllers
             users = users.Skip((page - 1) * 7).Take(7);
             ViewBag.paginationPages = paginationPages;
             return View(users.ToList());
-            
-        }
 
+        }
+        [HttpGet]
         public async Task<IActionResult> SendEmail(string id)
         {
             var user = await _applicationUser.GetOne(e => e.Id == id); // جرب تدور بـ Id مباشرًا الأول
@@ -70,7 +75,23 @@ namespace FinalProject.App.Areas.Admin.Controllers
 
             return View(user);
         }
+        [HttpPost]
+        public IActionResult SendEmail(Email email)
+        {
+            if (email != null)
+            {
+                var mail = new Email()
+                {
+                    To = email.To,
+                    Subject = email.Subject,
+                    Body = email.Body
+                };
+                _emailSettings.SendEmail(mail);
+                return RedirectToAction("Index");
+            }
 
+            return View();
+        }
 
 
 
@@ -81,7 +102,7 @@ namespace FinalProject.App.Areas.Admin.Controllers
             ViewBag.roles = roles;
             return View();
         }
-    
+
         [HttpPost]
         public async Task<IActionResult> Create(PatientRegisterVM registerVM, string RoleType)
         {
@@ -136,7 +157,7 @@ namespace FinalProject.App.Areas.Admin.Controllers
                             ApplicationUser = applicationUser,
                             Image = registerVM.Image,
                             Address = registerVM.Address,
-                            DateOfBirth = registerVM.DateOfBirth  
+                            DateOfBirth = registerVM.DateOfBirth
                         };
 
                         await _patientRepositry.Create(patient);
@@ -183,7 +204,7 @@ namespace FinalProject.App.Areas.Admin.Controllers
 
         public async Task<IActionResult> Delete(string userId)
         {
-            var userAcount =await _applicationUser.GetOne(e => e.Id == userId);
+            var userAcount = await _applicationUser.GetOne(e => e.Id == userId);
             if (userAcount != null)
             {
                 _applicationUser.Delete(userAcount);

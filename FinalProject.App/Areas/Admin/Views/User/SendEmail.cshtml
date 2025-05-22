@@ -8,17 +8,17 @@
 
         <div class="mb-3">
             <label>Email</label>
-            <input type="email" class="form-control" value="@Model.Email" readonly />
+            <input type="email" class="form-control" name="to" value="@Model.Email" readonly />
         </div>
 
         <div class="mb-3">
             <label>Subject</label>
-            <input type="text" class="form-control" name="subject" required />
+            <input type="text" class="form-control" name="Subject" required />
         </div>
 
         <div class="mb-3">
             <label>Message</label>
-            <textarea class="form-control" name="message" rows="5" required></textarea>
+            <textarea class="form-control" name="Body" rows="5" required></textarea>
         </div>
 
         <button type="submit" class="btn btn-success">Send Email</button>
