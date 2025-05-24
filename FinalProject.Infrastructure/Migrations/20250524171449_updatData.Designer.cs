@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinalProject.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250520131628_updatedose")]
-    partial class updatedose
+    [Migration("20250524171449_updatData")]
+    partial class updatData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -111,8 +111,9 @@ namespace FinalProject.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("FollowUpPrice")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<decimal>("FollowUpPrice")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
 
                     b.Property<int>("Gender")
                         .HasColumnType("int");
@@ -124,6 +125,7 @@ namespace FinalProject.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("IntialPrice")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Name")
@@ -250,12 +252,15 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Property<int>("Dose")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<TimeOnly>("StartDate")
-                        .HasColumnType("time");
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -355,18 +360,19 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppointmentId");
+                    b.HasIndex("AppointmentId")
+                        .IsUnique();
 
                     b.ToTable("Perscribtions");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.PerscribtionMedicine", b =>
                 {
-                    b.Property<int>("PerscribtionId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("MedicineId")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Dose")
                         .HasColumnType("int");
@@ -374,12 +380,20 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("MedicineId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PerscribtionId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("PerscribtionId", "MedicineId");
+                    b.HasKey("Id");
 
                     b.HasIndex("MedicineId");
+
+                    b.HasIndex("PerscribtionId");
 
                     b.ToTable("PerscribtionMedicines");
                 });
@@ -526,6 +540,36 @@ namespace FinalProject.Infrastructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("FinalProject.Data.Models.IdentityModels.ApplyRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("ApplyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePdf")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApplyRequests");
+                });
+
             modelBuilder.Entity("FinalProject.Data.Models.PaymentModels.Cart", b =>
                 {
                     b.Property<int>("Id")
@@ -558,6 +602,75 @@ namespace FinalProject.Infrastructure.Migrations
                     b.HasIndex("DoctorScheduleId");
 
                     b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("FinalProject.Data.Models.PaymentModels.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsShiped")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("OrderTotal")
+                        .HasColumnType("float");
+
+                    b.Property<bool>("PaymentStatus")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PaymentStripeId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SessionId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TrackingNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("FinalProject.Data.Models.PaymentModels.OrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<double?>("Price")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -821,8 +934,8 @@ namespace FinalProject.Infrastructure.Migrations
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Perscribtion", b =>
                 {
                     b.HasOne("FinalProject.Data.Models.AppModels.Appointment", "Appointment")
-                        .WithMany("Perscribtions")
-                        .HasForeignKey("AppointmentId")
+                        .WithOne("Perscribtion")
+                        .HasForeignKey("FinalProject.Data.Models.AppModels.Perscribtion", "AppointmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -834,7 +947,7 @@ namespace FinalProject.Infrastructure.Migrations
                     b.HasOne("FinalProject.Data.Models.AppModels.Medicine", "Medicine")
                         .WithMany("PerscribtionMedicines")
                         .HasForeignKey("MedicineId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("FinalProject.Data.Models.AppModels.Perscribtion", "Perscribtion")
@@ -924,6 +1037,32 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Navigation("DoctorSchedule");
                 });
 
+            modelBuilder.Entity("FinalProject.Data.Models.PaymentModels.Order", b =>
+                {
+                    b.HasOne("FinalProject.Data.Models.IdentityModels.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("FinalProject.Data.Models.PaymentModels.OrderItem", b =>
+                {
+                    b.HasOne("FinalProject.Data.Models.AppModels.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId");
+
+                    b.HasOne("FinalProject.Data.Models.PaymentModels.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId");
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -977,7 +1116,7 @@ namespace FinalProject.Infrastructure.Migrations
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Appointment", b =>
                 {
-                    b.Navigation("Perscribtions");
+                    b.Navigation("Perscribtion");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Department", b =>

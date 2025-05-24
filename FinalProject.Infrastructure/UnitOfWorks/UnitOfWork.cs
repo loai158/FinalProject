@@ -20,6 +20,7 @@ namespace FinalProject.Infrastructure.UnitOfWorks
         public IDoctorRepositry  DoctorRepositry { get; }
         public INurseRepositry  NurseRepositry { get; }
         public IPatientRepositry  PatientRepositry { get; }
+        public IRegisterApplyRepositoey RegisterApplyRepositoey { get; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -31,6 +32,7 @@ namespace FinalProject.Infrastructure.UnitOfWorks
             DoctorRepositry = new DoctorRepositry(_context);
             NurseRepositry = new NurseRepositry(_context);
             PatientRepositry = new PatientRepositry(_context);
+            RegisterApplyRepositoey = new RegisterApplyRepositoey(_context);
  
         }
         public async Task<IDbContextTransaction> BeginTransactionAsync()
