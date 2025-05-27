@@ -59,6 +59,7 @@ namespace FinalProject.App
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
              builder.Services.AddScoped<IPatientRepositry ,PatientRepositry >();
              builder.Services.AddScoped<IDoctorRepositry ,DoctorRepositry >();
+             builder.Services.AddScoped<IRegisterApplyRepositoey, RegisterApplyRepositoey>();
              builder.Services.AddScoped<INurseRepositry ,NurseRepositry >();
              builder.Services.AddScoped<IEmailSettings,EmailSettings>();
 

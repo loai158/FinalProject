@@ -29,6 +29,7 @@
     <Folder Include="wwwroot\images\Doctors\" />
     <Folder Include="wwwroot\images\Nurses\" />
     <Folder Include="wwwroot\images\Patients\" />
+    <Folder Include="wwwroot\FilesApply\" />
     <Folder Include="wwwroot\ProfImg\" />
   </ItemGroup>
 

@@ -14,6 +14,7 @@ namespace FinalProject.Infrastructure.UnitOfWorks
         public IDoctorRepositry DoctorRepositry { get; }
         public IPatientRepositry PatientRepositry { get; }
         public INurseRepositry NurseRepositry { get; }
+        public IRegisterApplyRepositoey RegisterApplyRepositoey { get; }
 
         IGenericRepositry<T> Repositry<T>() where T : class;
         public Task<IDbContextTransaction> BeginTransactionAsync();

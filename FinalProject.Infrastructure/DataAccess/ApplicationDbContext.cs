@@ -24,6 +24,8 @@ namespace FinalProject.Infrastructure.DataAccess
         DbSet<Cart> Carts { get; set; }
         DbSet<Order> Orders { get; set; }
         DbSet<OrderItem> OrderItems { get; set; }
+        //DbSet<ApplyRequest> ApplyRequestes { get; set; }
+        DbSet<ApplyRequest> ApplyRequests { get; set; }
     
 
         public DbSet<PerscribtionMedicine> PerscribtionMedicines { get; set; }
@@ -35,6 +37,10 @@ namespace FinalProject.Infrastructure.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Doctor>()
+               .Property(d => d.IntialPrice)
+               .HasPrecision(18, 2);
 
             modelBuilder.Entity<Appointment>()
                 .HasOne(a => a.Doctor)

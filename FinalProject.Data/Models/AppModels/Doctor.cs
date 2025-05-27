@@ -1,4 +1,5 @@
 ﻿using FinalProject.Data.Models.IdentityModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.Data.Models.AppModels
 {
@@ -13,7 +14,9 @@ namespace FinalProject.Data.Models.AppModels
         public string? IdentityUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
         public decimal? IntialPrice { get; set; }
-        public decimal? FollowUpPrice { get; set; }
+
+        [Precision(10, 2)]
+        public decimal FollowUpPrice { get; set; }
         public Gender Gender { get; set; }
         public ICollection<Appointment>? Appointments { get; set; } = new HashSet<Appointment>();
         public ICollection<DoctorSchedule>? DoctorSchedules { get; set; } = new HashSet<DoctorSchedule>();

@@ -191,7 +191,7 @@ namespace FinalProject.App.Areas.Customer.Controllers
             doctor.Image = vm.Image;
             doctor.Details = vm.Details;
             doctor.IntialPrice = vm.IntialPrice;
-            doctor.FollowUpPrice = vm.FollowUpPrice;
+            doctor.FollowUpPrice = (decimal)vm.FollowUpPrice;
             doctor.Gender = vm.Gender;
             doctor.DepartmentId = vm.DepartmentId;
 
