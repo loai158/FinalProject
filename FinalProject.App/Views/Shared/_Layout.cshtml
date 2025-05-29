@@ -53,13 +53,13 @@
                         @if (User.IsInRole("Nurse"))
                         {
                             <li class="nav-item"><a class="nav-link" href="/Customer/Nurse/Home">Home</a></li>
- 
+
                         }
                         @if (User.IsInRole("Patient"))
 
-                        } 
+                        }
                         @if (User.IsInRole("Patient") || User.IsInRole("Admin"))
- 
+
                         {
                             <li class="nav-item"><a class="nav-link" href="/Customer/Home/Index">Home</a></li>
                         }
@@ -124,6 +124,7 @@
                                     <li><a class="dropdown-item" href="/Identity/Account/Logout">Logout</a></li>
                                 </ul>
                             </li>
+                            <li><a asp-area="Customer" asp-controller="Chat" asp-action="AllMessage">📨 الرسائل</a></li>
 
                             <li class="nav-item">
                                 <a href="#appointment" class="btn btn-appointment d-flex align-items-center justify-content-center" title="Make Appointment">

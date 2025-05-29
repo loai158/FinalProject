@@ -6,22 +6,23 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace FinalProject.Infrastructure.UnitOfWorks
 {
-    public class UnitOfWork:IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
         private IDbContextTransaction _transaction;
         private readonly Dictionary<Type, object> _repositories = new Dictionary<Type, object>();
 
 
-        public ICartRepository   CartRepository { get; }
-        public IApplicationUserRepository  ApplicationUserRepository { get; }
-        public IOrderItemRepository  OrderItemRepository { get; }
-        public IOrderRepository  OrderRepository { get; }
-        public IDoctorRepositry  DoctorRepositry { get; }
-        public INurseRepositry  NurseRepositry { get; }
-        public IPatientRepositry  PatientRepositry { get; }
+        public ICartRepository CartRepository { get; }
+        public IApplicationUserRepository ApplicationUserRepository { get; }
+        public IOrderItemRepository OrderItemRepository { get; }
+        public IOrderRepository OrderRepository { get; }
+        public IDoctorRepositry DoctorRepositry { get; }
+        public INurseRepositry NurseRepositry { get; }
+        public IPatientRepositry PatientRepositry { get; }
         public IRegisterApplyRepositoey RegisterApplyRepositoey { get; }
 
+        public IMessageRepository MessageRepository { get; }
         public UnitOfWork(ApplicationDbContext context)
         {
             this._context = context;
@@ -33,7 +34,8 @@ namespace FinalProject.Infrastructure.UnitOfWorks
             NurseRepositry = new NurseRepositry(_context);
             PatientRepositry = new PatientRepositry(_context);
             RegisterApplyRepositoey = new RegisterApplyRepositoey(_context);
- 
+            MessageRepository = new MessageRepository(_context);
+
         }
         public async Task<IDbContextTransaction> BeginTransactionAsync()
         {
