@@ -16,15 +16,17 @@ namespace FinalProject.App.Areas.Customer.Controllers
     public class DoctorController : Controller
     {
         private readonly IMediator _mediator;
+        private readonly IMessageService _messageService;
         private readonly IDepartmentServices _departmentServices;
         private readonly IAppointmentServices _appointmentServices;
         private readonly IDoctorServices _doctorServices;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IPatientServices _patientServices;
 
-        public DoctorController(IMediator mediator, IDepartmentServices departmentServices, IAppointmentServices appointmentServices, IDoctorServices doctorServices, UserManager<ApplicationUser> userManager, IPatientServices patientServices)
+        public DoctorController(IMediator mediator, IMessageService messageService, IDepartmentServices departmentServices, IAppointmentServices appointmentServices, IDoctorServices doctorServices, UserManager<ApplicationUser> userManager, IPatientServices patientServices)
         {
             _mediator = mediator;
+            this._messageService = messageService;
             this._departmentServices = departmentServices;
             this._appointmentServices = appointmentServices;
             this._doctorServices = doctorServices;
@@ -55,7 +57,6 @@ namespace FinalProject.App.Areas.Customer.Controllers
             ViewBag.TotalPages = (int)Math.Ceiling(response.TotalCount / 10.0);
             return View(response);
         }
-
 
 
 

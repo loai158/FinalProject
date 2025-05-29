@@ -22,6 +22,8 @@ namespace FinalProject.Services
             services.AddScoped<IPrescriptionService, PrescriptionService>();
             services.AddScoped<IMedicineServices, MedicineServices>();
             services.AddScoped<IPerscribtionMedicineService, PerscribtionMedicineService>();
+            services.AddScoped<IMessageService, MessageService>();
+
 
             return services;
         }
