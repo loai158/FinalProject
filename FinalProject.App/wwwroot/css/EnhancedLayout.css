@@ -1,0 +1,397 @@
+﻿:root {
+    --primary-color: #3498db;
+    --primary-dark: #2980b9;
+    --secondary-color: #2ecc71;
+    --accent-color: #e74c3c;
+    --dark-bg: #1a1a1a;
+    --dark-card: #2d2d2d;
+    --text-light: #ecf0f1;
+    --border-radius: 12px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    transition: var(--transition);
+    scroll-behavior: smooth;
+}
+
+/* Enhanced Header */
+.header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+    z-index: 1000;
+}
+
+.navbar-brand {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: var(--transition);
+}
+
+    .navbar-brand:hover {
+        transform: scale(1.05);
+    }
+
+.nav-link {
+    font-weight: 500;
+    position: relative;
+    transition: var(--transition);
+    border-radius: 8px;
+    padding: 0.5rem 1rem !important;
+    margin: 0 0.25rem;
+}
+
+    .nav-link:hover {
+        background: rgba(52, 152, 219, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 50%;
+        background: var(--primary-color);
+        transition: var(--transition);
+        transform: translateX(-50%);
+    }
+
+    .nav-link:hover::after {
+        width: 80%;
+    }
+
+/* Enhanced Buttons */
+.btn-appointment {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    border: none;
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+    .btn-appointment:hover {
+        transform: translateY(-3px) scale(1.1);
+        box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+    }
+
+.theme-toggle-btn {
+    background: linear-gradient(135deg, #ff6b6b, #feca57);
+    border: none;
+    border-radius: 50px;
+    width: 45px;
+    height: 45px;
+    color: white;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+}
+
+    .theme-toggle-btn:hover {
+        transform: rotate(180deg) scale(1.1);
+        box-shadow: 0 6px 15px rgba(255, 107, 107, 0.3);
+    }
+
+/* Enhanced Dropdown */
+.dropdown-menu {
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropdown-item {
+    padding: 0.75rem 1.25rem;
+    transition: var(--transition);
+    border-radius: 8px;
+    margin: 0.25rem;
+}
+
+    .dropdown-item:hover {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        transform: translateX(5px);
+    }
+
+/* Enhanced Main Content */
+.main-content {
+    min-height: calc(100vh - 200px);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* Enhanced Footer */
+footer {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+    footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+    }
+
+.social-icons a {
+    width: 45px;
+    height: 45px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+}
+
+    .social-icons a:hover {
+        background: var(--primary-color);
+        transform: translateY(-5px) scale(1.1);
+        box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+    }
+
+/* Dark Mode Enhancements */
+.dark-mode {
+    background-color: var(--dark-bg);
+    color: var(--text-light);
+}
+
+    .dark-mode .header {
+        background: rgba(26, 26, 26, 0.95);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .dark-mode .nav-link:hover {
+        background: rgba(52, 152, 219, 0.2);
+    }
+
+    .dark-mode .dropdown-menu {
+        background: var(--dark-card);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .dark-mode .dropdown-item {
+        color: var(--text-light);
+    }
+
+/* Loading Animation */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+    .loading-overlay.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Message Badge */
+.message-badge {
+    position: relative;
+    font-size: 1.2rem;
+    transition: var(--transition);
+}
+
+    .message-badge:hover {
+        transform: scale(1.1);
+    }
+
+    .message-badge::after {
+        content: attr(data-count);
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: var(--accent-color);
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 0.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: pulse 2s infinite;
+    }
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.5rem;
+    }
+
+    .btn-appointment, .theme-toggle-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .main-content {
+        padding-top: 1rem;
+    }
+}
+
+/* Accessibility Enhancements */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus States */
+.nav-link:focus,
+.btn:focus,
+.dropdown-item:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+
+
+
+
+
+/* إصلاح لون النص في قسم الأقسام */
+#departments {
+    background-color: #f8f9fa;
+    padding: 60px 0;
+    color: #333333; /* لون النص الأساسي */
+}
+
+    #departments h2 {
+        color: #2c3e50; /* لون عنوان الأقسام */
+        font-weight: bold;
+    }
+
+    #departments p,
+    #departments .department-description {
+        color: #555555; /* لون النص الوصفي */
+        line-height: 1.6;
+    }
+
+/* للكارد الخاص بالقسم */
+.department-card {
+    background-color: #ffffff;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+    .department-card h3,
+    .department-card h4 {
+        color: #007bff; /* لون عنوان القسم بنفس لون الموقع */
+        margin-bottom: 15px;
+    }
+
+    .department-card p {
+        color: #666666; /* لون النص داخل الكارد */
+        margin-bottom: 10px;
+    }
+
+/* إذا كان النص داخل div معين */
+.department-content {
+    color: #444444 !important;
+}
+
+    .department-content h3 {
+        color: #007bff !important;
+    }
+
+/* حل فوري لإظهار النص */
+* {
+    color: #000000 !important;
+}
+
+/* أو بشكل أكثر تحديداً */
+body, p, div, span, h1, h2, h3, h4, h5, h6 {
+    color: #000000 !important;
+}
+
+/* لقسم الأقسام تحديداً */
+#departments,
+.departments-section,
+.department-card,
+.department-content {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+    #departments * {
+        color: #000000 !important;
+    }
