@@ -1,141 +1,195 @@
 ﻿@model IEnumerable<FinalProject.Data.Models.AppModels.Doctor>
 
-<div class="doctors-container">
-    <div class="row mt-4">
-        @if (!Model.Any())
-        {
-            <div class="col-12 text-center py-5">
-                <div class="alert alert-info border-0 shadow-sm">
-                    <i class="fas fa-user-md fa-3x mb-3 text-info"></i>
-                    <h3 class="mb-3">No Doctors Available</h3>
-                    <p class="mb-0 text-muted">We're currently updating our doctor listings. Please check back soon!</p>
-                </div>
+<div class="row mt-4">
+    @if (!Model.Any())
+    {
+        <div class="col-12 text-center py-5">
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle fa-2x mb-3"></i>
+                <h3>No doctors found</h3>
+                <p class="mb-0">Please check back later or try a different search.</p>
             </div>
-        }
+        </div>
+    }
 
-        @foreach (var item in Model)
-        {
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card doctor-card h-100 border-0 shadow-sm">
-                    <!-- Doctor Image Section -->
-                    <div class="card-img-top position-relative overflow-hidden" style="height: 280px;">
-                        <img src="~/images/Doctors/@item.Image" class="w-100 h-100 object-fit-cover" alt="Dr. @item.Name" onerror="this.src='/images/default-doctor.jpg'">
-
-                        <!-- Department Badge -->
-                        <div class="department-badge">
-                            <span class="badge bg-primary rounded-pill px-3 py-2 shadow-sm">
-                                <i class="fas fa-stethoscope me-1"></i>@item.Department.Name
-                            </span>
-                        </div>
-
-                        <!-- Gender Badge -->
-                        <div class="gender-badge-container">
-                            <span class="gender-badge badge @(item.Gender.ToString() == "Male" ? "bg-info" : "bg-pink") shadow-sm">
-                                <i class="fas @(item.Gender.ToString() == "Male" ? "fa-mars" : "fa-venus")"></i>
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="card-body p-4">
-                        <!-- Doctor Name -->
-                        <div class="doctor-header mb-3">
-                            <h4 class="card-title text-dark mb-1 fw-bold">Dr. @item.Name</h4>
-                            <p class="text-muted small mb-0">@item.Department.Name Specialist</p>
-                        </div>
-
-                        <!-- Contact Information -->
-                        <div class="doctor-info mb-3">
-                            <div class="info-item">
-                                <i class="fas fa-envelope text-primary me-2"></i>
-                                <span class="text-dark">@item.Email</span>
-                            </div>
-                            <div class="info-item">
-                                <i class="fas fa-phone-alt text-primary me-2"></i>
-                                <span class="text-dark">@item.Phone</span>
-                            </div>
-                        </div>
-
-                        <!-- Pricing Section -->
-                        <div class="pricing-section mb-3">
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="price-card initial-price">
-                                        <i class="fas fa-user-plus text-success me-2"></i>
-                                        <div>
-                                            <small class="text-muted d-block">Initial Visit</small>
-                                            <strong class="text-success">$@item.IntialPrice</strong>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="price-card followup-price">
-                                        <i class="fas fa-redo text-info me-2"></i>
-                                        <div>
-                                            <small class="text-muted d-block">Follow-up</small>
-                                            <strong class="text-info">$@item.FollowUpPrice</strong>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Bio Section -->
-                        <div class="bio-section mb-3">
-                            <h6 class="text-muted mb-2 fw-semibold">
-                                <i class="fas fa-info-circle me-1"></i>About
-                            </h6>
-                            <p class="bio-text text-dark">
-                                @(string.IsNullOrEmpty(item.Details) ? "Experienced medical professional dedicated to providing quality healthcare." : item.Details)
-                            </p>
-                        </div>
-
-                        <!-- Schedule Section -->
-                        <div class="schedule-section">
-                            <h6 class="text-muted mb-2 fw-semibold">
-                                <i class="fas fa-clock me-1"></i>Availability
-                            </h6>
-                            @if (item.DoctorSchedules != null && item.DoctorSchedules.Any())
-                            {
-                                <div class="schedule-days">
-                                    @foreach (var schedule in item.DoctorSchedules.Take(3))
-                                    {
-                                        <div class="day-time mb-2">
-                                            <span class="day-badge">@schedule.Day</span>
-                                            <span class="time-slot text-dark">
-                                                @schedule.StartTime.ToString(@"hh\:mm") - @schedule.EndTime.ToString(@"hh\:mm")
-                                            </span>
-                                        </div>
-                                    }
-                                    @if (item.DoctorSchedules.Count() > 3)
-                                    {
-                                        <div class="text-muted small">
-                                            <i class="fas fa-plus me-1"></i>+@(item.DoctorSchedules.Count() - 3) more days
-                                        </div>
-                                    }
-                                </div>
-                            }
-                            else
-                            {
-                                <div class="text-muted small">
-                                    <i class="fas fa-calendar-times me-1"></i>Schedule will be updated soon
-                                </div>
-                            }
-                        </div>
-                    </div>
-
-                    <!-- Action Buttons -->
-                    <div class="card-footer bg-white border-0 pt-0 pb-3 px-4">
-                        <div class="d-grid gap-2">
-                            <a href="/Customer/Patient/Create?doctorId=@item.Id" class="btn btn-primary py-2 fw-semibold">
-                                <i class="far fa-calendar-check me-2"></i>Book Appointment
-                            </a>
-                            <a href="/Customer/Chat/Index?doctorId=@item.Id" class="btn btn-outline-primary py-2">
-                                <i class="fas fa-comments me-2"></i>Chat with Doctor
-                            </a>
-                        </div>
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card doctor-card h-100 border-0 shadow-sm hover-shadow transition-all">
+                <div class="card-img-top position-relative overflow-hidden" style="height: 280px;">
+                    <img src="~/images/Doctors/@item.Image" class="w-100 h-100 object-fit-cover" alt="@item.Name" onerror="this.src='/images/default-doctor.jpg'">
+                    <div class="department-badge">
+                        <span class="badge bg-primary">@item.Department.Name</span>
                     </div>
                 </div>
+
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <h4 class="card-title text-dark mb-0">Dr. @item.Name</h4>
+                        <span class="gender-badge badge @(item.Gender.ToString() == "Male" ? "bg-info" : "bg-pink")">
+                            <i class="fas @(item.Gender.ToString() == "Male" ? "fa-mars" : "fa-venus")"></i>
+                        </span>
+                    </div>
+
+                    <div class="doctor-info mb-3">
+                        <div class="info-item">
+                            <i class="fas fa-envelope text-secondary me-2"></i>
+                            <span class="text-dark">@item.Email</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone-alt text-secondary me-2"></i>
+                            <span class="text-dark">@item.Phone</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-money-bill text-success me-2"></i>
+
+                            <span class="text-dark">Intial : @item.IntialPrice</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-money-bill text-success me-2"></i>
+
+                            <span class="text-dark">FollowUp : @item.FollowUpPrice</span>
+                        </div>
+                    </div>
+
+                    <div class="bio-section mb-3">
+                        <h6 class="text-muted mb-2">About</h6>
+                        <p class="bio-text text-dark">@(string.IsNullOrEmpty(item.Details) ? "No bio available" : item.Details)</p>
+                    </div>
+
+                    <div class="schedule-section">
+                        <h6 class="text-muted mb-2">Availability</h6>
+                        @if (item.DoctorSchedules != null && item.DoctorSchedules.Any())
+                        {
+                            <div class="schedule-days">
+                                @foreach (var schedule in item.DoctorSchedules)
+                                {
+                                    <div class="day-time mb-1">
+                                        <span class="day-badge">@schedule.Day</span>
+                                        <span class="time-slot text-dark">
+                                            @schedule.StartTime.ToString(@"hh\:mm") - @schedule.EndTime.ToString(@"hh\:mm")
+                                        </span>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="text-muted small">Schedule not available</div>
+                        }
+                    </div>
+                </div>
+
+                <div class="card-footer bg-white border-0 pt-0 pb-3">
+                    <a href="/Customer/Patient/Create?doctorId=@item.Id" class="btn btn-primary w-100 py-2 mb-2">
+                        <i class="far fa-calendar-check me-2"></i>Book Appointment
+                    </a>
+
+                    <a href="/Customer/Chat/Index?doctorId=@item.Id" class="btn btn-outline-primary w-100 py-2 mt-2">
+                        <i class="fas fa-comments me-2"></i>Chat with the doctor
+                    </a>
+
+                </div>
+
+
             </div>
-        }
-    </div>
+        </div>
+    }
 </div>
+
+<style>
+    .doctor-card {
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background-color: #f8f9fa;
+    }
+
+        .doctor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+    .department-badge {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+    }
+
+    .gender-badge {
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .bg-pink {
+        background-color: #ff6b9d;
+    }
+
+    .info-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+
+    .bio-text {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #343a40;
+    }
+
+    .schedule-days {
+        max-height: 120px;
+        overflow-y: auto;
+        padding-right: 8px;
+    }
+
+    .day-time {
+        display: flex;
+        align-items: center;
+        margin-bottom: 6px;
+    }
+
+    .day-badge {
+        background: #e9ecef;
+        color: #495057;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        min-width: 70px;
+        text-align: center;
+        margin-right: 10px;
+        font-weight: 500;
+    }
+
+    .time-slot {
+        font-size: 0.9rem;
+        color: #212529;
+    }
+
+    .hover-shadow {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .transition-all {
+        transition: all 0.3s ease;
+    }
+
+    .object-fit-cover {
+        object-fit: cover;
+    }
+
+    .card-body {
+        background-color: #ffffff;
+    }
+
+    .text-dark {
+        color: #212529 !important;
+    }
+</style>
