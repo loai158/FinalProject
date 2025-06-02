@@ -31,7 +31,11 @@ namespace FinalProject.Core.Feature.Patient.Command.Validations
             RuleFor(x => x.DateOfBirth)
                 .LessThan(DateTime.Today).WithMessage("تاريخ الميلاد يجب أن يكون في الماضي.");
 
-            RuleForEach(x => x.PreviousMedicines).SetValidator(new PreviousMedicineValidator());
+            When(x => x.PreviousMedicines != null, () =>
+            {
+                RuleForEach(x => x.PreviousMedicines)
+                    .SetValidator(new PreviousMedicineValidator());
+            });
 
 
         }

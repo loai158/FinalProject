@@ -170,16 +170,16 @@
                                 <tr>
                                     <td>@medicine.Name</td>
                                     <td>@medicine.Dose</td>
-                                    <td>@medicine.StartDate.ToString("yyyy-MM-dd")</td>
-                                    <td>@medicine.EndDate.ToString("yyyy-MM-dd")</td>
+                                    <td>@medicine.StartDate.ToString()</td>
+                                    <td>@medicine.EndDate.ToString()</td>
                                     <td>
                                         <button type="button" class="btn btn-primary btn-sm edit-medicine-btn"
                                                 data-bs-toggle="modal" data-bs-target="#editMedicineModal"
                                                 data-id="@medicine.Id"
                                                 data-name="@medicine.Name"
                                                 data-dose="@medicine.Dose"
-                                                data-start="@medicine.StartDate.ToString("yyyy-MM-dd")"
-                                                data-end="@medicine.EndDate.ToString("yyyy-MM-dd")">
+                                                data-start="@medicine.StartDate.ToString( )"
+                                                data-end="@medicine.EndDate.ToString( )">
                                             تعديل
                                         </button>
                                         <form asp-action="DeleteMedicine" asp-route-id="@medicine.Id" method="post" style="display:inline;" class="delete-form">
