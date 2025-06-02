@@ -1,5 +1,6 @@
 using FinalProject.App.Helper.EmailSettings;
 using FinalProject.App.Utility.EmailSettings;
+using FinalProject.App.Utility.Hubs;
 using FinalProject.App.Utility.StripeSettings;
 using FinalProject.Core;
 using FinalProject.Data.Models.IdentityModels;
@@ -8,7 +9,6 @@ using FinalProject.Infrastructure.DataAccess;
 using FinalProject.Infrastructure.IRepositry;
 using FinalProject.Infrastructure.Repositry;
 using FinalProject.Services;
-using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Identity;
 //using Microsoft.AspNetCore.Authentication.Google;
 
@@ -49,7 +49,7 @@ namespace FinalProject.App
             builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
             StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
             //send email
-             builder.Services.Configure<EmailSetting>(builder.Configuration.GetSection("EmailSetting"));
+            builder.Services.Configure<EmailSetting>(builder.Configuration.GetSection("EmailSetting"));
 
             builder.Services.AddHttpClient();
 
@@ -57,11 +57,11 @@ namespace FinalProject.App
             builder.Services.AddScoped<ICartRepository, CartRepository>();
             builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-             builder.Services.AddScoped<IPatientRepositry ,PatientRepositry >();
-             builder.Services.AddScoped<IDoctorRepositry ,DoctorRepositry >();
-             builder.Services.AddScoped<IRegisterApplyRepositoey, RegisterApplyRepositoey>();
-             builder.Services.AddScoped<INurseRepositry ,NurseRepositry >();
-             builder.Services.AddScoped<IEmailSettings,EmailSettings>();
+            builder.Services.AddScoped<IPatientRepositry, PatientRepositry>();
+            builder.Services.AddScoped<IDoctorRepositry, DoctorRepositry>();
+            builder.Services.AddScoped<IRegisterApplyRepositoey, RegisterApplyRepositoey>();
+            builder.Services.AddScoped<INurseRepositry, NurseRepositry>();
+            builder.Services.AddScoped<IEmailSettings, EmailSettings>();
 
             builder.Services.AddCors(options =>
             {
@@ -72,8 +72,8 @@ namespace FinalProject.App
                            .AllowAnyHeader();
                 });
             });
-
-            builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)  
+            builder.Services.AddSignalR();
+            builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)
                         .AddGoogle(options =>
                         {
                             IConfigurationSection googleAuth = builder.Configuration.GetSection("Authentication:Google");
@@ -92,7 +92,8 @@ namespace FinalProject.App
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-  
+
+            app.MapHub<ChatHub>("/chathub");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

@@ -5,15 +5,15 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>@ViewData["Title"] - FinalProject.App</title>
-    <meta name="description" content="FinalProject.App - Building solutions that matter. Crafted with care and precision." />
+    <title>@ViewData["Title"] - E-Clinic</title>
+    <meta name="description" content="E-Clinic - Comprehensive healthcare solutions. Quality care for everyone." />
     <meta name="keywords" content="healthcare, hospital, doctors, services, appointments" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Favicons -->
     <link href="~/assets/img/favicon.png" rel="icon" />
     <link href="~/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Bootstrap & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
@@ -24,11 +24,180 @@
     <link href="~/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
     <!-- Main CSS File -->
     <link href="~/assets/css/main.css" rel="stylesheet" />
-    @* navbar stylying link *@
-    <link href="~/css/NavStyle.css" rel="stylesheet" />
     <!-- Toastr CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --text-dark: #2c3e50;
+            --text-light: #f8f9fa;
+        }
 
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            background-color: #f5f7fa;
+        }
+
+        .header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-dark) !important;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .btn-appointment {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-appointment:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .theme-toggle-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            color: var(--primary-color);
+            transform: rotate(30deg);
+        }
+
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 0.5rem;
+        }
+
+        .dropdown-item {
+            border-radius: 5px;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--primary-color);
+            color: white !important;
+        }
+
+        footer {
+            background-color: var(--secondary-color);
+            padding: 3rem 0;
+        }
+
+        footer h5 {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        footer a {
+            transition: all 0.2s ease;
+        }
+
+        footer a:hover {
+            color: var(--primary-color) !important;
+            padding-left: 5px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #1a1a2e;
+            color: #e6e6e6;
+        }
+
+        body.dark-mode .header {
+            background-color: #16213e;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .navbar-brand,
+        body.dark-mode .nav-link,
+        body.dark-mode .theme-toggle-btn {
+            color: #e6e6e6 !important;
+        }
+
+        body.dark-mode .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        body.dark-mode .dropdown-menu {
+            background-color: #16213e;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .dropdown-item {
+            color: #e6e6e6 !important;
+        }
+
+        body.dark-mode footer {
+            background-color: #0f3460;
+        }
+    </style>
 </head>
 @{
     var user = await UserManager.GetUserAsync(User);
@@ -36,7 +205,7 @@
 }
 <body class="bg-light">
     <!-- Header -->
-    <header id="header" class="header sticky-top shadow-sm">
+    <header id="header" class="header sticky-top">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" href="/">E-Clinic</a>
@@ -53,13 +222,8 @@
                         @if (User.IsInRole("Nurse"))
                         {
                             <li class="nav-item"><a class="nav-link" href="/Customer/Nurse/Home">Home</a></li>
- 
                         }
-                        @if (User.IsInRole("Patient"))
-
-                        } 
                         @if (User.IsInRole("Patient") || User.IsInRole("Admin"))
- 
                         {
                             <li class="nav-item"><a class="nav-link" href="/Customer/Home/Index">Home</a></li>
                         }
@@ -69,55 +233,48 @@
                             <li class="nav-item"><a class="nav-link" href="/Customer/Cart/Index">Cart</a></li>
                         }
 
-                        @* <li class="nav-item"><a class="nav-link" href="/Customer/Patient/Profile">Profile</a></li> *@
                         <li class="nav-item"><a class="nav-link" href="/Customer/About/">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                         @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Home" asp-action="Index">Management System</a>
+                                <a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="Index">Management System</a>
                             </li>
-
                         }
 
                         @if (User.Identity.IsAuthenticated)
                         {
-
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                    aria-expanded="false">More</a>
-                                <ul class="dropdown-menu border-0 shadow-sm">
-
+                                <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#departments">Departments</a></li>
                                     <li><a class="dropdown-item" href="/customer/doctor">Doctors</a></li>
                                     <li><hr class="dropdown-divider" /></li>
-
                                     <li><a class="dropdown-item" href="#contact">Contact Us</a></li>
-                                    @* <li><hr class="dropdown-divider" /></li> *@
-                                    @* <li><a class="dropdown-item text-danger" asp-area="Identity" asp-controller="Account" asp-action="Logout">Logout</a></li> *@
-
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle d-flex align-items-center text-dark" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <span>Welcome: @User.Identity.Name</span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                     @if (User.IsInRole("Doctor"))
                                     {
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Doctor" asp-action="Profile">Doctor Profile</a>
+                                            <a class="dropdown-item" asp-area="Customer" asp-controller="Doctor" asp-action="Profile">Doctor Profile</a>
                                         </li>
                                     }
                                     @if (User.IsInRole("Patient"))
                                     {
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Patient" asp-action="Profile">Patient Profile</a>
+                                            <a class="dropdown-item" asp-area="Customer" asp-controller="Patient" asp-action="Profile">Patient Profile</a>
                                         </li>
-                                    } @if (User.IsInRole("Nurse"))
+                                    }
+                                    @if (User.IsInRole("Nurse"))
                                     {
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Nurse" asp-action="Profile">Nurse Profile</a>
+                                            <a class="dropdown-item" asp-area="Customer" asp-controller="Nurse" asp-action="Profile">Nurse Profile</a>
                                         </li>
                                     }
                                     <li><hr class="dropdown-divider"></li>
@@ -130,19 +287,17 @@
                                     <i class="bi bi-calendar-check"></i>
                                 </a>
                             </li>
-                            <li class="nav-item ms-2">
-                                <button id="themeToggle" class="theme-toggle-btn" title="Toggle Theme">
-                                    <i class="bi bi-palette-fill"></i> <!-- Changed to Creative Icon -->
-                                </button>
-                            </li>
+                            @* <li class="nav-item ms-2"> *@
+                            @*     <button id="themeToggle" class="theme-toggle-btn" title="Toggle Theme"> *@
+                            @*         <i class="bi bi-palette-fill"></i> *@
+                            @*     </button> *@
+                            @* </li> *@
                         }
                         else
                         {
-
-
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle text-dark" href="#" id="registerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="#" id="registerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Register
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
@@ -150,11 +305,10 @@
                                         <li><hr class="dropdown-divider"></li>
                                         <li><a class="dropdown-item" asp-area="Identity" asp-controller="Register" asp-action="RegisterApply">Work With Us</a></li>
                                     </ul>
-
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="Identity" asp-controller="Account" asp-action="Login">Login</a>
+                                    <a class="nav-link" asp-area="Identity" asp-controller="Account" asp-action="Login">Login</a>
                                 </li>
                             </ul>
                         }
@@ -163,33 +317,35 @@
             </div>
         </nav>
     </header>
+
     <!-- Main Content -->
     <div class="container my-4">
         <main role="main" class="py-4">
             @RenderBody()
         </main>
     </div>
+
     <!-- Footer -->
     <footer class="text-light py-5">
         <div class="container">
             <div class="row g-4 text-center text-md-start">
                 <div class="col-md-4">
-                    <h5 class="fw-bold mb-3">FinalProject.App</h5>
-                    <p>Building innovative digital solutions. Designed with passion and delivered with excellence.</p>
+                    <h5 class="fw-bold mb-3">E-Clinic</h5>
+                    <p>Comprehensive healthcare solutions. Quality care for everyone. Designed with passion and delivered with excellence.</p>
                 </div>
                 <div class="col-md-4">
                     <h5 class="fw-bold mb-3">Quick Links</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#about" class="text-light text-decoration-none d-flex align-items-center mb-2"><i class="bi bi-chevron-double-right me-2"></i>About Us</a></li>
-                        <li><a href="#services" class="text-light text-decoration-none d-flex align-items-center mb-2"><i class="bi bi-chevron-double-right me-2"></i>Services</a></li>
-                        <li><a href="#departments" class="text-light text-decoration-none d-flex align-items-center mb-2"><i class="bi bi-chevron-double-right me-2"></i>Departments</a></li>
-                        <li><a href="#doctors" class="text-light text-decoration-none d-flex align-items-center mb-2"><i class="bi bi-chevron-double-right me-2"></i>Doctors</a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-light text-decoration-none d-flex align-items-center mb-2"><i class="bi bi-chevron-double-right me-2"></i>Privacy Policy</a></li>
+                        <li><a href="#about" class="text-light text-decoration-none d-flex align-items-center mb-2"><i class="bi bi-chevron-right me-2"></i>About Us</a></li>
+                        <li><a href="#services" class="text-light text-decoration-none d-flex align-items-center mb-2"><i class="bi bi-chevron-right me-2"></i>Services</a></li>
+                        <li><a href="#departments" class="text-light text-decoration-none d-flex align-items-center mb-2"><i class="bi bi-chevron-right me-2"></i>Departments</a></li>
+                        <li><a href="#doctors" class="text-light text-decoration-none d-flex align-items-center mb-2"><i class="bi bi-chevron-right me-2"></i>Doctors</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-light text-decoration-none d-flex align-items-center mb-2"><i class="bi bi-chevron-right me-2"></i>Privacy Policy</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
                     <h5 class="fw-bold mb-3">Follow Us</h5>
-                    <div class="social-icons d-flex justify-content-center justify-content-md-start gap-2 fs-4 mb-3">
+                    <div class="social-icons d-flex justify-content-center justify-content-md-start gap-3 mb-3">
                         <a href="#" class="text-light"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="text-light"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="text-light"><i class="fab fa-instagram"></i></a>
@@ -198,11 +354,12 @@
                     <p class="small">Stay connected for the latest updates!</p>
                 </div>
             </div>
-            <div class="text-center mt-4 pt-3 border-top">
-                <small>© @DateTime.Now.Year FinalProject.App. All Rights Reserved.</small>
+            <div class="text-center mt-4 pt-3 border-top border-secondary">
+                <small>© @DateTime.Now.Year E-Clinic. All Rights Reserved.</small>
             </div>
         </div>
     </footer>
+
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -226,8 +383,8 @@
                 $('body').toggleClass('dark-mode');
                 const isDark = $('body').hasClass('dark-mode');
                 // Update icon based on theme
-                $('#themeToggle i').removeClass(isDark ? 'bi-palette-fill' : 'bi-sun').addClass(isDark ? 'bi-sun' : 'bi-palette-fill');
-                toastr.info(isDark ? 'Light Mode Activated' : 'Dark Mode Activated');
+                $('#themeToggle i').toggleClass('bi-palette-fill bi-sun');
+                toastr.info(isDark ? 'Dark Mode Activated' : 'Light Mode Activated');
                 // Save preference
                 localStorage.setItem('theme', isDark ? 'dark' : 'light');
             });

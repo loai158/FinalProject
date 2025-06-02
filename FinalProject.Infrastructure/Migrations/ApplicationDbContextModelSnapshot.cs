@@ -61,7 +61,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("ScheduleId");
 
-                    b.ToTable("Appointments");
+                    b.ToTable("Appointments", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Department", b =>
@@ -86,7 +86,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Doctor", b =>
@@ -139,7 +139,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Doctors");
+                    b.ToTable("Doctors", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.DoctorSchedule", b =>
@@ -169,7 +169,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.ToTable("DoctorSchedules");
+                    b.ToTable("DoctorSchedules", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Interaction", b =>
@@ -205,7 +205,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("PreviousMedicineId");
 
-                    b.ToTable("Interactions");
+                    b.ToTable("Interactions", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.MedicalRecord", b =>
@@ -235,7 +235,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("NurseId");
 
-                    b.ToTable("MedicalRecords");
+                    b.ToTable("MedicalRecords", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Medicine", b =>
@@ -261,7 +261,39 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Medicines");
+                    b.ToTable("Medicines", (string)null);
+                });
+
+            modelBuilder.Entity("FinalProject.Data.Models.AppModels.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReceiverId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SenderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("SentAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Messages", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Nurse", b =>
@@ -299,7 +331,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Nurses");
+                    b.ToTable("Nurses", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Patient", b =>
@@ -341,7 +373,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("IdentityUserId");
 
-                    b.ToTable("Patients");
+                    b.ToTable("Patients", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Perscribtion", b =>
@@ -360,7 +392,7 @@ namespace FinalProject.Infrastructure.Migrations
                     b.HasIndex("AppointmentId")
                         .IsUnique();
 
-                    b.ToTable("Perscribtions");
+                    b.ToTable("Perscribtions", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.PerscribtionMedicine", b =>
@@ -392,7 +424,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("PerscribtionId");
 
-                    b.ToTable("PerscribtionMedicines");
+                    b.ToTable("PerscribtionMedicines", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.PreviousCondition", b =>
@@ -413,7 +445,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("PreviousConditions");
+                    b.ToTable("PreviousConditions", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.PreviousMedicine", b =>
@@ -445,7 +477,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("PreviousMedicines");
+                    b.ToTable("PreviousMedicines", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.IdentityModels.ApplicationUser", b =>
@@ -564,7 +596,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ApplyRequests");
+                    b.ToTable("ApplyRequests", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.PaymentModels.Cart", b =>
@@ -598,7 +630,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("DoctorScheduleId");
 
-                    b.ToTable("Carts");
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.PaymentModels.Order", b =>
@@ -641,7 +673,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.PaymentModels.OrderItem", b =>
@@ -667,7 +699,7 @@ namespace FinalProject.Infrastructure.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -897,6 +929,25 @@ namespace FinalProject.Infrastructure.Migrations
                     b.Navigation("Appointment");
 
                     b.Navigation("Nurse");
+                });
+
+            modelBuilder.Entity("FinalProject.Data.Models.AppModels.Message", b =>
+                {
+                    b.HasOne("FinalProject.Data.Models.IdentityModels.ApplicationUser", "Receiver")
+                        .WithMany()
+                        .HasForeignKey("ReceiverId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("FinalProject.Data.Models.IdentityModels.ApplicationUser", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("FinalProject.Data.Models.AppModels.Nurse", b =>

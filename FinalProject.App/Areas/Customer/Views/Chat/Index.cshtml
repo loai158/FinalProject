@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Chat with Doctor";
+    var doctorId = ViewBag.DoctorId; // هنا الـ ID بتاع الدكتور اللي المريض بيكلمه
+}
+
+<h3>Chat with Dr. @ViewBag.DoctorName</h3>
+
+<div id="chatWindow" style="height:300px; border:1px solid #ccc; overflow-y:auto; padding:10px;"></div>
+
+<input type="text" id="message" placeholder="Type your message..." class="form-control" />
+<button id="sendButton" class="btn btn-primary mt-2">Send</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/chathub")
+        .build();
+
+    // استقبال الرسائل اللي هتجيله في الشات ده
+    connection.on("ReceiveMessage", function (sender, message) {
+        const chatWindow = document.getElementById("chatWindow");
+        chatWindow.innerHTML += `<div><strong>${sender}:</strong> ${message}</div>`;
+        chatWindow.scrollTop = chatWindow.scrollHeight; // عشان يعمل scroll لتحت تلقائياً
+    });
+
+    // بدء الاتصال
+    connection.start().then(function () {
+        document.getElementById("sendButton").addEventListener("click", function () {
+            const messageInput = document.getElementById("message");
+            const message = messageInput.value;
+            if (message.trim() === "") return; // منع إرسال رسائل فارغة
+
+            const doctorId = @doctorId; // ده الـ ID بتاع الدكتور المستهدف
+
+            // استدعاء ميثود الـ Hub لإرسال الرسالة للدكتور المحدد
+            connection.invoke("SendToDoctor", doctorId, message)
+                .catch(err => console.error("Failed to send message: " + err.toString()));
+
+            messageInput.value = ''; // مسح الرسالة بعد الإرسال
+        });
+    }).catch(function (err) {
+        console.error("Failed to start SignalR connection: " + err.toString());
+    });
+</script>
