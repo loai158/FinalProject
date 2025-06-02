@@ -1,89 +1,99 @@
 ﻿@model FinalProject.Core.Feature.Nurse.Query.Response.NurseResponse
-
 @{
     ViewData["Title"] = "Edit Nurse";
 }
 
-<h2>Edit Nurse</h2>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Edit Nurse</h2>
 
-<hr />
-<div class="row">
-    <div class="col-md-8">
-        <form asp-action="Edit" asp-controller="Nurse" asp-area="Admin" method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <form asp-action="Edit" asp-controller="Nurse" asp-area="Admin" method="post" enctype="multipart/form-data" class="patient-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <!-- Hidden field for Email (to identify patient) -->
-            <input type="hidden" asp-for="Id" />
+        <!-- Hidden field for Id -->
+        <input type="hidden" asp-for="Id" />
 
-            <!-- Patient Basic Information -->
-            <h4>Patient Information</h4>
-            <div class="form-group mb-3">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group mb-3">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
-            </div>
-            <div class="form-group mb-3">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group mb-3">
-                <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" class="form-control" type="file" name="file" accept="image/*" id="imageInput" />
+        <div class="row">
+            <!-- Image -->
+            <div class="col-md-4 form-group mb-3 text-center">
+                <label asp-for="Image" class="form-label">Nurse Image</label>
+                <input asp-for="Image" type="file" name="file" class="form-control" accept="image/*" id="imageInput" />
                 <span asp-validation-for="Image" class="text-danger"></span>
-                @if (!string.IsNullOrEmpty(Model.Image))
-                {
-                    <img src="@Model.Image" alt="Patient Image" id="imgPreview" class="img-thumbnail mt-2" style="max-width: 100px;" />
-                }
-                else
-                {
-                    <img id="imgPreview" class="img-thumbnail mt-2" style="max-width: 100px; display: none;" alt="Image Preview" />
-                }
+                <img id="imgPreview"  src="~/images/Nurses/@Model.Image" style="display: @(string.IsNullOrEmpty(Model.Image) ? "none" : "block"); max-width: 200px; margin-top: 10px;" alt="Image preview" />
             </div>
-            <select asp-for="DepartmentId" class="form-control" asp-items="@ViewBag.Departments">
-                <option value="">Select a department</option>
-            </select>
 
-            <!-- Submit and Cancel Buttons -->
-            <div class="form-group mt-4">
-                <button type="submit" class="btn btn-primary">Save</button>
-                <a asp-action="Index" asp-controller="Nurse" asp-area="Admin" class="btn btn-secondary">Cancel</a>
+            <!-- Right Column: Other Fields -->
+            <div class="col-md-8">
+                <div class="row">
+                    <!-- Name -->
+                    <div class="col-md-6 form-group mb-3">
+                        <label asp-for="Name" class="form-label">Name</label>
+                        <input asp-for="Name" class="form-control" placeholder="Enter nurse name" required />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="col-md-6 form-group mb-3">
+                        <label asp-for="Email" class="form-label">Email</label>
+                        <input asp-for="Email" class="form-control" type="email" placeholder="Enter email address" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="col-md-6 form-group mb-3">
+                        <label asp-for="Phone" class="form-label">Phone</label>
+                        <input asp-for="Phone" class="form-control" placeholder="Enter phone number" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+
+                    <!-- Department -->
+                    <div class="col-md-6 form-group mb-3">
+                        <label asp-for="DepartmentId" class="form-label">Department</label>
+                        <select asp-for="DepartmentId" class="form-control" asp-items="@ViewBag.Departments">
+                            <option value="">-- Select Department --</option>
+                        </select>
+                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-        </form>
-    </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary btn-lg">Save Changes</button>
+            <a asp-action="Index" asp-controller="Nurse" asp-area="Admin" class="btn btn-secondary btn-lg">Cancel</a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    <link rel="stylesheet" href="~/css/patient-create.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
     <script>
-      
-        $('#imageInput').on('change', function (event) {
-            const file = event.target.files[0];
-            const preview = $('#imgPreview');
+        $(document).ready(function () {
+            // Image preview
+            $('#imageInput').on('change', function (event) {
+                const imgPreview = $('#imgPreview');
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        imgPreview.attr('src', e.target.result).css('display', 'block');
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    imgPreview.attr('src', '@Model.Image').css('display', '@(string.IsNullOrEmpty(Model.Image) ? "none" : "block")');
+                }
+            });
 
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    preview.attr('src', e.target.result);
-                    preview.show();
-                };
-                reader.readAsDataURL(file);
-            } else {
-                preview.hide();
+            // Display error messages with toastr
+            @if (TempData["Error"] != null)
+            {
+                <text>toastr.error('@TempData["Error"]');</text>
             }
         });
-     
     </script>
 }

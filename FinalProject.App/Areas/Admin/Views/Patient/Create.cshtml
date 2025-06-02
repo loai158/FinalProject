@@ -1,123 +1,138 @@
 ﻿@model FinalProject.Core.Feature.Patient.Command.Models.AddNewPatient
 
 @{
-    ViewData["Title"] = "إضافة مريض جديد";
+    ViewData["Title"] = "Add New Patient";
 }
 
-<h2>إضافة مريض جديد</h2>
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-<form asp-action="Create" method="post" enctype="multipart/form-data">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Add New Patient</h2>
 
-    <div class="form-group">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
+    <form asp-action="Create" method="post" enctype="multipart/form-data" class="patient-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <div class="form-group">
-        <label asp-for="Phone"></label>
-        <input asp-for="Phone" class="form-control" />
-        <span asp-validation-for="Phone" class="text-danger"></span>
-    </div>
+        <div class="row">
+            <!-- Name -->
+            <div class="col-md-6 form-group mb-3">
+                <label asp-for="Name" class="form-label">Name</label>
+                <input asp-for="Name" class="form-control" placeholder="Enter patient name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="Email"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
+            <!-- Phone -->
+            <div class="col-md-6 form-group mb-3">
+                <label asp-for="Phone" class="form-label">Phone</label>
+                <input asp-for="Phone" class="form-control" placeholder="Enter phone number" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="Address"></label>
-        <input asp-for="Address" class="form-control" />
-        <span asp-validation-for="Address" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Image"></label>
-        <input asp-for="Image" class="form-control" type="file" name="file" id="imageInput" accept="image/*" />
-        <span asp-validation-for="Image" class="text-danger"></span>
-        <img id="imgPreview" style="display:none; max-width: 200px; margin-top: 10px;" alt="معاينة الصورة" />
-    </div>
+            <!-- Email -->
+            <div class="col-md-6 form-group mb-3">
+                <label asp-for="Email" class="form-label">Email</label>
+                <input asp-for="Email" class="form-control" placeholder="Enter email address" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="Gender"></label>
-        <select asp-for="Gender" class="form-control"
-                asp-items="Html.GetEnumSelectList<FinalProject.Data.Models.AppModels.Gender>()">
-            <option value="">-- اختر الجنس --</option>
-        </select>
-        <span asp-validation-for="Gender" class="text-danger"></span>
-    </div>
+            <!-- Address -->
+            <div class="col-md-6 form-group mb-3">
+                <label asp-for="Address" class="form-label">Address</label>
+                <input asp-for="Address" class="form-control" placeholder="Enter address" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
 
-    <div class="form-group">
-        <label asp-for="DateOfBirth"></label>
-        <input asp-for="DateOfBirth" class="form-control" type="date" />
-        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-    </div>
+            <!-- Gender -->
+            <div class="col-md-6 form-group mb-3">
+                <label asp-for="Gender" class="form-label">Gender</label>
+                <select asp-for="Gender" class="form-control"
+                        asp-items="Html.GetEnumSelectList<FinalProject.Data.Models.AppModels.Gender>()">
+                    <option value="">-- Select Gender --</option>
+                </select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
 
-    <!-- قسم إضافة الأدوية السابقة -->
-    <h3>إضافة الأدوية السابقة</h3>
-    <div id="medicines-container">
-        <div class="medicine-entry mb-3">
-            <div class="row">
-                <div class="col-md-3">
-                    <label>اسم الدواء</label>
-                    <input type="text" name="PreviousMedicines[0].Name" class="form-control medicine-name" placeholder="اكتب اسم الدواء" required />
-                </div>
-                <div class="col-md-2">
-                    <label>تاريخ البداية</label>
-                    <input type="date" name="PreviousMedicines[0].StartDate" class="form-control" required />
-                </div>
-                <div class="col-md-2">
-                    <label>تاريخ النهاية</label>
-                    <input type="date" name="PreviousMedicines[0].EndDate" class="form-control" required />
-                </div>
-                <div class="col-md-2">
-                    <label>الجرعة</label>
-                    <input type="text" name="PreviousMedicines[0].Dose" class="form-control" placeholder="مثال: 500 ملغ" required />
-                </div>
-                <div class="col-md-2 align-self-end">
-                    <button type="button" class="btn btn-danger remove-medicine">حذف</button>
+            <!-- Date of Birth -->
+            <div class="col-md-6 form-group mb-3">
+                <label asp-for="DateOfBirth" class="form-label">Date of Birth</label>
+                <input asp-for="DateOfBirth" class="form-control" type="date" />
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+
+            <!-- Image -->
+            <div class="col-md-12 form-group mb-3">
+                <label asp-for="Image" class="form-label">Profile Image</label>
+                <input asp-for="Image" class="form-control" type="file" name="file" id="imageInput" accept="image/*" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+                <img id="imgPreview" style="display:none; max-width: 200px; margin-top: 10px;" alt="Image preview" />
+            </div>
+        </div>
+
+        <!-- Previous Medicines Section -->
+        <h3 class="mt-5">Previous Medicines</h3>
+        <div id="medicines-container">
+            <div class="medicine-entry mb-3">
+                <div class="row align-items-end">
+                    <div class="col-md-3">
+                        <label class="form-label">Medicine Name</label>
+                        <input type="text" name="PreviousMedicines[0].Name" class="form-control medicine-name" placeholder="Enter medicine name" required />
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Start Date</label>
+                        <input type="date" name="PreviousMedicines[0].StartDate" class="form-control" required />
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">End Date</label>
+                        <input type="date" name="PreviousMedicines[0].EndDate" class="form-control" required />
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Dose</label>
+                        <input type="text" name="PreviousMedicines[0].Dose" class="form-control" placeholder="e.g. 500mg" required />
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-danger remove-medicine">Remove</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <button type="button" class="btn btn-secondary mt-2" id="add-medicine">إضافة دواء آخر</button>
+        <button type="button" class="btn btn-secondary mt-2" id="add-medicine">Add Another Medicine</button>
 
-    <!-- قسم إضافة الحالات السابقة -->
-    <h3>إضافة الحالات السابقة</h3>
-    <div id="conditions-container">
-        <div class="condition-entry mb-3">
-            <div class="row">
-                <div class="col-md-8">
-                    <label>الحالة</label>
-                    <select name="PreviousConditions[0].Name" class="form-control"
-                            asp-items="Html.GetEnumSelectList<FinalProject.Data.Models.AppModels.Name>()">
-                        <option value="">-- اختر الحالة --</option>
-                    </select>
-                </div>
-                <div class="col-md-4 align-self-end">
-                    <button type="button" class="btn btn-danger remove-condition">حذف</button>
+        <!-- Previous Conditions Section -->
+        <h3 class="mt-5">Previous Conditions</h3>
+        <div id="conditions-container">
+            <div class="condition-entry mb-3">
+                <div class="row align-items-end">
+                    <div class="col-md-8">
+                        <label class="form-label">Condition</label>
+                        <select name="PreviousConditions[0].Name" class="form-control"
+                                asp-items="Html.GetEnumSelectList<FinalProject.Data.Models.AppModels.Name>()">
+                            <option value="">-- Select Condition --</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-danger remove-condition">Remove</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <button type="button" class="btn btn-secondary mt-2" id="add-condition">إضافة حالة أخرى</button>
+        <button type="button" class="btn btn-secondary mt-2" id="add-condition">Add Another Condition</button>
 
-    <button type="submit" class="btn btn-primary mt-3">حفظ</button>
-</form>
+        <!-- Submit Button -->
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary btn-lg">Save</button>
+        </div>
+    </form>
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="~/css/patient-create.css" />
 
     <script>
-        // معاينة الصورة
         function previewImage(event) {
             const imgPreview = document.getElementById('imgPreview');
             const file = event.target.files[0];
@@ -125,23 +140,21 @@
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     imgPreview.src = e.target.result;
-                    imgPreview.style.display = 'block'; // إظهار الصورة
+                    imgPreview.style.display = 'block';
                 };
                 reader.readAsDataURL(file);
             } else {
                 imgPreview.src = '';
-                imgPreview.style.display = 'none'; // إخفاء الصورة إذا مفيش ملف
+                imgPreview.style.display = 'none';
             }
         }
 
         $(document).ready(function () {
-            // ربط حدث change بحقل الصورة
             $('#imageInput').on('change', previewImage);
 
             let medicineIndex = 1;
             let conditionIndex = 1;
 
-            // باقي السكربت الخاص بالـ autocomplete والأدوية والحالات (يظل كما هو)
             function initializeAutocomplete(element) {
                 element.autocomplete({
                     source: function (request, response) {
@@ -165,25 +178,25 @@
             $("#add-medicine").click(function () {
                 let newMedicine = `
                     <div class="medicine-entry mb-3">
-                        <div class="row">
+                        <div class="row align-items-end">
                             <div class="col-md-3">
-                                <label>اسم الدواء</label>
-                                <input type="text" name="PreviousMedicines[${medicineIndex}].Name" class="form-control medicine-name" placeholder="اكتب اسم الدواء" required />
+                                <label class="form-label">Medicine Name</label>
+                                <input type="text" name="PreviousMedicines[${medicineIndex}].Name" class="form-control medicine-name" placeholder="Enter medicine name" required />
                             </div>
                             <div class="col-md-2">
-                                <label>تاريخ البداية</label>
+                                <label class="form-label">Start Date</label>
                                 <input type="date" name="PreviousMedicines[${medicineIndex}].StartDate" class="form-control" required />
                             </div>
                             <div class="col-md-2">
-                                <label>تاريخ النهاية</label>
+                                <label class="form-label">End Date</label>
                                 <input type="date" name="PreviousMedicines[${medicineIndex}].EndDate" class="form-control" required />
                             </div>
                             <div class="col-md-2">
-                                <label>الجرعة</label>
-                                <input type="text" name="PreviousMedicines[${medicineIndex}].Dose" class="form-control" placeholder="مثال: 500 ملغ" required />
+                                <label class="form-label">Dose</label>
+                                <input type="text" name="PreviousMedicines[${medicineIndex}].Dose" class="form-control" placeholder="e.g. 500mg" required />
                             </div>
-                            <div class="col-md-2 align-self-end">
-                                <button type="button" class="btn btn-danger remove-medicine">حذف</button>
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-danger remove-medicine">Remove</button>
                             </div>
                         </div>
                     </div>`;
@@ -195,19 +208,19 @@
             $("#add-condition").click(function () {
                 let newCondition = `
                     <div class="condition-entry mb-3">
-                        <div class="row">
+                        <div class="row align-items-end">
                             <div class="col-md-8">
-                                <label>الحالة</label>
+                                <label class="form-label">Condition</label>
                                 <select name="PreviousConditions[${conditionIndex}].Name" class="form-control">
-                                    <option value="">-- اختر الحالة --</option>
+                                    <option value="">-- Select Condition --</option>
                                     @foreach (var condition in Enum.GetValues(typeof(FinalProject.Data.Models.AppModels.Name)))
                                     {
                                         <option value="@condition">@condition</option>
                                     }
                                 </select>
                             </div>
-                            <div class="col-md-4 align-self-end">
-                                <button type="button" class="btn btn-danger remove-condition">حذف</button>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-danger remove-condition">Remove</button>
                             </div>
                         </div>
                     </div>`;
@@ -223,11 +236,12 @@
                 $(this).closest(".condition-entry").remove();
             });
         });
+
         $(function () {
-                     @if (TempData["Error"] != null)
-             {
-                 <text>toastr.error('@TempData["Error"]');</text>
-             }
+            @if (TempData["Error"] != null)
+            {
+                <text>toastr.error('@TempData["Error"]');</text>
+            }
         });
     </script>
 }

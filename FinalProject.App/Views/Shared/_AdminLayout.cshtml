@@ -41,13 +41,13 @@
             <div class="sidebar-logo">
                 <!-- Logo Header -->
                 <div class="logo-header" data-background-color="dark">
-                    <a href="/Customer/Home" class="big-logo">
+                    <a href="/Customer/Home" class="navbar-brand">
                         <img src="~/images/icon.png"
-                             alt="navbar brand"
-                             style="padding-top:10px"
-                             class="navbar-brand"
-                             height="80" />
+                             alt="Logo"
+                             height="50"
+                             class="d-inline-block align-text-top" />
                     </a>
+
                     <button class="topbar-toggler more">
                         <i class="gg-more-vertical-alt"></i>
                     </button>
@@ -72,10 +72,15 @@
                             <div class="collapse" id="base">
                                 <ul class="nav nav-collapse">
                                     <li>
+                                        <a href="/Admin/User/Index">
+                                            <span class="sub-item">Users</span>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="/Admin/Doctor/Index">
                                             <span class="sub-item">Doctors</span>
                                         </a>
-                                    </li> 
+                                    </li>
                                     <li>
                                         <a href="/Admin/Patient/Index">
                                             <span class="sub-item">Patients</span>
@@ -87,15 +92,16 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="/Admin/Department/Index">
+                                            <span class="sub-item">Departments</span>
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="/Admin/Appointment/Index">
                                             <span class="sub-item">Appointments</span>
                                         </a>
-                                    </li>   
-                                    <li>
-                                        <a href="/Admin/User/Index">
-                                            <span class="sub-item">Users</span>
-                                        </a>
                                     </li>
+
                                 </ul>
                             </div>
                         </li>

@@ -1,141 +1,180 @@
 ﻿@model FinalProject.Core.Feature.Doctor.Command.Models.AddDoctorCommand
 
 @{
-    ViewData["Title"] = "إضافة دكتور جديد";
+    ViewData["Title"] = "Add New Doctor";
 }
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4">إضافة دكتور جديد</h2>
+    <h2 class="text-center mb-4">Add New Doctor</h2>
 
-    <form asp-action="Create" method="post" enctype="multipart/form-data">
+    <form asp-action="Create" method="post" enctype="multipart/form-data" class="patient-form">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-        <!-- الاسم -->
-        <div class="form-group mb-3">
-            <label asp-for="Name" class="form-label"></label>
-            <input asp-for="Name" class="form-control" />
-            <span asp-validation-for="Name" class="text-danger"></span>
-        </div>
-
-        <!-- التفاصيل -->
-        <div class="form-group mb-3">
-            <label asp-for="Details" class="form-label"></label>
-            <textarea asp-for="Details" class="form-control" rows="4"></textarea>
-            <span asp-validation-for="Details" class="text-danger"></span>
-        </div>
-
-        <!-- الهاتف -->
-        <div class="form-group mb-3">
-            <label asp-for="Phone" class="form-label"></label>
-            <input asp-for="Phone" class="form-control" />
-            <span asp-validation-for="Phone" class="text-danger"></span>
-        </div>
-
-        <!-- الصورة -->
-        <div class="mb-3">
-            <label for="Image" class="form-label">Doctor Img</label>
-            <input asp-for="Image" type="file" name="file" class="form-control" accept="image/*" onchange="previewImage(event)">
-            <div class="mt-3">
-                <img id="imgPreview" src="#" alt="Image Preview" style="max-width: 20%; height: 5%;object-fit:cover;  display: none;" />
+        <div class="row">
+            <!-- Name -->
+            <div class="col-md-6 form-group mb-3">
+                <label asp-for="Name" class="form-label">Name</label>
+                <input asp-for="Name" class="form-control" placeholder="Enter doctor name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <span class="text-danger" asp-validation-for="Image"></span>
+
+            <!-- Phone -->
+            <div class="col-md-6 form-group mb-3">
+                <label asp-for="Phone" class="form-label">Phone</label>
+                <input asp-for="Phone" class="form-control" placeholder="Enter phone number" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+
+            <!-- Email -->
+            <div class="col-md-6 form-group mb-3">
+                <label asp-for="Email" class="form-label">Email</label>
+                <input asp-for="Email" class="form-control" type="email" placeholder="Enter email address" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <!-- Gender -->
+            <div class="col-md-6 form-group mb-3">
+                <label asp-for="Gender" class="form-label">Gender</label>
+                <select asp-for="Gender" class="form-control" asp-items="Html.GetEnumSelectList<FinalProject.Data.Models.AppModels.Gender>()">
+                    <option value="">-- Select Gender --</option>
+                </select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+
+            <!-- Department -->
+            <div class="col-md-6 form-group mb-3">
+                <label asp-for="DepatrmentId" class="form-label">Department</label>
+                <select asp-for="DepatrmentId" class="form-control">
+                    <option value="">-- Select Department --</option>
+                    @foreach (var item in ViewData["Departments"] as List<Department>)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="DepatrmentId" class="text-danger"></span>
+            </div>
+
+            <!-- Image -->
+            <div class="col-md-6 form-group mb-3">
+                <label asp-for="Image" class="form-label">Doctor Image</label>
+                <input asp-for="Image" type="file" name="file" class="form-control" accept="image/*" id="imageInput" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+                <img id="imgPreview" style="display:none; max-width: 200px; margin-top: 10px;" alt="Image preview" />
+            </div>
+
+            <!-- Details -->
+            <div class="col-md-12 form-group mb-3">
+                <label asp-for="Details" class="form-label">Details</label>
+                <textarea asp-for="Details" class="form-control" rows="4" placeholder="Enter doctor details"></textarea>
+                <span asp-validation-for="Details" class="text-danger"></span>
+            </div>
         </div>
 
-        <!-- البريد الإلكتروني -->
-        <div class="form-group mb-3">
-            <label asp-for="Email" class="form-label"></label>
-            <input asp-for="Email" class="form-control" type="email" />
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-
-        <!-- الجنس -->
-        <div class="form-group mb-3">
-            <label asp-for="Gender" class="form-label"></label>
-            <select asp-for="Gender" class="form-control" asp-items="Html.GetEnumSelectList<FinalProject.Data.Models.AppModels.Gender>()"></select>
-            <span asp-validation-for="Gender" class="text-danger"></span>
-        </div>
-
-        <!-- القسم -->
-        <div class="form-group mb-3">
-            <label asp-for="DepatrmentId" class="form-label">القسم</label>
-            <select asp-for="DepatrmentId" class="form-control">
-                <option value="">اختر قسم</option>
-                @foreach (var item in ViewData["Departments"] as List<Department>)
-                {
-                    <option value="@item.Id">@item.Name</option>
-                }
-            </select>
-            <span asp-validation-for="DepatrmentId" class="text-danger"></span>
-        </div>
-
-
-        <!-- المواعيد -->
-        <h4 class="mt-4">المواعيد</h4>
+        <!-- Schedules Section -->
+        <h3 class="mt-5">Schedules</h3>
         <div id="schedules-container" class="mb-3">
-            <!-- هنا هيتم إضافة المواعيد ديناميكيًا -->
+            <div class="schedule-item mb-3">
+                <div class="row align-items-end">
+                    <div class="col-md-4">
+                        <label class="form-label">Day</label>
+                        <select name="DoctorSchedules[0].Day" class="form-control">
+                            <option value="">-- Select Day --</option>
+                            <option value="Sunday">Sunday</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Start Time</label>
+                        <input type="time" name="DoctorSchedules[0].StartTime" class="form-control" />
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">End Time</label>
+                        <input type="time" name="DoctorSchedules[0].EndTime" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-danger remove-schedule">Remove</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <button type="button" class="btn btn-outline-primary mb-3" onclick="addSchedule()">إضافة موعد</button>
+        <button type="button" class="btn btn-secondary mt-2" id="add-schedule">Add Another Schedule</button>
 
-        <!-- أزرار التحكم -->
-        <div class="form-group mt-4">
-            <button type="submit" class="btn btn-primary">إضافة الدكتور</button>
-            <a asp-action="Index" class="btn btn-secondary">رجوع</a>
+        <!-- Action Buttons -->
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary btn-lg">Add Doctor</button>
+            <a asp-action="Index" class="btn btn-secondary btn-lg">Back</a>
         </div>
     </form>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <link rel="stylesheet" href="~/css/patient-create.css" />
+
     <script>
-        let scheduleIndex = 0;
-
-        function addSchedule() {
-            const container = document.getElementById('schedules-container');
-            const scheduleHtml = `
-                    <div class="schedule-item mb-3 border p-3" data-index="${scheduleIndex}">
-                        <div class="form-group">
-                            <label>اليوم</label>
-                            <select name="DoctorSchedules[${scheduleIndex}].Day" class="form-control">
-                                <option value="Sunday">الأحد</option>
-                                <option value="Monday">الإثنين</option>
-                                <option value="Tuesday">الثلاثاء</option>
-                                <option value="Wednesday">الأربعاء</option>
-                                <option value="Thursday">الخميس</option>
-                                <option value="Friday">الجمعة</option>
-                                <option value="Saturday">السبت</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>وقت البداية</label>
-                            <input type="time" name="DoctorSchedules[${scheduleIndex}].StartTime" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label>وقت النهاية</label>
-                            <input type="time" name="DoctorSchedules[${scheduleIndex}].EndTime" class="form-control" />
-                        </div>
-                        <button type="button" class="btn btn-danger btn-sm" onclick="removeSchedule(this)">حذف</button>
-                    </div>`;
-            container.insertAdjacentHTML('beforeend', scheduleHtml);
-            scheduleIndex++;
+        function previewImage(event) {
+            const imgPreview = document.getElementById('imgPreview');
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    imgPreview.src = e.target.result;
+                    imgPreview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                imgPreview.src = '';
+                imgPreview.style.display = 'none';
+            }
         }
 
-        function removeSchedule(button) {
-            button.closest('.schedule-item').remove();
-        }
-            function previewImage(event) {
-                const imgPreview = document.getElementById('imgPreview');
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        imgPreview.src = e.target.result;
-                        imgPreview.style.display = 'block';
-                    }
-                    reader.readAsDataURL(file);
-                } else {
-                    imgPreview.style.display = 'none';
-                    imgPreview.src = '';
-                }
-        }
+        $(document).ready(function () {
+            $('#imageInput').on('change', previewImage);
+
+            let scheduleIndex = 1;
+
+            $("#add-schedule").click(function () {
+                let newSchedule = `
+                        <div class="schedule-item mb-3">
+                            <div class="row align-items-end">
+                                <div class="col-md-4">
+                                    <label class="form-label">Day</label>
+                                    <select name="DoctorSchedules[${scheduleIndex}].Day" class="form-control">
+                                        <option value="">-- Select Day --</option>
+                                        <option value="Sunday">Sunday</option>
+                                        <option value="Monday">Monday</option>
+                                        <option value="Tuesday">Tuesday</option>
+                                        <option value="Wednesday">Wednesday</option>
+                                        <option value="Thursday">Thursday</option>
+                                        <option value="Friday">Friday</option>
+                                        <option value="Saturday">Saturday</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Start Time</label>
+                                    <input type="time" name="DoctorSchedules[${scheduleIndex}].StartTime" class="form-control" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">End Time</label>
+                                    <input type="time" name="DoctorSchedules[${scheduleIndex}].EndTime" class="form-control" />
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-danger remove-schedule">Remove</button>
+                                </div>
+                            </div>
+                        </div>`;
+                $("#schedules-container").append(newSchedule);
+                scheduleIndex++;
+            });
+
+            $(document).on("click", ".remove-schedule", function () {
+                $(this).closest(".schedule-item").remove();
+            });
+        });
     </script>
 }

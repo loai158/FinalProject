@@ -61,6 +61,7 @@ namespace FinalProject.App.Areas.Admin.Controllers
             if (doctorId == -1)
             {
                 TempData["ErrorMessage"] = " الاسم موجود  بالفعل";
+                ViewData["Departments"] = _departmentServices.getAll().ToList();
                 return View();
             }
 

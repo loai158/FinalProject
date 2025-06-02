@@ -1,0 +1,67 @@
+﻿@model FinalProject.Data.Models.AppModels.Department
+@{
+    ViewData["Title"] = "Edit Department";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Edit Department</h2>
+
+    <form asp-action="Edit" asp-controller="Department" asp-area="Admin" method="post" class="patient-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <!-- Hidden field for Id -->
+        <input type="hidden" asp-for="Id" />
+
+        <div class="row">
+            <!-- Fields -->
+            <div class="col-md-12">
+                <div class="row">
+                    <!-- Name -->
+                    <div class="col-md-6 form-group mb-3">
+                        <label asp-for="Name" class="form-label">Department Name</label>
+                        <input asp-for="Name" class="form-control" placeholder="Enter department name" required />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="col-md-6 form-group mb-3">
+                        <label asp-for="Location" class="form-label">Location</label>
+                        <input asp-for="Location" class="form-control" placeholder="Enter department location" />
+                        <span asp-validation-for="Location" class="text-danger"></span>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="col-md-12 form-group mb-3">
+                        <label asp-for="Description" class="form-label">Description</label>
+                        <textarea asp-for="Description" class="form-control" rows="4" placeholder="Enter department description"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary btn-lg">Save Changes</button>
+            <a asp-action="Index" asp-controller="Department" asp-area="Admin" class="btn btn-secondary btn-lg">Cancel</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <link rel="stylesheet" href="~/css/patient-create.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Display error messages with toastr
+            @if (TempData["Error"] != null)
+            {
+                <text>toastr.error('@TempData["Error"]');</text>
+            }
+        });
+    </script>
+}
