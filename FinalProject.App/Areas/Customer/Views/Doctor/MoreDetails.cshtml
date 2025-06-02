@@ -1,84 +1,121 @@
 ﻿@model IEnumerable<FinalProject.Data.Models.AppModels.Doctor>
 
-<div class="row mt-4">
-    @if (!Model.Any())
-    {
-        <div class="col-12 text-center py-5">
-            <div class="alert alert-info">
-                <i class="fas fa-info-circle fa-2x mb-3"></i>
-                <h3>No doctors found</h3>
-                <p class="mb-0">Please check back later or try a different search.</p>
+<div class="doctors-listing">
+    <div class="container">
+        @if (!Model.Any())
+        {
+            <div class="empty-state text-center py-5">
+                <div class="empty-state-icon">
+                    <i class="fas fa-user-md fa-4x text-muted"></i>
+                </div>
+                <h3 class="mt-4 fw-bold">No Doctors Found</h3>
+                <p class="text-muted mb-4">We couldn't find any doctors matching your criteria.</p>
+                <a href="/" class="btn btn-primary px-4">
+                    <i class="fas fa-arrow-left me-2"></i> Back to Home
+                </a>
             </div>
-        </div>
-    }
+        }
 
-    @foreach (var item in Model)
-    {
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card doctor-card h-100 border-0 shadow-sm hover-shadow transition-all">
-                <div class="card-img-top position-relative overflow-hidden" style="height: 280px;">
-                    <img src="~/images/Doctors/@item.Image" class="w-100 h-100 object-fit-cover" alt="@item.Name" onerror="this.src='/images/default-doctor.jpg'">
-                    <div class="department-badge">
-                        <span class="badge bg-primary">@item.Department.Name</span>
-                    </div>
-                </div>
-
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <h4 class="card-title text-dark mb-0">Dr. @item.Name</h4>
-                        <span class="gender-badge badge @(item.Gender.ToString() == "Male" ? "bg-info" : "bg-pink")">
-                            <i class="fas @(item.Gender.ToString() == "Male" ? "fa-mars" : "fa-venus")"></i>
-                        </span>
-                    </div>
-
-                    <div class="doctor-info mb-3">
-                        <div class="info-item">
-                            <i class="fas fa-envelope text-secondary me-2"></i>
-                            <span class="text-dark">@item.Email</span>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-phone-alt text-secondary me-2"></i>
-                            <span class="text-dark">@item.Phone</span>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-money-bill text-success me-2"></i>
-
-                            <span class="text-dark">Intial : @item.IntialPrice</span>
-                        </div>
-                        <div class="info-item">
-                            <i class="fas fa-money-bill text-success me-2"></i>
-
-                            <span class="text-dark">FollowUp : @item.FollowUpPrice</span>
-                        </div>
-                    </div>
-
-                    <div class="bio-section mb-3">
-                        <h6 class="text-muted mb-2">About</h6>
-                        <p class="bio-text text-dark">@(string.IsNullOrEmpty(item.Details) ? "No bio available" : item.Details)</p>
-                    </div>
-
-                    <div class="schedule-section">
-                        <h6 class="text-muted mb-2">Availability</h6>
-                        @if (item.DoctorSchedules != null && item.DoctorSchedules.Any())
-                        {
-                            <div class="schedule-days">
-                                @foreach (var schedule in item.DoctorSchedules)
-                                {
-                                    <div class="day-time mb-1">
-                                        <span class="day-badge">@schedule.Day</span>
-                                        <span class="time-slot text-dark">
-                                            @schedule.StartTime.ToString(@"hh\:mm") - @schedule.EndTime.ToString(@"hh\:mm")
-                                        </span>
-                                    </div>
-                                }
+        <div class="row gy-4">
+            @foreach (var item in Model)
+            {
+                <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="doctor-profile-card">
+                        <!-- Doctor Header with Image -->
+                        <div class="doctor-header">
+                            <div class="doctor-avatar">
+                                <img src="@Url.Content(!string.IsNullOrEmpty(item.Image) ? "~/images/Doctors/" + item.Image : "~/images/default-doctor.png")"
+                                     
+                                     class="img-fluid"
+                                     onerror="this.onerror=null;this.src='/images/default-doctor.png'">
                             </div>
-                        }
-                        else
-                        {
-                            <div class="text-muted small">Schedule not available</div>
-                        }
+                            <div class="doctor-badges">
+                                <span class="department-badge">
+                                    <i class="fas fa-stethoscope me-1"></i> @item.Department.Name
+                                </span>
+                                <span class="gender-badge @(item.Gender.ToString().ToLower())">
+                                    <i class="fas @(item.Gender.ToString() == "Male" ? "fa-mars" : "fa-venus")"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Doctor Body -->
+                        <div class="doctor-body">
+                            <h3 class="doctor-name">Dr. @item.Name</h3>
+                            <div class="doctor-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="rating-value">4.8</span>
+                            </div>
+
+                            <div class="doctor-contact">
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <span>@item.Email</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-phone-alt"></i>
+                                    <span>@item.Phone</span>
+                                </div>
+                            </div>
+
+                            <div class="doctor-pricing">
+                                <div class="price-item">
+                                    <span class="price-label">Initial</span>
+                                    <span class="price-value">$@item.IntialPrice</span>
+                                </div>
+                                <div class="price-item">
+                                    <span class="price-label">Follow Up</span>
+                                    <span class="price-value">$@item.FollowUpPrice</span>
+                                </div>
+                            </div>
+
+                            <div class="doctor-bio">
+                                <p>@(string.IsNullOrEmpty(item.Details) ? "Professional healthcare provider with extensive experience." : item.Details)</p>
+                            </div>
+                        </div>
+
+                        <!-- Doctor Footer -->
+                        <div class="doctor-footer">
+                            <a href="/Customer/Patient/Create?doctorId=@item.Id" class="btn btn-primary btn-book">
+                                <i class="far fa-calendar-check me-2"></i> Book Appointment
+                            </a>
+                            <a href="/Customer/Chat/Index?doctorId=@item.Id" class="btn btn-outline-primary btn-chat">
+                                <i class="fas fa-comments me-2"></i> Chat Now
+                            </a>
+                        </div>
+
+                        <!-- Schedule Popup (Hidden by default) -->
+                        <div class="schedule-popup">
+                            <h4>Availability</h4>
+                            @if (item.DoctorSchedules != null && item.DoctorSchedules.Any())
+                            {
+                                <div class="schedule-list">
+                                    @foreach (var schedule in item.DoctorSchedules)
+                                    {
+                                        <div class="schedule-item">
+                                            <span class="day">@schedule.Day</span>
+                                            <span class="time">@schedule.StartTime.ToString(@"hh\:mm") - @schedule.EndTime.ToString(@"hh\:mm")</span>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <p class="text-muted">No schedule available</p>
+                            }
+                            <button class="btn btn-close-popup">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
+            }
 
                 <div class="card-footer bg-white border-0 pt-0 pb-3">
                     <a href="/Customer/Patient/Create?doctorId=@item.Id" class="btn btn-primary w-100 py-2 mb-2">
@@ -94,102 +131,323 @@
 
             </div>
         </div>
-    }
+    </div>
 </div>
 
 <style>
-    .doctor-card {
-        border-radius: 12px;
-        overflow: hidden;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        background-color: #f8f9fa;
+    /* Main Styles */
+    .doctors-listing {
+        padding: 3rem 0;
+        background-color: #f8fafc;
     }
 
-        .doctor-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    /* Doctor Card */
+    .doctor-profile-card {
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        position: relative;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+        .doctor-profile-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
         }
 
-    .department-badge {
-        position: absolute;
-        top: 15px;
-        left: 15px;
+    /* Doctor Header */
+    .doctor-header {
+        position: relative;
+        height: 200px;
+        overflow: hidden;
     }
 
-    .gender-badge {
-        border-radius: 50%;
-        width: 28px;
-        height: 28px;
+    .doctor-avatar {
+        height: 100%;
+        width: 100%;
+        background-color: #e2e8f0;
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
-    .bg-pink {
-        background-color: #ff6b9d;
-    }
+        .doctor-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-    .info-item {
+    .doctor-badges {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        right: 15px;
         display: flex;
-        align-items: center;
-        margin-bottom: 8px;
+        justify-content: space-between;
     }
 
-    .bio-text {
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        color: #343a40;
-    }
-
-    .schedule-days {
-        max-height: 120px;
-        overflow-y: auto;
-        padding-right: 8px;
-    }
-
-    .day-time {
-        display: flex;
-        align-items: center;
-        margin-bottom: 6px;
-    }
-
-    .day-badge {
-        background: #e9ecef;
-        color: #495057;
-        padding: 3px 8px;
-        border-radius: 4px;
+    .department-badge {
+        background: rgba(59, 130, 246, 0.9);
+        color: white;
+        padding: 6px 12px;
+        border-radius: 20px;
         font-size: 0.8rem;
-        min-width: 70px;
-        text-align: center;
-        margin-right: 10px;
         font-weight: 500;
     }
 
-    .time-slot {
+    .gender-badge {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+    }
+
+        .gender-badge.male {
+            background: #3b82f6;
+        }
+
+        .gender-badge.female {
+            background: #ec4899;
+        }
+
+    /* Doctor Body */
+    .doctor-body {
+        padding: 1.5rem;
+        flex-grow: 1;
+    }
+
+    .doctor-name {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: #1e293b;
+    }
+
+    .doctor-rating {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .stars {
+        color: #f59e0b;
+        margin-right: 8px;
+    }
+
+    .rating-value {
+        font-weight: 600;
+        color: #64748b;
+    }
+
+    .doctor-contact {
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+        color: #475569;
+    }
+
+        .contact-item i {
+            margin-right: 8px;
+            color: #94a3b8;
+            width: 20px;
+            text-align: center;
+        }
+
+    .doctor-pricing {
+        display: flex;
+        background: #f1f5f9;
+        border-radius: 10px;
+        padding: 12px;
+        margin-bottom: 1.5rem;
+    }
+
+    .price-item {
+        flex: 1;
+        text-align: center;
+    }
+
+    .price-label {
+        display: block;
+        font-size: 0.8rem;
+        color: #64748b;
+    }
+
+    .price-value {
+        display: block;
+        font-weight: 700;
+        color: #1e293b;
+    }
+
+    .doctor-bio {
+        color: #475569;
         font-size: 0.9rem;
-        color: #212529;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
     }
 
-    .hover-shadow {
-        box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        .doctor-bio p {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 0;
+        }
+
+    /* Doctor Footer */
+    .doctor-footer {
+        padding: 0 1.5rem 1.5rem;
+        margin-top: auto;
     }
 
-    .transition-all {
+    .btn-book, .btn-chat {
+        width: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        font-weight: 500;
+        margin-bottom: 10px;
         transition: all 0.3s ease;
     }
 
-    .object-fit-cover {
-        object-fit: cover;
+        .btn-book:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .btn-chat:hover {
+            background: #e0e7ff;
+            transform: translateY(-2px);
+        }
+
+    /* Schedule Popup */
+    .schedule-popup {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: white;
+        padding: 1.5rem;
+        z-index: 10;
+        border-radius: 16px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        transform: translateY(10px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     }
 
-    .card-body {
-        background-color: #ffffff;
+        .schedule-popup.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .schedule-popup h4 {
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+    .schedule-list {
+        max-height: 200px;
+        overflow-y: auto;
     }
 
-    .text-dark {
-        color: #212529 !important;
+    .schedule-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .day {
+        font-weight: 500;
+        color: #1e293b;
+    }
+
+    .time {
+        color: #64748b;
+    }
+
+    .btn-close-popup {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: none;
+        border: none;
+        font-size: 1.2rem;
+        color: #64748b;
+        cursor: pointer;
+    }
+
+    /* Empty State */
+    .empty-state {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .empty-state-icon {
+        margin-bottom: 1.5rem;
+    }
+
+    /* Dark Mode */
+    body.dark-mode .doctors-listing {
+        background-color: #0f172a;
+    }
+
+    body.dark-mode .doctor-profile-card {
+        background-color: #1e293b;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    body.dark-mode .doctor-name,
+    body.dark-mode .price-value,
+    body.dark-mode .day {
+        color: #f8fafc;
+    }
+
+    body.dark-mode .doctor-bio,
+    body.dark-mode .contact-item,
+    body.dark-mode .time {
+        color: #cbd5e1;
+    }
+
+    body.dark-mode .doctor-pricing {
+        background-color: #334155;
+    }
+
+    body.dark-mode .rating-value,
+    body.dark-mode .price-label {
+        color: #94a3b8;
+    }
+
+    body.dark-mode .btn-chat:hover {
+        background-color: #334155;
     }
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Schedule popup functionality can be added here
+        // Example: document.querySelector('.btn-view-schedule').addEventListener('click', function() {
+        //     this.closest('.doctor-profile-card').querySelector('.schedule-popup').classList.add('active');
+        // });
+
+        // document.querySelectorAll('.btn-close-popup').forEach(btn => {
+        //     btn.addEventListener('click', function() {
+        //         this.closest('.schedule-popup').classList.remove('active');
+        //     });
+        // });
+    });
+</script>
