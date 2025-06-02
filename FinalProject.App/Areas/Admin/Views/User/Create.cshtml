@@ -77,6 +77,16 @@
                                     <option value="@role.Name">@role.Name</option>
                                 }
                             </select>
+                        </div>   
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Select Department</label>
+                            <select name="departmentId" class="form-select">
+                                @foreach (var dep in ViewBag.deps)
+                                {
+                                    <option value="@dep.Id">@dep.Name</option>
+                                }
+                            </select>
                         </div>
 
                         <div class="form-check mb-3">

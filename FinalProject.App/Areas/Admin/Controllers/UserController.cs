@@ -6,6 +6,7 @@ using FinalProject.Data.Models.SendEmailModel;
 using FinalProject.Infrastructure.IRepositry;
 using FinalProject.Infrastructure.Repositry;
 using FinalProject.Infrastructure.UnitOfWorks;
+using FinalProject.Services.Abstracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -26,12 +27,13 @@ namespace FinalProject.App.Areas.Admin.Controllers
         private readonly IPatientRepositry _patientRepositry;
         private readonly INurseRepositry _nurseRepositry;
         private readonly IEmailSettings _emailSettings;
+        private readonly IDepartmentServices _departmentServices;
 
         public UserController(UserManager<ApplicationUser> userManager,
           RoleManager<IdentityRole> roleManager, IUnitOfWork unitOfWork,
             IApplicationUserRepository applicationUser, IDoctorRepositry doctorRepositry,
             IPatientRepositry patientRepositry, INurseRepositry nurseRepositry,
-            IEmailSettings emailSettings
+            IEmailSettings emailSettings,IDepartmentServices departmentServices
             )
         {
             this._userManager = userManager;
@@ -42,6 +44,7 @@ namespace FinalProject.App.Areas.Admin.Controllers
             this._patientRepositry = patientRepositry;
             this._nurseRepositry = nurseRepositry;
             this._emailSettings = emailSettings;
+            this._departmentServices = departmentServices;
         }
         [HttpGet]
         public IActionResult Index(string query, int page = 1)
@@ -100,11 +103,13 @@ namespace FinalProject.App.Areas.Admin.Controllers
         {
             var roles = _roleManager.Roles.ToList();
             ViewBag.roles = roles;
+            var deps = _departmentServices.getAll();
+            ViewBag.deps = deps;
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(PatientRegisterVM registerVM, string RoleType)
+        public async Task<IActionResult> Create(PatientRegisterVM registerVM, string RoleType ,int departmentId)
         {
             if (ModelState.IsValid)
             {
@@ -134,7 +139,7 @@ namespace FinalProject.App.Areas.Admin.Controllers
                             IdentityUserId = applicationUser.Id,
                             ApplicationUser = applicationUser,
                             Image = registerVM.Image,
-                            DepartmentId = 1,
+                            DepartmentId = departmentId,
                             IntialPrice = 0,
                             FollowUpPrice = 0,
                             Details = "Default details"
@@ -175,7 +180,7 @@ namespace FinalProject.App.Areas.Admin.Controllers
                             IdentityUserId = applicationUser.Id,
                             ApplicationUser = applicationUser,
                             Image = registerVM.Image,
-                            DepartmentId = 1
+                            DepartmentId =departmentId
                         };
 
                         await _nurseRepositry.Create(nurse);

@@ -1,0 +1,17 @@
+C:\Users\user\Desktop\final2\FinalProject\FinalProject.Services\bin\Debug\net8.0\FinalProject.Services.deps.json
+C:\Users\user\Desktop\final2\FinalProject\FinalProject.Services\bin\Debug\net8.0\FinalProject.Services.dll
+C:\Users\user\Desktop\final2\FinalProject\FinalProject.Services\bin\Debug\net8.0\FinalProject.Services.pdb
+C:\Users\user\Desktop\final2\FinalProject\FinalProject.Services\bin\Debug\net8.0\FinalProject.Data.dll
+C:\Users\user\Desktop\final2\FinalProject\FinalProject.Services\bin\Debug\net8.0\FinalProject.Infrastructure.dll
+C:\Users\user\Desktop\final2\FinalProject\FinalProject.Services\bin\Debug\net8.0\FinalProject.Data.pdb
+C:\Users\user\Desktop\final2\FinalProject\FinalProject.Services\bin\Debug\net8.0\FinalProject.Infrastructure.pdb
+C:\Users\user\Desktop\final2\FinalProject\FinalProject.Services\obj\Debug\net8.0\FinalProject.Services.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\final2\FinalProject\FinalProject.Services\obj\Debug\net8.0\FinalProject.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\final2\FinalProject\FinalProject.Services\obj\Debug\net8.0\FinalProject.Services.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\final2\FinalProject\FinalProject.Services\obj\Debug\net8.0\FinalProject.Services.AssemblyInfo.cs
+C:\Users\user\Desktop\final2\FinalProject\FinalProject.Services\obj\Debug\net8.0\FinalProject.Services.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\final2\FinalProject\FinalProject.Services\obj\Debug\net8.0\FinalPro.C7476B36.Up2Date
+C:\Users\user\Desktop\final2\FinalProject\FinalProject.Services\obj\Debug\net8.0\FinalProject.Services.dll
+C:\Users\user\Desktop\final2\FinalProject\FinalProject.Services\obj\Debug\net8.0\refint\FinalProject.Services.dll
+C:\Users\user\Desktop\final2\FinalProject\FinalProject.Services\obj\Debug\net8.0\FinalProject.Services.pdb
+C:\Users\user\Desktop\final2\FinalProject\FinalProject.Services\obj\Debug\net8.0\ref\FinalProject.Services.dll
