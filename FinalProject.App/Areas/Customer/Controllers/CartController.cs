@@ -9,7 +9,6 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Stripe.Checkout;
-using System.Threading.Tasks;
 
 namespace FinalProject.App.Areas.Customer.Controllers
 {
@@ -26,7 +25,7 @@ namespace FinalProject.App.Areas.Customer.Controllers
 
         public CartController(IMediator mediator, UserManager<ApplicationUser> userManager,
             IDoctorServices doctorServices, IDepartmentServices departmentServices,
-            IAppointmentServices appointmentServices, IPatientServices patientServices ,IUnitOfWork unitOfWork)
+            IAppointmentServices appointmentServices, IPatientServices patientServices, IUnitOfWork unitOfWork)
         {
             this._mediator = mediator;
             this._doctorServices = doctorServices;
@@ -60,6 +59,8 @@ namespace FinalProject.App.Areas.Customer.Controllers
         {
             var Dr = await _doctorServices.GetById(doctorId);
             ViewBag.Dr = Dr;
+            var schedule = Dr.DoctorSchedules.Where(s => s.IsAvailable).ToList();
+            ViewBag.Schedule = schedule;
             var patient = await _patientServices.GetById(patientId);
             ViewBag.Patient = patient;
             return View();
@@ -271,4 +272,4 @@ namespace FinalProject.App.Areas.Customer.Controllers
 
 
     }
-    }
+}

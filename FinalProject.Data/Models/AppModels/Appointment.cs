@@ -15,6 +15,7 @@
         public Perscribtion? Perscribtion { get; set; }
         public int ScheduleId { get; set; }
         public DoctorSchedule Schedule { get; set; }
+        public decimal Price { get; set; }
 
     }
 

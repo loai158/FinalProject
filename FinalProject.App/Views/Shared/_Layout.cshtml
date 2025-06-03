@@ -52,25 +52,18 @@
                         @if (User.IsInRole("Doctor"))
                         {
                             <li class="nav-item"><a class="nav-link" href="/Customer/Doctor/Home">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/Customer/Schedule/Index">Manage Schedule</a></li>
+
                         }
                         @if (User.IsInRole("Nurse"))
                         {
                             <li class="nav-item"><a class="nav-link" href="/Customer/Nurse/Home">Home</a></li>
                         }
-                        
                         @if (User.IsInRole("Patient") || User.IsInRole("Admin"))
-
                         {
                             <li class="nav-item"><a class="nav-link" href="/Customer/Home/Index">Home</a></li>
-                        }
 
-                        @if (User.IsInRole("Patient") || User.IsInRole("Admin"))
-                        {
                             <li class="nav-item"><a class="nav-link" href="/Customer/Cart/Index">Cart</a></li>
-                        }
-                        @if (User.IsInRole("Doctor"))
-                        {
-                            <li class="nav-item"><a class="nav-link" href="/Customer/Schedule/Index">Manage Schedule</a></li>
                         }
 
                         <li class="nav-item"><a class="nav-link" href="/Customer/About/">About</a></li>

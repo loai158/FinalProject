@@ -12,5 +12,7 @@ namespace FinalProject.Services.Abstracts
         public Task<int> GetTotalCount(string query);
         public Task<string> Delete(int id);
         public IQueryable<Doctor> GetByDeptId(int id);
+
+        Task update(int id);
     }
 }

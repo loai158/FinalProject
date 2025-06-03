@@ -10,15 +10,22 @@ namespace FinalProject.Core.Feature.Apponitments.Command.Handler
         IRequestHandler<DeleteAppointmentCommand, string>
     {
         private readonly IAppointmentServices _appointmentService;
+        private readonly IDoctorServices doctorServices;
 
-        public AppointmentCommandHandler(IAppointmentServices appointmentService)
+        public AppointmentCommandHandler(IAppointmentServices appointmentService, IDoctorServices doctorServices)
         {
             this._appointmentService = appointmentService;
+            this.doctorServices = doctorServices;
         }
         public async Task<int> Handle(AddNewAppointmentCommand request, CancellationToken cancellationToken)
         {
-            var appointment = request.MapAddToAppointment();
+            var doctor = await doctorServices.GetById(request.DoctorId);
+            if (doctor == null)
+                throw new Exception("Doctor not found.");
+
+            var appointment = request.MapAddToAppointment(doctor);
             var result = await _appointmentService.Create(appointment);
+            await doctorServices.update(request.SelectedScheduleId);
             return result;
         }
 

@@ -31,6 +31,7 @@ namespace FinalProject.Services.Implemetations
         public async Task<int> Create(Appointment appointment)
         {
             var final = await _unitOfWork.Repositry<Appointment>().Create(appointment);
+
             await _unitOfWork.CompleteAsync();
             if (final == "success")
             {

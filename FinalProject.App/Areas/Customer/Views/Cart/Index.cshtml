@@ -40,12 +40,12 @@
                                     <td>@item.Patient</td>
                                     <td>@item.Doctor</td>
                                     <td>@item.Department</td>
- 
+
                                     <td>@item.ScheduleDate</td>
 
                                     @* <td>@item.Doctor.IntialPrice</td>   *@
                                     @* <td>@item.Doctor.FollowUpPrice</td>   *@
-                                    <td>@item.Price.ToString("MM-dd")</td>
+                                    <td>@item.Price.ToString("0.00")</td>
 
                                     <td>
                                         @if (item.Perscribtions != null && item.Perscribtions.Any())
