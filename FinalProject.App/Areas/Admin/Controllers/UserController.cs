@@ -1,18 +1,12 @@
-﻿using Azure;
-using FinalProject.App.Helper.EmailSettings;
+﻿using FinalProject.App.Helper.EmailSettings;
 using FinalProject.Data.Models.AppModels;
 using FinalProject.Data.Models.IdentityModels;
 using FinalProject.Data.Models.SendEmailModel;
 using FinalProject.Infrastructure.IRepositry;
-using FinalProject.Infrastructure.Repositry;
 using FinalProject.Infrastructure.UnitOfWorks;
 using FinalProject.Services.Abstracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
-using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace FinalProject.App.Areas.Admin.Controllers
 {
@@ -33,7 +27,7 @@ namespace FinalProject.App.Areas.Admin.Controllers
           RoleManager<IdentityRole> roleManager, IUnitOfWork unitOfWork,
             IApplicationUserRepository applicationUser, IDoctorRepositry doctorRepositry,
             IPatientRepositry patientRepositry, INurseRepositry nurseRepositry,
-            IEmailSettings emailSettings,IDepartmentServices departmentServices
+            IEmailSettings emailSettings, IDepartmentServices departmentServices
             )
         {
             this._userManager = userManager;
@@ -109,7 +103,7 @@ namespace FinalProject.App.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(PatientRegisterVM registerVM, string RoleType ,int departmentId)
+        public async Task<IActionResult> Create(PatientRegisterVM registerVM, string RoleType, int departmentId)
         {
             if (ModelState.IsValid)
             {
@@ -180,7 +174,7 @@ namespace FinalProject.App.Areas.Admin.Controllers
                             IdentityUserId = applicationUser.Id,
                             ApplicationUser = applicationUser,
                             Image = registerVM.Image,
-                            DepartmentId =departmentId
+                            DepartmentId = departmentId
                         };
 
                         await _nurseRepositry.Create(nurse);

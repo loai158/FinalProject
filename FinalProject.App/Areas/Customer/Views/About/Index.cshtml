@@ -178,9 +178,10 @@
                                                 data-id="@medicine.Id"
                                                 data-name="@medicine.Name"
                                                 data-dose="@medicine.Dose"
+ 
                                                 data-start="@medicine.StartDate.ToString( )"
                                                 data-end="@medicine.EndDate.ToString( )">
-                                           
+                                            
                                             Edit
                                         </button>
                                         <form asp-action="DeleteMedicine" asp-route-id="@medicine.Id" method="post" style="display:inline;" class="delete-form">
