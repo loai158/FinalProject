@@ -16,120 +16,117 @@
             </div>
         }
 
-        <div class="row gy-4">
-            @foreach (var item in Model)
-            {
-                <div class="col-xl-3 col-lg-4 col-md-6">
-                    <div class="doctor-profile-card">
-                        <!-- Doctor Header with Image -->
-                        <div class="doctor-header">
-                            <div class="doctor-avatar">
-                                <img src="@Url.Content(!string.IsNullOrEmpty(item.Image) ? "~/images/Doctors/" + item.Image : "~/images/default-doctor.png")"
-                                     
-                                     class="img-fluid"
-                                     onerror="this.onerror=null;this.src='/images/default-doctor.png'">
-                            </div>
-                            <div class="doctor-badges">
-                                <span class="department-badge">
-                                    <i class="fas fa-stethoscope me-1"></i> @item.Department.Name
-                                </span>
-                                <span class="gender-badge @(item.Gender.ToString().ToLower())">
-                                    <i class="fas @(item.Gender.ToString() == "Male" ? "fa-mars" : "fa-venus")"></i>
-                                </span>
-                            </div>
+    <div class="row gy-4">
+        @foreach (var item in Model)
+        {
+            <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="doctor-profile-card">
+                    <!-- Doctor Header with Image -->
+                    <div class="doctor-header">
+                        <div class="doctor-avatar">
+                            <img src="@Url.Content(!string.IsNullOrEmpty(item.Image) ? "~/images/Doctors/" + item.Image : "~/images/default-doctor.png")"
+                                 class="img-fluid"
+                                 onerror="this.onerror=null;this.src='/images/default-doctor.png'">
                         </div>
-
-                        <!-- Doctor Body -->
-                        <div class="doctor-body">
-                            <h3 class="doctor-name">Dr. @item.Name</h3>
-                            <div class="doctor-rating">
-                                <div class="stars">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                                <span class="rating-value">4.8</span>
-                            </div>
-
-                            <div class="doctor-contact">
-                                <div class="contact-item">
-                                    <i class="fas fa-envelope"></i>
-                                    <span>@item.Email</span>
-                                </div>
-                                <div class="contact-item">
-                                    <i class="fas fa-phone-alt"></i>
-                                    <span>@item.Phone</span>
-                                </div>
-                            </div>
-
-                            <div class="doctor-pricing">
-                                <div class="price-item">
-                                    <span class="price-label">Initial</span>
-                                    <span class="price-value">$@item.IntialPrice</span>
-                                </div>
-                                <div class="price-item">
-                                    <span class="price-label">Follow Up</span>
-                                    <span class="price-value">$@item.FollowUpPrice</span>
-                                </div>
-                            </div>
-
-                            <div class="doctor-bio">
-                                <p>@(string.IsNullOrEmpty(item.Details) ? "Professional healthcare provider with extensive experience." : item.Details)</p>
-                            </div>
-                        </div>
-
-                        <!-- Doctor Footer -->
-                        <div class="doctor-footer">
-                            <a href="/Customer/Patient/Create?doctorId=@item.Id" class="btn btn-primary btn-book">
-                                <i class="far fa-calendar-check me-2"></i> Book Appointment
-                            </a>
-                            <a href="/Customer/Chat/Index?doctorId=@item.Id" class="btn btn-outline-primary btn-chat">
-                                <i class="fas fa-comments me-2"></i> Chat Now
-                            </a>
-                        </div>
-
-                        <!-- Schedule Popup (Hidden by default) -->
-                        <div class="schedule-popup">
-                            <h4>Availability</h4>
-                            @if (item.DoctorSchedules != null && item.DoctorSchedules.Any())
-                            {
-                                <div class="schedule-list">
-                                    @foreach (var schedule in item.DoctorSchedules)
-                                    {
-                                        <div class="schedule-item">
-                                            <span class="day">@schedule.Day</span>
-                                            <span class="time">@schedule.StartTime.ToString(@"hh\:mm") - @schedule.EndTime.ToString(@"hh\:mm")</span>
-                                        </div>
-                                    }
-                                </div>
-                            }
-                            else
-                            {
-                                <p class="text-muted">No schedule available</p>
-                            }
-                            <button class="btn btn-close-popup">
-                                <i class="fas fa-times"></i>
-                            </button>
+                        <div class="doctor-badges">
+                            <span class="department-badge">
+                                <i class="fas fa-stethoscope me-1"></i> @item.Department.Name
+                            </span>
+                            <span class="gender-badge @(item.Gender.ToString().ToLower())">
+                                <i class="fas @(item.Gender.ToString() == "Male" ? "fa-mars" : "fa-venus")"></i>
+                            </span>
                         </div>
                     </div>
+
+                    <!-- Doctor Body -->
+                    <div class="doctor-body">
+                        <h3 class="doctor-name">Dr. @item.Name</h3>
+                        <div class="doctor-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-value">4.8</span>
+                        </div>
+
+                        <div class="doctor-contact">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>@item.Email</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone-alt"></i>
+                                <span>@item.Phone</span>
+                            </div>
+                        </div>
+
+                        <div class="doctor-pricing">
+                            <div class="price-item">
+                                <span class="price-label">Initial</span>
+                                <span class="price-value">$@item.IntialPrice</span>
+                            </div>
+                            <div class="price-item">
+                                <span class="price-label">Follow Up</span>
+                                <span class="price-value">$@item.FollowUpPrice</span>
+                            </div>
+                        </div>
+
+                        <div class="doctor-bio">
+                            <p>@(string.IsNullOrEmpty(item.Details) ? "Professional healthcare provider with extensive experience." : item.Details)</p>
+                        </div>
+                    </div>
+
+                    <!-- Doctor Footer -->
+                    <div class="doctor-footer">
+                        <a href="/Customer/Patient/Create?doctorId=@item.Id" class="btn btn-primary btn-book">
+                            <i class="far fa-calendar-check me-2"></i> Book Appointment
+                        </a>
+                        <a href="/Customer/Chat/Index?doctorId=@item.Id" class="btn btn-outline-primary btn-chat">
+                            <i class="fas fa-comments me-2"></i> Chat Now
+                        </a>
+                    </div>
+
+                    <!-- Schedule Popup (Hidden by default) -->
+                    <div class="schedule-popup">
+                        <h4>Availability</h4>
+                        @if (item.DoctorSchedules != null && item.DoctorSchedules.Any())
+                        {
+                            <div class="schedule-list">
+                                @foreach (var schedule in item.DoctorSchedules)
+                                {
+                                    <div class="schedule-item">
+                                        <span class="day">@schedule.Day</span>
+                                        <span class="time">@schedule.StartTime.ToString(@"hh\:mm") - @schedule.EndTime.ToString(@"hh\:mm")</span>
+                                    </div>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <p class="text-muted">No schedule available</p>
+                        }
+                        <button class="btn btn-close-popup">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
                 </div>
-            }
+            </div>
+            <div class="card-footer bg-white border-0 pt-0 pb-3">
+                <a href="/Customer/Patient/Create?doctorId=@item.Id" class="btn btn-primary w-100 py-2 mb-2">
+                    <i class="far fa-calendar-check me-2"></i>Book Appointment
+                </a>
 
-                <div class="card-footer bg-white border-0 pt-0 pb-3">
-                    <a href="/Customer/Patient/Create?doctorId=@item.Id" class="btn btn-primary w-100 py-2 mb-2">
-                        <i class="far fa-calendar-check me-2"></i>Book Appointment
-                    </a>
-
-                    <a href="/Customer/Chat/Index?doctorId=@item.Id" class="btn btn-outline-primary w-100 py-2 mt-2">
-                        <i class="fas fa-comments me-2"></i>Chat with the doctor
-                    </a>
-
-                </div>
-
+                <a href="/Customer/Chat/Index?doctorId=@item.Id" class="btn btn-outline-primary w-100 py-2 mt-2">
+                    <i class="fas fa-comments me-2"></i>Chat with the doctor
+                </a>
 
             </div>
+        }
+
+    </div>
         </div>
     </div>
 </div>

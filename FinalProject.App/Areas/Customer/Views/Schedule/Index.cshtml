@@ -1,0 +1,176 @@
+﻿@model IEnumerable<FinalProject.Data.Models.AppModels.DoctorSchedule>
+
+@{
+    ViewData["Title"] = "Doctor Schedules";
+    var daysOfWeek = Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>();
+}
+
+<h2 class="mb-4">My Schedule</h2>
+
+<!-- ✅ Filter by Day -->
+<form method="get" asp-action="Index" asp-controller="Schedule" asp-area="Customer" class="mb-3 row g-3">
+    <div class="col-auto">
+        <select name="dayFilter" class="form-select" onchange="this.form.submit()">
+            <option value="">-- Filter by Day --</option>
+            @foreach (var day in daysOfWeek)
+            {
+                <option value="@day">@day</option>
+            }
+        </select>
+    </div>
+</form>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">You don't have any schedules yet.</div>
+}
+else
+{
+    <table class="table table-group-divider"  style="border-collapse: separate; border-spacing: 0 10px;">
+        <thead style="background-color: #e3fcec; color: #2c3e50;">
+            <tr>
+                <th style="border-top-left-radius: 10px;">Day</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Status</th>
+                <th style="border-top-right-radius: 10px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr style="background-color: #ffffff; border-radius: 10px;">
+                    <td>@item.Day</td>
+                    <td>@item.StartTime.ToString(@"hh\:mm")</td>
+                    <td>@item.EndTime.ToString(@"hh\:mm")</td>
+                    <td>
+                        @if (item.IsAvailable)
+                        {
+                            <span class="badge bg-success bg-opacity-75">Available</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary bg-opacity-75">Not Available</span>
+                        }
+                    </td>
+                    <td>
+                        <button class="btn btn-outline-warning edit-schedule"
+                                data-id="@item.Id"
+                                data-day="@item.Day"
+                                data-starttime="@item.StartTime.ToString(@"hh\:mm")"
+                                data-endtime="@item.EndTime.ToString(@"hh\:mm")"
+                                data-isavailable="@item.IsAvailable.ToString().ToLower()"
+                                data-bs-toggle="modal"
+                                data-bs-target="#scheduleModal">
+                            Edit
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="confirmDelete(@item.Id)">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+<!-- Button to open modal to add new schedule -->
+<button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#scheduleModal" onclick="resetModal()">
+    + Add New Schedule
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="scheduleModalLabel">Add New Schedule</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="scheduleForm" method="post" asp-controller="Schedule" asp-area="Customer">
+                    <input type="hidden" name="Id" id="scheduleId" />
+                    <div id="scheduleFormFields">
+                        <div class="mb-3">
+                            <label for="day" class="form-label">Day</label>
+                            <select name="Day" id="day" class="form-select" required>
+                                <option value="">-- Select Day --</option>
+                                @foreach (var day in daysOfWeek)
+                                {
+                                    <option value="@day">@day</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="startTime" class="form-label">Start Time</label>
+                            <input type="time" name="StartTime" id="startTime" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="endTime" class="form-label">End Time</label>
+                            <input type="time" name="EndTime" id="endTime" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="isAvailable" class="form-label">Status</label>
+                            <select name="IsAvailable" id="isAvailable" class="form-select" required>
+                                <option value="true">Available</option>
+                                <option value="false">Not Available</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="deleteConfirmation" style="display: none;">
+                        <p>Are you sure you want to delete this schedule?</p>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="submitButton">Save</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Include Bootstrap JS for modal -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Reset modal for new schedule
+        function resetModal() {
+            console.log("Resetting modal for create");
+            document.getElementById('scheduleForm').action = '@Url.Action("Create", "Schedule", new { area = "Customer" })';
+            document.getElementById('scheduleModalLabel').innerText = 'Add New Schedule';
+            document.getElementById('scheduleId').value = '';
+            document.getElementById('day').value = '';
+            document.getElementById('startTime').value = '';
+            document.getElementById('endTime').value = '';
+            document.getElementById('isAvailable').value = 'true';
+            document.getElementById('scheduleFormFields').style.display = 'block';
+            document.getElementById('deleteConfirmation').style.display = 'none';
+            document.getElementById('submitButton').innerText = 'Save';
+            document.getElementById('submitButton').classList.remove('btn-danger');
+            document.getElementById('submitButton').classList.add('btn-primary');
+        }
+
+        // Fill modal for editing schedule
+        document.querySelectorAll('.edit-schedule').forEach(button => {
+            button.addEventListener('click', function () {
+                console.log("Edit button clicked, ID: " + this.dataset.id);
+                document.getElementById('scheduleForm').action = '@Url.Action("Edit", "Schedule", new { area = "Customer" })' + '/' + this.dataset.id;
+                document.getElementById('scheduleModalLabel').innerText = 'Edit Schedule';
+                document.getElementById('scheduleId').value = this.dataset.id;
+                document.getElementById('day').value = this.dataset.day;
+                document.getElementById('startTime').value = this.dataset.starttime;
+                document.getElementById('endTime').value = this.dataset.endtime;
+                document.getElementById('isAvailable').value = this.dataset.isavailable;
+                document.getElementById('scheduleFormFields').style.display = 'block';
+                document.getElementById('deleteConfirmation').style.display = 'none';
+                document.getElementById('submitButton').innerText = 'Save';
+                document.getElementById('submitButton').classList.remove('btn-danger');
+                document.getElementById('submitButton').classList.add('btn-primary');
+            });
+        });
+
+        function confirmDelete(id) {
+            if (confirm("Are you sure you want to delete this doctor?")) {
+                window.location.href = `/Customer/Schedule/Delete?id=${id}`;
+            }
+        }
+    </script>
+}
