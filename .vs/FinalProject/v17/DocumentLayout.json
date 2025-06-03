@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\user\\Desktop\\final2\\FinalProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|c:\\users\\user\\desktop\\final2\\finalproject\\finalproject.app\\areas\\admin\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|solutionrelative:finalproject.app\\areas\\admin\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|c:\\users\\user\\desktop\\final2\\finalproject\\finalproject.app\\areas\\customer\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|solutionrelative:finalproject.app\\areas\\customer\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|c:\\users\\user\\desktop\\final2\\finalproject\\finalproject.app\\areas\\admin\\views\\user\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|solutionrelative:finalproject.app\\areas\\admin\\views\\user\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|c:\\users\\user\\desktop\\final2\\finalproject\\finalproject.app\\areas\\customer\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|solutionrelative:finalproject.app\\areas\\customer\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|c:\\users\\user\\desktop\\final2\\finalproject\\finalproject.app\\areas\\identity\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|solutionrelative:finalproject.app\\areas\\identity\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|c:\\users\\user\\desktop\\final2\\finalproject\\finalproject.app\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1EE4BECF-E4B7-4504-9D8F-50D691D4F8EA}|FinalProject.App\\FinalProject.App.csproj|solutionrelative:finalproject.app\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,41 +46,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\final2\\FinalProject\\FinalProject.App\\Areas\\Admin\\Views\\User\\Create.cshtml",
-              "RelativeDocumentMoniker": "FinalProject.App\\Areas\\Admin\\Views\\User\\Create.cshtml",
-              "ToolTip": "C:\\Users\\user\\Desktop\\final2\\FinalProject\\FinalProject.App\\Areas\\Admin\\Views\\User\\Create.cshtml",
-              "RelativeToolTip": "FinalProject.App\\Areas\\Admin\\Views\\User\\Create.cshtml",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAAAFAAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-02T16:09:21.783Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\final2\\FinalProject\\FinalProject.App\\Areas\\Admin\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "FinalProject.App\\Areas\\Admin\\Controllers\\UserController.cs",
-              "ToolTip": "C:\\Users\\user\\Desktop\\final2\\FinalProject\\FinalProject.App\\Areas\\Admin\\Controllers\\UserController.cs",
-              "RelativeToolTip": "FinalProject.App\\Areas\\Admin\\Controllers\\UserController.cs",
-              "ViewState": "AgIAAFsAAAAAAAAAAAAAAGQAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T16:09:12.485Z",
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\final2\\FinalProject\\FinalProject.App\\Areas\\Customer\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "FinalProject.App\\Areas\\Customer\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\user\\Desktop\\final2\\FinalProject\\FinalProject.App\\Areas\\Customer\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "FinalProject.App\\Areas\\Customer\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAPsBAAAAAAAAAAAAAJ4AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-03T15:36:05.443Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "C:\\Users\\user\\Desktop\\final2\\FinalProject\\FinalProject.App\\Areas\\Identity\\Controllers\\AccountController.cs",
-              "RelativeDocumentMoniker": "FinalProject.App\\Areas\\Identity\\Controllers\\AccountController.cs",
-              "ToolTip": "C:\\Users\\user\\Desktop\\final2\\FinalProject\\FinalProject.App\\Areas\\Identity\\Controllers\\AccountController.cs",
-              "RelativeToolTip": "FinalProject.App\\Areas\\Identity\\Controllers\\AccountController.cs",
-              "ViewState": "AgIAAGYAAAAAAAAAAAAAAHgAAABIAAAAAAAAAA==",
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\final2\\FinalProject\\FinalProject.App\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "FinalProject.App\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\user\\Desktop\\final2\\FinalProject\\FinalProject.App\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "FinalProject.App\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAALoAAAAAAAAAAAAAAM0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-03T15:35:07.616Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\user\\Desktop\\final2\\FinalProject\\FinalProject.App\\Areas\\Customer\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "FinalProject.App\\Areas\\Customer\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\user\\Desktop\\final2\\FinalProject\\FinalProject.App\\Areas\\Customer\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "FinalProject.App\\Areas\\Customer\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAB0AAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T15:59:58.832Z",
+              "WhenOpened": "2025-06-03T15:17:20.152Z",
               "EditorCaption": ""
             }
           ]
