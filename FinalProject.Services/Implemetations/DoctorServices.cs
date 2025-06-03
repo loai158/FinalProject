@@ -62,7 +62,7 @@ namespace FinalProject.Services.Implemetations
 
         public IQueryable<Doctor> GetByDeptId(int id)
         {
-            var result = _unitOfWork.Repositry<Doctor>().Get(includes: [e=>e.Department],filter: d => d.DepartmentId == id);
+            var result = _unitOfWork.Repositry<Doctor>().Get(includes: [e => e.Department], filter: d => d.DepartmentId == id);
             return result;
         }
 
@@ -89,6 +89,17 @@ namespace FinalProject.Services.Implemetations
         {
             return await _unitOfWork.Repositry<Doctor>().Exist(d => d.Name == name);
 
+        }
+
+        public async Task update(int id)
+        {
+            var schedule = await _unitOfWork.Repositry<DoctorSchedule>().GetOne(d => d.Id == id);
+            if (schedule != null)
+            {
+                schedule.IsAvailable = false;
+            }
+            _unitOfWork.Repositry<DoctorSchedule>().Edit(schedule);
+            await _unitOfWork.CompleteAsync();
         }
     }
 }

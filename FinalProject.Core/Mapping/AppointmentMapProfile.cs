@@ -6,6 +6,7 @@ namespace FinalProject.Core.Mapping
 {
     public static class AppointmentMapProfile
     {
+
         public static GetAppointmentByIdResponse MapAppointmentToGetById(this Appointment appointment)
         {
             return new GetAppointmentByIdResponse
@@ -19,11 +20,10 @@ namespace FinalProject.Core.Mapping
                 PatientId = appointment.Patient.Id,
                 Patient = appointment.Patient.Name,
                 Status = appointment.Status,
-                //Perscribtions = appointment.Perscribtion,
                 ScheduleDate = appointment.Schedule != null
                 ? $"{appointment.Schedule.Day} from {appointment.Schedule.StartTime} to {appointment.Schedule.EndTime}"
                          : "Not Scheduled",
-
+                Price = appointment.Price,
             };
         }
         public static GetAllApponintmentsResponse MapAppointmentsToGetAll(this IEnumerable<Appointment> appointments)
@@ -34,8 +34,9 @@ namespace FinalProject.Core.Mapping
             };
         }
 
-        public static Appointment MapAddToAppointment(this AddNewAppointmentCommand command)
+        public static Appointment MapAddToAppointment(this AddNewAppointmentCommand command, Doctor doctor)
         {
+
             return new Appointment
             {
                 Date = command.Date,
@@ -44,7 +45,10 @@ namespace FinalProject.Core.Mapping
                 Status = command.Status,
                 DepartmentId = command.DepartmentId,
                 TypePayment = command.TypePayment,
-                ScheduleId = command.SelectedScheduleId
+                ScheduleId = command.SelectedScheduleId,
+                Price = (decimal)(command.Status == Status.Initial
+                    ? doctor.IntialPrice ?? 0
+                    : doctor.FollowUpPrice)
             };
         }
         public static Appointment MapEditToAppointment(this EditAppointmentCommand command)

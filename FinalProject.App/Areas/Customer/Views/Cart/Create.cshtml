@@ -132,11 +132,11 @@
                                         <!-- Time Slot -->
                                         <div class="mb-3">
                                             <label class="form-label">Select Time Slot</label>
-                                            @if (ViewBag.Dr.DoctorSchedules != null && ViewBag.Dr.DoctorSchedules.Count > 0)
+                                            @if (ViewBag.schedule != null && ViewBag.schedule.Count > 0)
                                             {
                                                 <select class="form-select" asp-for="SelectedScheduleId" required>
                                                     <option value="" disabled selected>-- Select Time --</option>
-                                                    @foreach (var schedule in ViewBag.Dr.DoctorSchedules)
+                                                    @foreach (var schedule in ViewBag.schedule)
                                                     {
                                                         <option value="@schedule.Id">
                                                             @schedule.Day | @schedule.StartTime.ToString(@"hh\:mm") - @schedule.EndTime.ToString(@"hh\:mm")
