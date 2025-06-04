@@ -1,0 +1,267 @@
+﻿@model FinalProject.Data.Models.Medical.PatientMessagesViewModel
+
+@{
+    var currentUserId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+    var currentUserName = User.Identity?.Name;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Messages</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+
+        .chat-container {
+            display: flex;
+            height: 90vh;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            margin: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 30%;
+            border-right: 1px solid #ddd;
+            overflow-y: auto;
+            background-color: #fafafa;
+        }
+
+        .chat-area {
+            width: 70%;
+            display: flex;
+            flex-direction: column;
+            background-color: #fdfdfd;
+        }
+
+        .patient-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+            .patient-item:hover {
+                background-color: #e9f5f9;
+            }
+
+            .patient-item h4 {
+                margin: 0;
+                font-size: 1rem;
+                color: #333;
+            }
+
+            .patient-item p {
+                margin: 5px 0;
+                font-size: 0.85rem;
+                color: #666;
+            }
+
+            .patient-item small {
+                color: #999;
+                font-size: 0.75rem;
+            }
+
+        .active {
+            background-color: #d1f2f6 !important;
+        }
+
+        .messages-container {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            background-color: #f9f9f9;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 12px 16px;
+            border-radius: 15px;
+            max-width: 60%;
+            word-wrap: break-word;
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        .sent {
+            background-color: #d1e7dd;
+            align-self: flex-end;
+            border-bottom-right-radius: 0;
+        }
+
+        .received {
+            background-color: #f1f1f1;
+            align-self: flex-start;
+            border-bottom-left-radius: 0;
+        }
+
+        .message small {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        textarea {
+            width: 100%;
+            height: 60px;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            resize: none;
+            border-radius: 8px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #00bcd4;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+            button:hover {
+                background-color: #0097a7;
+            }
+
+        .chat-area > div:last-child {
+            padding: 10px 20px;
+            border-top: 1px solid #ddd;
+            background-color: #fff;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            @foreach (var patient in Model.Doctors)
+            {
+                <div class="patient-item" data-patient-id="@patient.DoctorId" data-patient-name="@patient.DoctorName">
+                    <h4>@patient.DoctorName</h4>
+                    <p>@(patient.LastMessage?.Length > 50 ? patient.LastMessage.Substring(0, 50) + "..." : patient.LastMessage)</p>
+                    <small>@patient.LastMessageTime.ToString("hh:mm tt")</small>
+                </div>
+            }
+        </div>
+
+        <!-- Chat Area -->
+        <div class="chat-area">
+            <div class="messages-container" id="messagesContainer">
+                <!-- Messages will load here -->
+            </div>
+            <div>
+                <textarea id="messageInput" placeholder="اكتب الرسالة..."></textarea>
+                <button onclick="sendMessage()">إرسال</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <script>
+        const currentUserId = "@currentUserId";
+        const currentUserName = "@currentUserName";
+
+        let selectedPatientId = null;
+        let selectedPatientName = null;
+
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/chathub")
+            .build();
+
+        connection.start().then(() => {
+            console.log("SignalR Connected");
+        }).catch(err => console.error("Connection error:", err));
+
+        connection.on("ReceiveMessage", function (senderName, message) {
+            const messageHtml = `
+                <div class="message ${senderName === currentUserName ? 'sent' : 'received'}">
+                    <p>${escapeHtml(message)}</p>
+                    <small>${senderName}</small>
+                </div>`;
+            $('#messagesContainer').append(messageHtml);
+            $('#messagesContainer').scrollTop($('#messagesContainer')[0].scrollHeight);
+        });
+
+        $(document).ready(function () {
+            $('.patient-item').click(function () {
+                $('.patient-item').removeClass('active');
+                $(this).addClass('active');
+
+                selectedPatientId = $(this).data('patient-id');
+                selectedPatientName = $(this).data('patient-name');
+
+                loadMessages(selectedPatientId);
+            });
+        });
+
+        function sendMessage() {
+            const content = $('#messageInput').val().trim();
+
+            if (!selectedPatientId) {
+                alert('اختر مريضًا أولاً.');
+                return;
+            }
+
+            if (!content) {
+                return;
+            }
+
+            connection.invoke("SendToPatient", selectedPatientId.toString(), content)
+                .then(() => {
+                    $('#messageInput').val('');
+                })
+                .catch(err => console.error("Error sending message:", err));
+        }
+
+        function loadMessages(patientId) {
+            $.ajax({
+                url: '@Url.Action("GetMessagesWithPatient", "Chat", new { area = "Customer" })',
+                type: 'GET',
+                data: { patientId: patientId },
+                success: function (messages) {
+                    $('#messagesContainer').empty();
+                    messages.forEach(function (msg) {
+                        const senderName = msg.senderName;
+                        const messageHtml = `
+                            <div class="message ${senderName === currentUserName ? 'sent' : 'received'}">
+                                <p>${escapeHtml(msg.content)}</p>
+                                <small>${senderName}</small>
+                            </div>`;
+                        $('#messagesContainer').append(messageHtml);
+                    });
+                    $('#messagesContainer').scrollTop($('#messagesContainer')[0].scrollHeight);
+                },
+                error: function () {
+                    alert('خطأ أثناء تحميل الرسائل.');
+                }
+            });
+        }
+
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
+        }
+    </script>
+</body>
+</html>

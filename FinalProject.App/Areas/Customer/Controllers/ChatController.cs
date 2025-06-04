@@ -3,6 +3,7 @@ using FinalProject.Data.Models.Medical;
 using FinalProject.Services.Abstracts;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.App.Areas.Customer.Controllers
 {
@@ -12,13 +13,15 @@ namespace FinalProject.App.Areas.Customer.Controllers
         private readonly IMessageService _messageService;
 
         private readonly IDoctorServices _doctorServices;
+        private readonly IPatientServices _patientServices;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public ChatController(IDoctorServices doctorServices, IMessageService messageService, UserManager<ApplicationUser> userManager)
+        public ChatController(IDoctorServices doctorServices, IPatientServices patientServices, IMessageService messageService, UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
             _messageService = messageService;
             this._doctorServices = doctorServices;
+            this._patientServices = patientServices;
         }
         public async Task<ActionResult> Index(int doctorId)
         {
@@ -50,12 +53,40 @@ namespace FinalProject.App.Areas.Customer.Controllers
 
             return Json(result);
         }
-        public async Task<IActionResult> AllMessage()
+        public async Task<IActionResult> AllMessages()
         {
-            var doctorUserId = _userManager.GetUserId(User);
-            var messages = await _messageService.GetMessagesForDoctorAsync(doctorUserId);
-            return View(messages);
+            var userId = _userManager.GetUserId(User);
+            var user = await _userManager.FindByIdAsync(userId);
+            var roles = await _userManager.GetRolesAsync(user);
+
+            if (roles.Contains("Doctor"))
+            {
+                var doctor = await _doctorServices.GetAll().Where(d => d.IdentityUserId == userId).FirstOrDefaultAsync();
+
+                var messages = await _messageService.GetPatientsWithMessages(doctor.Id);
+                var viewModel = new DoctorMessagesViewModel
+                {
+                    DoctorId = doctor.Id,
+                    Patients = messages
+                };
+                return View("DoctorAllMessages", viewModel);
+            }
+            else if (roles.Contains("Patient"))
+            {
+                var patient = await _patientServices.GetAll().Where(d => d.IdentityUserId == userId).FirstOrDefaultAsync();
+
+                var messages = await _messageService.GetDoctorsWithMessagesForPatient(patient.Id);
+                var viewModel = new PatientMessagesViewModel
+                {
+                    PatientId = patient.Id,
+                    Doctors = messages
+                };
+                return View("PatientAllMessages", viewModel);
+            }
+
+            return Unauthorized();
         }
+
         [HttpGet]
         public async Task<IActionResult> GetMessagesWithPatient(string patientId)
         {
