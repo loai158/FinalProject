@@ -1,7 +1,13 @@
-﻿namespace FinalProject.Data.Models.Medical
+﻿using FinalProject.Data.Models.VM;
+
+namespace FinalProject.Data.Models.Medical
 {
+
     public class DoctorMessagesViewModel
     {
-        public List<PatientMessageVM> Patients { get; set; }
+        public int DoctorId { get; set; }
+        public List<PatientChatPreviewViewModel> Patients { get; set; }
     }
+
+
 }
