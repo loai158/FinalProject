@@ -1,0 +1,56 @@
+﻿@model List<FinalProject.Data.Models.AppModels.Department>
+
+@{
+    ViewData["Title"] = "All Departments";
+    var query = ViewBag.Query as string ?? "";
+    var currentPage = (int)(ViewBag.CurrentPage ?? 1);
+    var totalPages = (int)(ViewBag.paginationPages ?? 1);
+}
+
+<div class="container mt-5">
+    <!-- Search -->
+    <div class="row mb-4">
+        <div class="col-md-8 mx-auto">
+            <form method="get" class="d-flex shadow-sm rounded-pill overflow-hidden border">
+                <input type="text" name="query" value="@query" class="form-control border-0 px-4" placeholder="🔍 Search departments by name..." />
+                <button type="submit" class="btn btn-primary rounded-0 px-4">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        @foreach (var dept in Model)
+        {
+            <div class="col">
+                <div class="card h-100 border-0 shadow rounded-4">
+                    <div class="card-body p-4">
+                        <h5 class="card-title text-primary fw-bold">@dept.Name</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@dept.Location</h6>
+                        <p class="card-text small text-secondary">@dept.Description</p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0 text-center">
+                        <a asp-area="Customer" asp-controller="AllDepartments" asp-action="DocsDepartment" asp-route-dep="@dept.Name" class="btn btn-outline-primary btn-sm rounded-pill">
+                            View Doctors
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <!-- Pagination -->
+    <div class="d-flex justify-content-between align-items-center mt-5">
+        <a href="/Customer/AllDepartments/Index" class="btn btn-secondary">Show All</a>
+        <nav>
+            <ul class="pagination m-0">
+                @for (int i = 1; i <= totalPages; i++)
+                {
+                    <li class="page-item @(i == currentPage ? "active" : "")">
+                        <a class="page-link rounded-circle mx-1" href="?query=@query&page=@i">@i</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+</div>

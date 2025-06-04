@@ -1,0 +1,47 @@
+﻿@model List<FinalProject.Data.Models.AppModels.Doctor>
+
+@{
+    ViewData["Title"] = "Doctors in Department";
+}
+
+<div class="container mt-4">
+    <h3 class="mb-4">Doctors</h3>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm h-100">
+                    <img src="~/images/Doctors/@item.Image" class="card-img-top" alt="@item.Name" style="height: 200px; object-fit: cover;">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text"><strong>Bio:</strong> @item.Details</p>
+                        <p class="card-text"><strong>Department:</strong> @item.Department.Name</p>
+                        <p class="card-text"><strong>Phone:</strong> @item.Phone</p>
+                        <p class="card-text"><strong>Email:</strong> @item.Email</p>
+                        <p class="card-text"><strong>Gender:</strong> @item.Gender</p>
+                        <p class="card-text">
+                            <strong>Schedules:</strong><br />
+                            @foreach (var s in item.DoctorSchedules)
+                            {
+                                <span>@s.Day: @s.StartTime.ToString(@"hh\:mm") - @s.EndTime.ToString(@"hh\:mm")</span>
+
+                                <br />
+                            }
+                        </p>
+                    </div>
+                    <div class="card-footer bg-white border-0 pt-0 pb-3">
+                        <a href="/Customer/Patient/Create?doctorId=@item.Id" class="btn btn-primary w-100 py-2 mb-2">
+                            <i class="far fa-calendar-check me-2"></i>Book Appointment
+                        </a>
+
+                        <a href="/Customer/Chat/Index?doctorId=@item.Id" class="btn btn-outline-primary w-100 py-2 mt-2">
+                            <i class="fas fa-comments me-2"></i>Chat with the doctor
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    </div>
+</div>
