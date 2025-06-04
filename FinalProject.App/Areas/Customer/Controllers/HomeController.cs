@@ -27,14 +27,18 @@ namespace FinalProject.App.Areas.Customer.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1, int pageSize = 4)
         {
-            var Docs = await _mediator.Send(new GetAllDoctorsQuery { });
-            Docs = Docs.Skip((1 - 1) * 4).Take(4);
-            var depts = _departmentServices.getAll().ToList();
-            ViewData["Departments"] = depts;
-            return View(Docs);
+            var allDocs = await _mediator.Send(new GetAllDoctorsQuery());
+            var pagedDocs = allDocs.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            var allDepts = _departmentServices.getAll();
+            var pagedDepts = allDepts.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            ViewData["Departments"] = pagedDepts;
+            return View(pagedDocs);
         }
+
 
         public IActionResult Privacy()
         {
