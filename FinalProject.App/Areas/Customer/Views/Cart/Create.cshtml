@@ -183,10 +183,11 @@
                                             <input type="hidden" id="price" name="Price">
                                         </div>
 
-                                        <!-- Submit Button -->
-                                        <button type="submit" class="btn btn-primary w-100 py-2">
+                                        <button type="submit" class="btn btn-primary w-100 py-2"
+                                                @(ViewBag.schedule == null || ((List<FinalProject.Data.Models.AppModels.DoctorSchedule>)ViewBag.schedule).Count == 0 ? "disabled style='opacity: 0.5; cursor: not-allowed;'" : "")>
                                             <i class="fas fa-calendar-check me-2"></i> Confirm Booking
                                         </button>
+
                                     </div>
                                 </div>
                             </div>
