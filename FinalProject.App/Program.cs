@@ -53,15 +53,12 @@ namespace FinalProject.App
 
             builder.Services.AddHttpClient();
 
-            builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
-            builder.Services.AddScoped<ICartRepository, CartRepository>();
-            builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
-            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-            builder.Services.AddScoped<IPatientRepositry, PatientRepositry>();
-            builder.Services.AddScoped<IDoctorRepositry, DoctorRepositry>();
-            builder.Services.AddScoped<IRegisterApplyRepositoey, RegisterApplyRepositoey>();
-            builder.Services.AddScoped<INurseRepositry, NurseRepositry>();
-            builder.Services.AddScoped<IEmailSettings, EmailSettings>();
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Admin", policy =>
+                    policy.RequireRole("Admin")); // ?? ?? ??? ?????
+            });
+
 
             builder.Services.AddCors(options =>
             {
@@ -82,6 +79,15 @@ namespace FinalProject.App
                         });
 
 
+            builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+            builder.Services.AddScoped<ICartRepository, CartRepository>();
+            builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+            builder.Services.AddScoped<IPatientRepositry, PatientRepositry>();
+            builder.Services.AddScoped<IDoctorRepositry, DoctorRepositry>();
+            builder.Services.AddScoped<IRegisterApplyRepositoey, RegisterApplyRepositoey>();
+            builder.Services.AddScoped<INurseRepositry, NurseRepositry>();
+            builder.Services.AddScoped<IEmailSettings, EmailSettings>();
 
             var app = builder.Build();
 

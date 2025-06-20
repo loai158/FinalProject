@@ -1,13 +1,14 @@
 ﻿using FinalProject.Data.Models.AppModels;
 using FinalProject.Data.Models.VM;
 using FinalProject.Services.Abstracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.App.Areas.Admin.Controllers
 {
     [Area("Admin")]
-
+    [Authorize("Admin")]
     public class DepartmentController : Controller
     {
         private readonly IDepartmentServices _departmentServices;

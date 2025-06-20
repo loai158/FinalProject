@@ -3,12 +3,13 @@ using FinalProject.Data.Models.IdentityModels;
 using FinalProject.Data.Models.SendEmailModel;
 using FinalProject.Infrastructure.IRepositry;
 using FinalProject.Infrastructure.UnitOfWorks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace FinalProject.App.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize("Admin")]
     public class NurseApplyController : Controller
     {
         private readonly IRegisterApplyRepositoey _registerApply;
@@ -16,13 +17,13 @@ namespace FinalProject.App.Areas.Admin.Controllers
         private readonly IUnitOfWork _unitOfWork;
 
         public NurseApplyController(IRegisterApplyRepositoey registerApply, IEmailSettings emailSettings
-            ,IUnitOfWork unitOfWork)
+            , IUnitOfWork unitOfWork)
         {
             this._registerApply = registerApply;
             this._emailSettings = emailSettings;
             this._unitOfWork = unitOfWork;
         }
-        public  IActionResult Index(string query, int page = 1)
+        public IActionResult Index(string query, int page = 1)
         {
             var nursApply = _registerApply.Get().Where(e => e.Role == RoleType.Nurse);
 
@@ -75,7 +76,7 @@ namespace FinalProject.App.Areas.Admin.Controllers
         }
 
 
-         
+
         public async Task<IActionResult> Delete(int id)
         {
             var user = await _registerApply.GetOne(e => e.Id == id);
@@ -85,9 +86,9 @@ namespace FinalProject.App.Areas.Admin.Controllers
                 TempData["Error"] = "User not found";
                 return RedirectToAction("Index");
             }
-             _registerApply.Delete(user);
-             _unitOfWork.RegisterApplyRepositoey.Commit();
-            
+            _registerApply.Delete(user);
+            _unitOfWork.RegisterApplyRepositoey.Commit();
+
 
             return RedirectToAction("Index");
         }

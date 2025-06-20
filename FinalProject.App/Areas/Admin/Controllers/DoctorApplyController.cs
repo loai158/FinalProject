@@ -2,21 +2,21 @@
 using FinalProject.Data.Models.SendEmailModel;
 using FinalProject.Infrastructure.IRepositry;
 using FinalProject.Infrastructure.UnitOfWorks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FinalProject.App.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize("Admin")]
     public class DoctorApplyController : Controller
     {
         private readonly IRegisterApplyRepositoey _registerApply;
         private readonly IEmailSettings _emailSettings;
         private readonly IUnitOfWork _unitOfWork;
 
-        public DoctorApplyController(IRegisterApplyRepositoey registerApply, 
-            IEmailSettings emailSettings,IUnitOfWork unitOfWork)
+        public DoctorApplyController(IRegisterApplyRepositoey registerApply,
+            IEmailSettings emailSettings, IUnitOfWork unitOfWork)
         {
             _registerApply = registerApply;
             _emailSettings = emailSettings;

@@ -65,8 +65,14 @@
 
                             <li class="nav-item"><a class="nav-link" href="/Customer/Cart/Index">Cart</a></li>
                         }
-
-                        <li class="nav-item"><a class="nav-link" href="/Customer/About/">About</a></li>
+                        @if (User.IsInRole("Patient"))
+                        {
+                            <li class="nav-item"><a class="nav-link" href="/Customer/About/">About</a></li>
+                        }
+                        @if(!User.IsInRole(""))
+                        {
+                            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                        }
                         <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                         @if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
                         {
@@ -117,16 +123,11 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link position-relative d-flex align-items-center" asp-area="Customer" asp-controller="Chat" asp-action="AllMessages">
                                     <i class="bi bi-chat-dots-fill fs-5"></i>
-                                    
+
                                 </a>
                             </li>
 
 
-                            <li class="nav-item">
-                                <a href="#appointment" class="btn btn-appointment d-flex align-items-center justify-content-center" title="Make Appointment">
-                                    <i class="bi bi-calendar-check"></i>
-                                </a>
-                            </li>
                             @* <li class="nav-item ms-2"> *@
                             @*     <button id="themeToggle" class="theme-toggle-btn" title="Toggle Theme"> *@
                             @*         <i class="bi bi-palette-fill"></i> *@
