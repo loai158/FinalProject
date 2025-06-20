@@ -5,12 +5,14 @@ using FinalProject.Data.Models.SendEmailModel;
 using FinalProject.Infrastructure.IRepositry;
 using FinalProject.Infrastructure.UnitOfWorks;
 using FinalProject.Services.Abstracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProject.App.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize("Admin")]
     public class UserController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

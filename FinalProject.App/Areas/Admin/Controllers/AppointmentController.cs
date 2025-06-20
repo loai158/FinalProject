@@ -4,12 +4,14 @@ using FinalProject.Data.Models.AppModels;
 using FinalProject.Infrastructure.UnitOfWorks;
 using FinalProject.Services.Abstracts;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FinalProject.App.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize("Admin")]
     public class AppointmentController : Controller
     {
         private readonly IMediator _mediator;
